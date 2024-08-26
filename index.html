@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracious Ogyiri Asare Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Page -->
+    <div class="loading-page">
+        <div class="vinyl-record"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="main-content" style="display: none;">
+        <!-- Landing Page -->
+        <div class="landing-page" id="landing-page">
+            <div class="music-card">
+                <div class="cover-image">
+                    <img src="assets/mock-gracious-cover.jpg" alt="Cover Image">
+                </div>
+                <div class="intro">
+                    <h1>Gracious Ogyiri Asare</h1>
+                    <p>CS @ Boston University • Python Developer</p>
+                </div>
+                <div class="big-play-button">
+                    <img src="assets/mock-playbutton.png" alt="Play Button">
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Main Page Content -->
+        <div class="about-section" id="about-section">
+            <div class="about-content">
+                <h1>Gracious</h1>
+                <img src="assets/mock-gracious-cover.jpg" alt="Image of Gracious">
+            </div>
+        </div>
+
+        <!-- Sticky Header -->
+        <div class="sticky-header">
+            <nav>
+                <ul>
+                    <li><a href="#about-section">About</a></li>
+                    <li><a href="#experience-section">Experience</a></li>
+                    <li><a href="#projects-section">Projects</a></li>
+                    <li><a href="#contact-section">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="hero-section" id="hero-section">
+            <p>Hello! I am Gracious Ogyiri Asare and I enjoy creating things- 
+                from software engineering to music tracks. I am currently a Computer 
+                Science major at Boston University, with an interest in full-stack 
+                development and DevOps engineering. I am a founder of Rophe Jewels, 
+                a business aimed to encourage mental wellness incorporated into our daily lives. 
+                I am passionate about problem-solving- oh, and music!</p>
+        </div>
+
+<!-- Experience Section -->
+<div class="experience-section" id="experience-section">
+    <div class="job-number">
+        <h2>1</h2>
+        <h2>2</h2>
+        <h2>3</h2>
+    </div>
+
+    <div class="experience-list">
+        <div class="experience-item" data-logo="assets/logo1.jpg">
+            <h3>Bits Lead</h3>
+            <p>Boston University Girl's Who Code</p>
+        </div>
+        <div class="experience-item" data-logo="assets/logo2.jpg">
+            <h3>Bits Lead</h3>
+            <p>Boston University Girl's Who Code</p>
+        </div>
+        <div class="experience-item" data-logo="assets/logo3.jpg">
+            <h3>Bits Lead</h3>
+            <p>Boston University Girl's Who Code</p>
+        </div>
+    </div>
+
+    <div class="experience-dates">
+        <p>04.24</p>
+        <p>04.24</p>
+        <p>04.24</p>
+    </div>
+
+    <div class="album-cover">
+        <a href="assets/Gracious O. Asare Resume.pdf" target="_blank">
+            <img src="assets/mock-project1.jpg" alt="Project">
+            <div class="play-button"></div>
+        </a>
+    </div>
+</div>
+
+
+     <!-- Projects Section -->
+
+        <div class="projects-section" id="projects-section">
+            <div class="projects-list">
+                <h2>Featured</h2>
+                <div class="project-item">
+                    <img src="assets/mock-project1.jpg" alt="Project 1">
+                    <h3>Stock Portfolio Website</h3>
+                    <p>Flask, Python, HTML/CSS, RESTful APIs, Github workflows </p>
+                </div>
+                <div class="project-item">
+                    <img src="assets/mock-project1.jpg" alt="Project 1">
+                    <h3>CrowdSync- Events Search</h3>
+                    <p>Short description.</p>
+                </div>
+                <div class="project-item">
+                    <img src="assets/mock-project1.jpg" alt="Project 1">
+                    <h3>Workout/Playlist Generator</h3>
+                    <p>Short description.</p>
+                </div>
+                <div class="project-item">
+                    <img src="assets/mock-project1.jpg" alt="Project 1">
+                    <h3>HeadAid- Migraine Tracker App</h3>
+                    <p>Short description.</p>
+                </div>
+                <div class="project-item">
+                    <img src="assets/mock-project1.jpg" alt="Project 1">
+                    <h3>TimeZoner- Timezone finder</h3>
+                    <p>Short description.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact me section -->
+        <div class="contact-section" id="contact-section">
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2024 Gracious Ogyiri Asare.</p>
+            <div class="social-media">
+            </div>
+        </footer>
+
+        <!-- Music Play Bar -->
+        <div class="music-bar">
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+            <span class="play-time">1:00</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
