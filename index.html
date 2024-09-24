@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Gracious Ogyiri Asare</title>
         <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
     </head>
 
     <body>
+ 
         <!-- Loading Page -->
         <div class="loading-page">
             <div class="vinyl-record"></div>
@@ -16,54 +22,57 @@
 
         <!-- Main Content -->
         <div class="main-content" id="main-content">
-            <div class="about-section" id="about-section">
-                <div class="about-content">
+            <div class="hero-section" id="hero-section">
+                <div class="hero-content">
                     <h1>Gracious</h1>
                     <img src="assets/mock-gracious-cover.jpg" alt="Gracious Ogyiri Asare">
                 </div>
             </div>
 
             <!-- Sticky Header -->
-            <div class="sticky-header">
+            <header class="navbar">
                 <nav>
                     <ul>
-                        <li><a href="#about-section">About</a></li>
-                        <li><a href="#experience-section">Experience</a></li>
-                        <li><a href="#projects-section">Projects</a></li>
-                        <li><a href="#contact-section">Contact</a></li>
+                        <li><a href="#about-section" class="nav-link">About</a></li>
+                        <li><a href="#experience-section" class="nav-link">Experience</a></li>
+                        <li><a href="#projects-section" class="nav-link">Projects</a></li>
+                        <li><a href="#contact-section" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
-            </div>
+            </header>
 
-            <div class="hero-section" id="hero-section">
-                <p>Welcome! I am Gracious Ogyiri Asare and I love creating things, enjoying 
-                the process of letting concepts in my mind become a reality- whether it's 
-                a full-stack website, or music track! I am currently a Computer Science 
-                major at Boston University, with an interest in full-stack web development 
-                and DevOps engineering. I am dedicated to creating impactful, solutions, to 
-                change the small world around me.
-                </p>
-            </div>
+
+            <section id="about-section">
+                <div class="about-section" id="about-section">
+                    <p class="fade-in"> Welcome! I am Gracious Ogyiri Asare and I love creating things, enjoying 
+                    the process of letting concepts in my mind become a reality- whether it's 
+                    a full-stack website, or music track! I am currently a Computer Science 
+                    major at Boston University, with an interest in full-stack web development 
+                    and DevOps engineering. I am dedicated to creating impactful, solutions, to 
+                    change the small world around me.
+                    </p>
+                </div>
+            </section>
 
         <!-- Experience Section -->
+        <section id="experience-section">
         <div class="experience-section" id="experience-section">
-
-            <div class="job-number">
-                <h2>1</h2>
+            <div class="job-number fade-in">
+                <h2 class="fade-in">1</h2>
                 <h2>2</h2>
                 <h2>3</h2>
             </div>
 
             <div class="experience-list">
-                <div class="experience-item" data-logo="assets/logo1.jpg">
+                <div class="experience-item" id="experience-1" data-logo="assets/job1.png">
                     <h3>Tech Dev Intern</h3>
                     <p>Sponsors for Educational Opportunity</p>
                 </div>
-                <div class="experience-item" data-logo="assets/logo2.jpg">
+                <div class="experience-item" id="experience-2" data-logo="assets/job2.png">
                     <h3>Bits Lead</h3>
                     <p>Boston University Girl's Who Code</p>
                 </div>
-                <div class="experience-item" data-logo="assets/logo3.jpg">
+                <div class="experience-item" id="experience-3" data-logo="assets/job3.png">
                     <h3>Bits Lead</h3>
                     <p>Boston University Girl's Who Code</p>
                 </div>
@@ -76,78 +85,83 @@
             </div>
 
             <div class="album-cover">
-                <a href="assets/Gracious O. Asare.pdf" target="_blank">
-                    <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
-                    <div class="play-button"></div>
+                <div class="resume-img">
+                    <a href="assets/Gracious O. Asare.pdf" target="_blank">
+                    <img src="assets/mock-resume-cover.jpg" class="resume-img" alt="Gracious Ogyiri Asare">
+                </div>
+                <div class="play-button"></div>
                 </a>
             </div>
         </div>
-
+    </section>
 
         <!-- Projects Section -->
-        <div class="projects-section" id="projects-section">
+        <section id="projects-section">
+        <div class="projects-section fade-in" id="projects-section">
             <div class="projects-list">
-                <h2>Featured</h2>
-                <div class="project-item">
+                <h2 class="fade-in">Featured</h2>
+                <div class="project-item fade-in">
                     <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
                     <div class="play-button" onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')">
                         <img src="assets/mock-playbutton-small.png" alt="Gracious Ogyiri Asare">
                     </div>
                     <h3>Stock Portfolio Website</h3>
-                    <p>Flask, Python, HTML/CSS, RESTful APIs, Github workflows </p>
+                    <p>Flask, Python, HTML/CSS, REST APIs </p>
                 </div>
-                <div class="project-item">
+                <div class="project-item fade-in">
                     <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
                     <div class="play-button" onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')">
                         <img src="assets/mock-playbutton-small.png" alt="Gracious Ogyiri Asare">
                     </div>
                     <h3>CrowdSync- Events Search</h3>
-                    <p>Short description.</p>
+                    <p>Python, Flask, JavaScript, HTML/CSS, Ticketmaster API</p>
                 </div>
-                <div class="project-item">
-                    <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
+                <div class="project-item fade-in">
+                    <img src="assets/crowdsync.jpg" alt="Gracious Ogyiri Asare">
                     <div class="play-button" onclick="window.open('https://github.com/stavros-0/CS411Project', '_blank')">
                         <img src="assets/mock-playbutton-small.png" alt="Gracious Ogyiri Asare">
                     </div>
                     <h3>Workout/Playlist Generator</h3>
-                    <p>Short description.</p>
+                    <p>Python, Flask, React, HTML/CSS, Firebase</p>
                 </div>
-                <div class="project-item">
+                <div class="project-item fade-in">
                     <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
                     <div class="play-button" onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')">
                         <img src="assets/mock-playbutton-small.png" alt="Gracious Ogyiri Asare">
                     </div>
                     <h3>HeadAid- Migraine Tracker App</h3>
-                    <p>Short description.</p>
+                    <p>Swift, CoreML, HealthKit, SiriKit</p>
                 </div>
-                <div class="project-item">
+                <div class="project-item fade-in">
                     <img src="assets/mock-project1.jpg" alt="Gracious Ogyiri Asare">
                     <div class="play-button" onclick="window.open('https://github.com/sheisgracious/Timezone-project', 'https://gpoatimezone.pythonanywhere.com/')">
                         <img src="assets/mock-playbutton-small.png" alt="Gracious Ogyiri Asare">
                     </div>
                     <h3>TimeZoner- Timezone finder</h3>
-                    <p>Short description.</p>
+                    <p>Python, Flask, HTML/CSS, Google Maps API</p>
                 </div>            
             </div>
         </div>
+        </section>
 
 
         <!-- Contact me section -->
+        <section id="contact-section">
         <div class="contact-section" id="contact-section">
-            <h2>Get In Touch</h2> <img src = "assets/Gracious-linkedin.png" onclick="window.open('https://linkedin.com/in/gpoa', '_blank')" alt="Gracious Ogyiri Asare">  <img src = "assets/Gracious-github.png" onclick="window.open('https://github.com/sheisgracious', '_blank')" alt="Gracious Ogyiri Asare"> 
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-                <button type="submit">Send</button>
+            
+            <form action="https://formsubmit.co/051a64c5fead472ca48a470e5be1c792" method="POST" class="contact-form">
+                <div class="form-title fade-in">
+                    <h2>Get In Touch</h2> 
+                    <img src= "assets/Gracious-linkedin.png" class="linkedin" onclick="window.open('https://linkedin.com/in/gpoa', '_blank')" alt="Gracious Ogyiri Asare"> 
+                    <img src= "assets/Gracious-github.png" class="github" onclick="window.open('https://github.com/sheisgracious', '_blank')" alt="Gracious Ogyiri Asare"> 
+                </div>
+                <input type="text" name="name" placeholder="Your Name" class="contact-fields fade-in" required>
+                <input type="email" name="email" placeholder="Your Email" class="contact-fields" fade-in required>
+                <textarea name="message" placeholder="Type a message" class="contact-fields fade-in" required></textarea>
+                <button type="submit" class="fade-in">Send<img src="assets/Gracious-arrow.webp" alt="Gracious Ogyiri Asare"></button>
             </form>
         </div>
+        </section>
 
         <!-- Footer -->
         <footer>
@@ -157,6 +171,10 @@
         </footer>
 
         <script src="script.js"></script>
-        
+        <!-- <div class="music-player">
+            <div class="music-bar">
+                <div class="progress" id= "progress" > </div>    
+            </div>
+        </div> -->
     </body>
 </html>
