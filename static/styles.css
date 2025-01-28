@@ -72,10 +72,92 @@ header:not(.fixed) {
   padding: 5px;
 }
 
+/* Popup Add Song Section */
+.add-music-btn {
+  width: 120px;
+  height: 30px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  background: #111;
+  cursor: pointer;
+  position: absolute;
+  transform: translateX(1000%);
+  z-index: 0;
+  border-radius: 800px;
+}
+
+.add-music-btn:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing 20s linear infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.add-music-btn:active {
+  color: #000;
+}
+
+.add-music-btn:active:after {
+  background: transparent;
+}
+
+.add-music-btn:before {
+  opacity: 1;
+}
+
+.add-music-btn:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #111;
+  left: 0;
+  top: 0;
+  border-radius: 800px;
+}
+
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 /* Hero Section */
 .hero-section {
-  /* background-color: #f7c9b8; */
-  background-image: url("assets/background3.png");
+  background-color: #e3feff;
+  /* background-image: url("assets/background3.png"); */
   background-size: initial;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,6 +172,13 @@ header:not(.fixed) {
   justify-content: space-between;
 }
 
+.about-section h2 {
+  font-size: 1.5rem;
+  /* position: absolute; */
+  padding-bottom: 20px;
+  font-size: 35px;
+  font-weight: bold;
+}
 .hero-content img {
   position: relative;
   width: 351px;
@@ -99,25 +188,111 @@ header:not(.fixed) {
 
 .hero-content h1 {
   color: #000000;
-  font-size: 80pt;
+  font-size: 65pt;
   padding-left: 40px;
-  padding-top: 180px;
+  padding-top: 230px;
 }
 
 /* About Section */
-.about-section {
-  background: linear-gradient(to bottom, #fcdbd1, #d3c9c8);
-  color: #03363b;
-  /* height: 30%; */
-  text-align: left;
-  padding: 75px 60px;
-  box-sizing: border-box;
+/* Main section styling */
+#about-section {
+  display: flex; /* Use flexbox to align the children side by side */
+  justify-content: center; /* Centers the content horizontally */
+  align-items: flex-start; /* Aligns items at the top */
+  background: linear-gradient(
+    to bottom,
+    #e3feff,
+    #acfafc
+  ); /* Gradient background */
+  padding-left: 10px; /* Space between the left edge of the section and its content */
+  margin-left: -20px;
+  padding-right: 120px; /* Space between the right edge of the section and its content */
+  padding-top: 60px; /* Space from the top of the section */
+  padding-bottom: 20px; /* Space from the bottom of the section */
 }
 
-.about-section p {
-  font-size: 25pt;
-  font-family: "PT Mono", monospace;
-  margin-bottom: 20px;
+/* Container that holds the two sections (title + about-info) */
+.about-section {
+  display: flex; /* Layout the content horizontally side by side */
+  justify-content: space-between; /* Put space between the title and the about-info */
+  width: 100%; /* Full width of the section */
+  max-width: 1200px; /* Control the maximum width for large screens */
+}
+
+/* Title container section */
+.about-title-container {
+  width: 90%; /* Adjust this value to control how much space the title and paragraph take up */
+  padding-right: 60px; /* Adds space between the title section and the about-info */
+}
+
+/* Title styling (About Gracious) */
+.about-title-container h2 {
+  font-size: 36px; /* Adjust the font size for the title */
+  margin-bottom: 2px; /* Space between the title and paragraph */
+  color: #000; /* Title color */
+}
+
+/* Paragraph styling (The main text in the About Gracious section) */
+.about-me {
+  font-size: 18pt; /* Adjust this value for text size */
+  line-height: 1.6; /* Controls the space between lines of text */
+  color: #525557; /* Text color */
+  margin-bottom: 10px; /* Space between paragraphs (if there are more) */
+}
+
+/* About-info section (From, Education, Skills, etc.) */
+.about-info {
+  display: flex;
+  flex-direction: column; /* Stack the items vertically */
+  align-items: flex-start; /* Align all items to the left */
+  width: 30%; /* Adjust this value to control the width of the about-info section */
+  max-width: 500px; /* Restrict to a max width for better readability */
+  padding-top: 65px; /* Space from the top of the section */
+}
+
+/* Title styling for items in the About-info section (From, Education, Skills) */
+.about-title {
+  font-weight: bold; /* Makes the title text bold */
+  font-size: 18px; /* Adjust the font size for these titles */
+  color: #000; /* Color for these titles */
+  margin-bottom: 5px; /* Space below the title */
+}
+
+/* Styling for the paragraphs inside the About-info section */
+.about-pg {
+  color: #000; /* Color of the paragraph text */
+  margin-bottom: 5px; /* Space between the paragraphs */
+}
+
+/* Adjust the space between the left section and the page edge */
+.about-title-container {
+  padding-left: 0; /* Removes any extra padding from the left edge of the section */
+}
+
+/* If you want more control over layout on smaller screens, you can add media queries */
+@media screen and (max-width: 768px) {
+  /* For smaller screens, adjust the widths to fit better */
+  .about-section {
+    flex-direction: column; /* Stack the title and about-info vertically on small screens */
+  }
+
+  .about-title-container,
+  .about-info {
+    width: 100%; /* Make both sections take full width */
+    max-width: none; /* Remove max-width restriction */
+  }
+
+  .about-title-container h2 {
+    font-size: 30px; /* Adjust title font size for smaller screens */
+  }
+
+  .about-me {
+    font-size: 16pt; /* Adjust paragraph font size for smaller screens */
+  }
+
+  .about-info {
+    padding-top: 20px; /* Adds space above the about-info section */
+  }
 }
 
 /* Experience section */
