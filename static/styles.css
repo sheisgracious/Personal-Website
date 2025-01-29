@@ -358,12 +358,12 @@ header:not(.fixed) {
 
 .job-number {
   font-size: 35px;
-  margin-left: 28px;
   display: flex;
   flex-direction: column;
   gap: 118px;
-  margin-left: 35px;
+  margin-left: 70px;
   margin-right: 50px;
+  padding-left: 30px;
 }
 
 .experience-dates {
