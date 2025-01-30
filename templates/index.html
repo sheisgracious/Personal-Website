@@ -41,10 +41,30 @@
                 
        
                 </nav>
-                                <button class="add-music-btn" id="spotify-login" onclick="location.href='/login'" title="Add Your Vibe">Add A Track</button>
+                                <button class="add-music-btn" id="spotify-login" title="Add Your Vibe">Add A Track</button>
+                                <!-- <button class="add-music-btn" id="spotify-login" onclick="location.href='/login'" title="Add Your Vibe">Add A Track</button> -->
 
             </header>
 
+
+            <!-- Popup Section -->
+<section class="modal hidden">
+  <div class="flex">
+    <button class="btn-close">&times;</button>
+  </div>
+  <div>
+    <h3>Share music with me!</h3>
+    <p>I love discovering new music! Add any track to this shared Spotify playlist.</p>
+  </div>
+
+  <input type="email" id="email" placeholder="Search" />
+  <button class="btn" id="spotify-login" onclick="location.href='/login'">Login to Spotify</button>
+</section>
+
+<div class="overlay hidden"></div>
+
+
+<!-- About Section -->
 
             <section id="about-section">
   <div class="about-section">

@@ -1,113 +1,126 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const header = document.querySelector('header');
-    const headerOffset = header.offsetTop; // Get the initial position of the header
-    const navLinks = document.querySelectorAll('.nav-link');
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector("header");
+  const headerOffset = header.offsetTop; // Get the initial position of the header
+  const navLinks = document.querySelectorAll(".nav-link");
 
-    const initialTop = header.getBoundingClientRect().top + window.pageYOffset;
+  const initialTop = header.getBoundingClientRect().top + window.pageYOffset;
 
-    // Loading Page 
-    const vinylRecord = document.querySelector('.vinyl-record');
-    const loadingPage = document.querySelector('.loading-page');
-    const mainContent = document.querySelector('.main-content');
+  // Loading Page
+  const vinylRecord = document.querySelector(".vinyl-record");
+  const loadingPage = document.querySelector(".loading-page");
+  const mainContent = document.querySelector(".main-content");
 
-    mainContent.style.display = 'none';
+  mainContent.style.display = "none";
 
-    vinylRecord.style.opacity = 1;
+  vinylRecord.style.opacity = 1;
+
+  setTimeout(() => {
+    vinylRecord.classList.add("zoom-out");
+  }, 2000);
+
+  setTimeout(() => {
+    loadingPage.style.opacity = 0;
 
     setTimeout(() => {
-        vinylRecord.classList.add('zoom-out');
-    }, 2000); 
+      loadingPage.style.display = "none";
+      mainContent.style.display = "block";
+      mainContent.style.opacity = 0; // Start hidden
 
-    setTimeout(() => {
-        loadingPage.style.opacity = 0;
+      setTimeout(() => {
+        mainContent.style.opacity = 1; // Fade in
+      }, 50);
+    }, 500);
+  }, 2500);
 
-        setTimeout(() => {
-            loadingPage.style.display = 'none';
-            mainContent.style.display = 'block';
-            mainContent.style.opacity = 0; // Start hidden
+  window.addEventListener("scroll", function () {
+    const scrollY = window.pageYOffset; // Get the current scroll position
 
-            setTimeout(() => {
-                mainContent.style.opacity = 1; // Fade in
-            }, 50);
-        }, 500);
-    }, 2500);
+    if (scrollY > headerOffset + 350) {
+      // If scrolled past the header's position
+      header.classList.add("fixed"); // Add fixed class
+    } else {
+      // If scrolled back above the header's position
+      header.classList.remove("fixed"); // Remove fixed class
+    }
+  });
 
+  // hover album effect
+  const albumCover = document.querySelector(".album-cover img");
+  const originalImage = albumCover.src; // Store the original image source
 
-
-    window.addEventListener('scroll', function() {
-        const scrollY = window.pageYOffset; // Get the current scroll position
-    
-        if (scrollY > headerOffset + 350) {
-            // If scrolled past the header's position
-            header.classList.add('fixed'); // Add fixed class
-        } else {
-            // If scrolled back above the header's position
-            header.classList.remove('fixed'); // Remove fixed class
-        }
+  document.querySelectorAll(".experience-item").forEach((item) => {
+    item.addEventListener("mouseover", function () {
+      albumCover.src = item.dataset.logo; // Change to hover image
     });
 
-
-    // hover album effect
-    const albumCover = document.querySelector('.album-cover img');
-    const originalImage = albumCover.src; // Store the original image source
-
-    document.querySelectorAll('.experience-item').forEach(item => {
-        item.addEventListener('mouseover', function() {
-            albumCover.src = item.dataset.logo; // Change to hover image
-        });
-
-        item.addEventListener('mouseout', function() {
-            albumCover.src = originalImage; // Reset to original image
-        });
+    item.addEventListener("mouseout", function () {
+      albumCover.src = originalImage; // Reset to original image
     });
+  });
 
-    console.log('Script is running');
+  console.log("Script is running");
+
+  //Modal
 
 
-  
+  const modal = document.querySelector(".modal");
+  const overlay = document.querySelector(".overlay");
+  const openModalBtn = document.querySelector(".add-music-btn");
+  const closeModalBtn = document.querySelector(".btn-close");
 
+  const closeModal = function () {
+    modal.classList.add("hidden");
+    overlay.classList.add("hidden");
+  };
 
-    // Sticky Navigation
-    // let lastScrollTop = 0;
-    // const header = document.querySelector('header');
-    // const navLinks = document.querySelectorAll('.nav-link');
-    // console.log('Header:', header);
-    // window.addEventListener('scroll', () => {
-    //     console.log('Scroll Top:', window.pageYOffset);
-    //     header.style.setProperty('top', '0'); // Force showing the navbar for testing
-    // });
-    
-//     window.addEventListener('scroll', () => {
-//         console.log('Scroll event detected');
-//         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-//         console.log('Scroll Top:', scrollTop);
-//         // Show/hide header on scroll
-//         if (scrollTop > lastScrollTop) {
-//             header.style.top = '-70px'; // Direct assignment without 'important'
-//  // Hide the navbar
-//             console.log('Scrolling down, hiding header');
-//         } else {
-//             header.style.top = '0'; // Direct assignment without 'important'
-//  // Show the navbar
-//             console.log('Scrolling up, showing header');
-//         }
-//         lastScrollTop = scrollTop;
-    
-//         // Active link highlight
-//         navLinks.forEach(link => {
-//             const section = document.querySelector(link.getAttribute('href'));
-//             const sectionTop = section.offsetTop;
-//             const sectionHeight = section.offsetHeight;
-    
-//             if (scrollTop >= sectionTop - header.offsetHeight && scrollTop < sectionTop + sectionHeight - header.offsetHeight) {
-//                 navLinks.forEach(link => link.classList.remove('active'));
-//                 link.classList.add('active');
-//             }
-//         });
-//     });
-    
+  closeModalBtn.addEventListener("click", closeModal);
+  overlay.addEventListener("click", closeModal);
+
+  const openModal = function () {
+    modal.classList.remove("hidden");
+    overlay.classList.remove("hidden");
+  };
+  openModalBtn.addEventListener("click", openModal);
+
+  // Sticky Navigation
+  // let lastScrollTop = 0;
+  // const header = document.querySelector('header');
+  // const navLinks = document.querySelectorAll('.nav-link');
+  // console.log('Header:', header);
+  // window.addEventListener('scroll', () => {
+  //     console.log('Scroll Top:', window.pageYOffset);
+  //     header.style.setProperty('top', '0'); // Force showing the navbar for testing
+  // });
+
+  //     window.addEventListener('scroll', () => {
+  //         console.log('Scroll event detected');
+  //         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  //         console.log('Scroll Top:', scrollTop);
+  //         // Show/hide header on scroll
+  //         if (scrollTop > lastScrollTop) {
+  //             header.style.top = '-70px'; // Direct assignment without 'important'
+  //  // Hide the navbar
+  //             console.log('Scrolling down, hiding header');
+  //         } else {
+  //             header.style.top = '0'; // Direct assignment without 'important'
+  //  // Show the navbar
+  //             console.log('Scrolling up, showing header');
+  //         }
+  //         lastScrollTop = scrollTop;
+
+  //         // Active link highlight
+  //         navLinks.forEach(link => {
+  //             const section = document.querySelector(link.getAttribute('href'));
+  //             const sectionTop = section.offsetTop;
+  //             const sectionHeight = section.offsetHeight;
+
+  //             if (scrollTop >= sectionTop - header.offsetHeight && scrollTop < sectionTop + sectionHeight - header.offsetHeight) {
+  //                 navLinks.forEach(link => link.classList.remove('active'));
+  //                 link.classList.add('active');
+  //             }
+  //         });
+  //     });
 });
-
 
 // document.getElementById('contactForm').addEventListener('submit', function(event) {
 //     event.preventDefault(); // Prevent the default form submission
@@ -130,29 +143,30 @@ document.addEventListener("DOMContentLoaded", function() {
 //     this.reset();
 // });
 
-
-document.getElementById('contactForm').addEventListener('submit', function(event) {
+document
+  .getElementById("contactForm")
+  .addEventListener("submit", function (event) {
     event.preventDefault();
 
     const formData = new FormData(this); // Get form data
 
-    fetch('YOUR_BACKEND_ENDPOINT', {
-        method: 'POST',
-        body: formData,
+    fetch("YOUR_BACKEND_ENDPOINT", {
+      method: "POST",
+      body: formData,
     })
-    .then(response => {
+      .then((response) => {
         if (response.ok) {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.textContent = 'Message sent successfully!';
-            successMessage.style.display = 'block';
-            successMessage.style.color = '#4caf50';
-            this.reset(); // Reset form
+          const successMessage = document.getElementById("successMessage");
+          successMessage.textContent = "Message sent successfully!";
+          successMessage.style.display = "block";
+          successMessage.style.color = "#4caf50";
+          this.reset(); // Reset form
         } else {
-            alert('There was an error sending your message.');
+          alert("There was an error sending your message.");
         }
-    })
-    .catch(error => {
-        alert('There was an error sending your message.');
-        console.error('Error:', error);
-    });
-});
+      })
+      .catch((error) => {
+        alert("There was an error sending your message.");
+        console.error("Error:", error);
+      });
+  });
