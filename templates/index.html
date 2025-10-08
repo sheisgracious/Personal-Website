@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gracious Ogyiri Asare</title>
+    <title>Gracious Ogyiri Asare - Portfolio</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,237 +18,279 @@
 
     <!-- Main Content -->
     <div class="main-content" id="main-content">
-        <!-- Sticky Header -->
-        <header class="navbar">
-            <nav>
-                <ul>
-                    <li><a href="#about-section" class="nav-link">About</a></li>
-                    <li><a href="#experience-section" class="nav-link">Experience</a></li>
-                    <li><a href="#projects-section" class="nav-link">Projects</a></li>
-                    <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                </ul>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <span class="logo-icon">🎵</span>
+                    <span class="logo-text">Gracious</span>
+                </div>
+                <button class="collapse-btn" id="collapseBtn">
+                    <span id="collapseIcon">◀</span>
+                </button>
+            </div>
+            
+            <nav class="nav-section">
+                <a href="#hero" class="nav-item active">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Home</span>
+                </a>
+                <a href="#about" class="nav-item">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">About</span>
+                </a>
+                <a href="#experience" class="nav-item">
+                    <span class="nav-icon">💼</span>
+                    <span class="nav-text">Experience</span>
+                </a>
+                <a href="#projects" class="nav-item">
+                    <span class="nav-icon">🎨</span>
+                    <span class="nav-text">Projects</span>
+                </a>
+                <a href="#contact" class="nav-item">
+                    <span class="nav-icon">📧</span>
+                    <span class="nav-text">Contact</span>
+                </a>
             </nav>
-            <button class="add-music-btn" id="spotify-login" title="Add Your Vibe">Add A Track</button>
-        </header>
+
+            <button class="add-track-btn">+ Add A Track</button>
+        </aside>
 
         <!-- Hero Section -->
-        <div class="hero-section" id="hero-section">
+        <section id="hero" class="hero">
             <div class="hero-content">
-                <div>
-                    <h1>Gracious Ogyiri Asare</h1>
-                    <div class="artist-info">
-                        <div class="verified-badge">✓</div>
-                        <span class="monthly-listeners">Verified Developer</span>
+                <img src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}" alt="Gracious" class="hero-image">
+                <div class="hero-info">
+                    <div class="verified-badge">
+                        <span class="verified-icon">✓</span>
+                        Verified Developer
                     </div>
-                    <p class="hero-description">
-                        Full-stack developer crafting digital experiences. Currently studying Computer Science at Boston University.
-                    </p>
-                    <button class="play-btn">▶ Play Portfolio</button>
+                    <h1>Gracious Ogyiri Asare</h1>
+                    <p class="hero-meta">Full-stack developer · Boston University '26</p>
+                    <div class="hero-actions">
+                        <button class="play-btn-hero" onclick="window.open('{{ url_for('static', filename='assets/Gracious O. Asare.pdf') }}', '_blank')">
+                            ▶
+                            <span class="tooltip">View My Resume</span>
+                        </button>
+                        <a href="https://linkedin.com/in/gpoa" target="_blank" class="connect-btn">Connect</a>
+                    </div>
                 </div>
-                <img src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}" alt="Gracious Ogyiri Asare">
             </div>
-        </div>
-
-        <!-- Popup Section -->
-        <section class="modal hidden">
-            <button class="btn-close">&times;</button>
-            <div>
-                <h3>Share music with me!</h3>
-                <p>I love discovering new music! Add any track to this shared Spotify playlist.</p>
-            </div>
-            <input type="email" id="email" placeholder="Search" />
-            <button class="btn" id="spotify-login-modal" onclick="location.href='/login'">Login to Spotify</button>
         </section>
 
-        <div class="overlay hidden"></div>
-
         <!-- About Section -->
-        <section id="about-section">
-            <div class="about-section">
-                <div class="about-title-container">
-                    <h2>About the Artist</h2>
-                    <p class="about-me">Welcome! I am Gracious Ogyiri Asare and I love creating things. I enjoy the process of letting concepts in my mind become a reality—whether it's a full-stack website or music track! I am currently a Computer Science major at Boston University, with an interest in full-stack web development and DevOps engineering. I am dedicated to creating impactful solutions, to create value in any way possible.</p>
+        <section id="about" class="content-section">
+            <h2 class="section-title">About</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Welcome! I am Gracious Ogyiri Asare and I love creating things. I enjoy the process of letting concepts in my mind become a reality - whether it's a full-stack website or music track! I am currently a Computer Science major at Boston University, with an interest in full-stack web development and DevOps engineering. I am dedicated to creating impactful solutions, to create value in any way possible.</p>
                 </div>
-                <div class="about-info">
-                    <div>
-                        <p class="about-title">From</p>
-                        <p class="about-pg">Ghana / United States</p>
+                <div class="about-metadata">
+                    <div class="metadata-item">
+                        <div class="metadata-label">From</div>
+                        <div class="metadata-value">Ghana / United States</div>
                     </div>
-                    <div>
-                        <p class="about-title">Education</p>
-                        <p class="about-pg">Boston University Class of 2026</p>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Education</div>
+                        <div class="metadata-value">Boston University Class of 2026</div>
                     </div>
-                    <div>
-                        <p class="about-title">Skills</p>
-                        <p class="about-pg">Python, HTML/CSS, Swift, JavaScript</p>
+                    <div class="metadata-item">
+                        <div class="metadata-label">Skills</div>
+                        <div class="metadata-value">Python, HTML/CSS, Swift, JavaScript</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Experience Section -->
-        <section id="experience-section">
-            <div class="experience-section">
+        <section id="experience" class="experience-section">
+            <div class="content-section" style="padding-top: 0; padding-bottom: 0;">
+                <h2 class="section-title">Latest Album</h2>
                 <div class="album-header">
-                    <div class="album-cover">
-                        <a href="{{ url_for('static', filename='assets/Gracious O. Asare.pdf') }}" target="_blank">
-                            💼
-                        </a>
-                    </div>
+                    <div class="album-cover" onclick="window.open('{{ url_for('static', filename='assets/Gracious O. Asare.pdf') }}', '_blank')">💼</div>
                     <div class="album-info">
-                        <h3>Album</h3>
+                        <h3>Album · 2024</h3>
                         <h2>Professional Experience</h2>
-                        <div class="album-meta">
-                            <span>Gracious Ogyiri Asare</span>
-                            <span>•</span>
-                            <span>2024</span>
-                            <span>•</span>
-                            <span>3 tracks</span>
-                        </div>
+                        <p class="album-meta">3 tracks · 2024</p>
                     </div>
                 </div>
 
-                <div class="experience-list">
-                    <div class="experience-item" id="experience-1" data-logo="{{ url_for('static', filename='assets/job1.png') }}">
-                        <div class="job-number">1</div>
+                <div class="tracklist">
+                    <div class="track">
                         <div>
-                            <h3>Tech Dev Intern</h3>
+                            <div class="track-num">1</div>
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="track-info">
+                            <h4>Tech Dev Intern</h4>
                             <p>Led remote coding programs, boosted membership 40%</p>
                         </div>
-                        <p>Sponsors for Educational Opportunity</p>
-                        <p class="experience-dates">05.24</p>
+                        <div class="track-company">Sponsors for Educational Opportunity</div>
+                        <div class="track-date">05.24</div>
                     </div>
 
-                    <div class="experience-item" id="experience-2" data-logo="{{ url_for('static', filename='assets/job2.png') }}">
-                        <div class="job-number">2</div>
+                    <div class="track">
                         <div>
-                            <h3>Bits Lead</h3>
+                            <div class="track-num">2</div>
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="track-info">
+                            <h4>Bits Lead</h4>
                             <p>Managed facilitators, achieved 80% student retention</p>
                         </div>
-                        <p>Boston University Girl's Who Code</p>
-                        <p class="experience-dates">04.24</p>
+                        <div class="track-company">Boston University Girl's Who Code</div>
+                        <div class="track-date">04.24</div>
                     </div>
 
-                    <div class="experience-item" id="experience-3" data-logo="{{ url_for('static', filename='assets/job3.png') }}">
-                        <div class="job-number">3</div>
+                    <div class="track">
                         <div>
-                            <h3>Founder/President</h3>
+                            <div class="track-num">3</div>
+                            <div class="play-icon">▶</div>
+                        </div>
+                        <div class="track-info">
+                            <h4>Founder/President</h4>
                             <p>Built and scaled handmade jewelry business</p>
                         </div>
-                        <p>Rophe Jewels</p>
-                        <p class="experience-dates">01.24</p>
+                        <div class="track-company">Rophe Jewels</div>
+                        <div class="track-date">01.24</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Projects Section -->
-        <section id="projects-section">
-            <div class="projects-section">
-                <h2>Featured Projects</h2>
-                <div class="projects-list">
-                    <div class="project-item">
-                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Stock Portfolio">
-                        <div class="play-button" onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')">
-                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+        <section id="projects" class="content-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-carousel">
+                <div class="carousel">
+                    <div class="project-card" onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')">
+                        <div class="project-cover project-1">
+                            <div class="play-overlay">▶</div>
                         </div>
-                        <h3>Stock Portfolio Website</h3>
-                        <p>Flask, Python, HTML/CSS, REST APIs</p>
+                        <div class="project-info">
+                            <h3>Stock Portfolio Website</h3>
+                            <p>Flask, Python, HTML/CSS, REST APIs</p>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="CrowdSync">
-                        <div class="play-button" onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')">
-                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                    <div class="project-card" onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')">
+                        <div class="project-cover project-2">
+                            <div class="play-overlay">▶</div>
                         </div>
-                        <h3>CrowdSync</h3>
-                        <p>Python, Flask, JavaScript, HTML/CSS, Ticketmaster API</p>
+                        <div class="project-info">
+                            <h3>CrowdSync</h3>
+                            <p>Python, Flask, JavaScript, Ticketmaster API</p>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Workout Generator">
-                        <div class="play-button" onclick="window.open('https://github.com/stavros-0/CS411Project', '_blank')">
-                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                    <div class="project-card" onclick="window.open('https://github.com/stavros-0/CS411Project', '_blank')">
+                        <div class="project-cover project-3">
+                            <div class="play-overlay">▶</div>
                         </div>
-                        <h3>Workout/Playlist Generator</h3>
-                        <p>Python, Flask, React, HTML/CSS, Firebase</p>
+                        <div class="project-info">
+                            <h3>Workout/Playlist Generator</h3>
+                            <p>Python, Flask, React, Firebase</p>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="HeadAid">
-                        <div class="play-button" onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')">
-                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                    <div class="project-card" onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')">
+                        <div class="project-cover project-4">
+                            <div class="play-overlay">▶</div>
                         </div>
-                        <h3>HeadAid</h3>
-                        <p>Swift, CoreML, HealthKit, SiriKit</p>
+                        <div class="project-info">
+                            <h3>HeadAid</h3>
+                            <p>Swift, CoreML, HealthKit, SiriKit</p>
+                        </div>
                     </div>
 
-                    <div class="project-item">
-                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="TimeZoner">
-                        <div class="play-button" onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')">
-                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                    <div class="project-card" onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')">
+                        <div class="project-cover project-5">
+                            <div class="play-overlay">▶</div>
                         </div>
-                        <h3>TimeZoner</h3>
-                        <p>Python, Flask, HTML/CSS, Google Maps API</p>
+                        <div class="project-info">
+                            <h3>TimeZoner</h3>
+                            <p>Python, Flask, Google Maps API</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact-section">
-            <div class="contact-section">
-                <h2>Drop A Beat 🎵</h2>
-                <div class="form-title">
-                    <img src="{{ url_for('static', filename='assets/Gracious-linkedin.png') }}" class="linkedin" onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')" alt="LinkedIn">
-                    <img src="{{ url_for('static', filename='assets/Gracious-github.png') }}" class="github" onclick="window.open('https://github.com/sheisgracious', '_blank')" alt="GitHub">
+        <section id="contact" class="content-section">
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="contact-content">
+                <div class="social-links">
+                    <div class="social-btn" onclick="window.open('https://linkedin.com/in/gpoa', '_blank')">in</div>
+                    <div class="social-btn" onclick="window.open('https://github.com/sheisgracious', '_blank')">⚡</div>
                 </div>
-                <form action="https://formspree.io/f/mldelvjp" method="POST" class="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" class="contact-fields" required>
-                    <input type="email" name="email" placeholder="Your Email" class="contact-fields" required>
-                    <textarea name="message" placeholder="Type a message" class="contact-fields" required></textarea>
-                    <button type="submit">Send<img src="{{ url_for('static', filename='assets/Gracious-arrow.webp') }}" alt="Arrow"></button>
-                </form>
+                <div class="contact-form">
+                    <form action="https://formspree.io/f/mldelvjp" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+                <div id="successMessage" style="display: none;"></div>
             </div>
-            <div id="successMessage" style="display: none;"></div>
         </section>
 
         <!-- Footer -->
         <footer>
-            <p>© 2024 Gracious Ogyiri Asare | gpoa@bu.edu</p>
+            <p>© 2024 Gracious Ogyiri Asare · gpoa@bu.edu</p>
         </footer>
-    </div>
 
-    <!-- Bottom Playback Bar -->
-    <div class="music-player">
-        <div class="now-playing">
-            <div class="now-playing-cover">🎵</div>
-            <div class="now-playing-info">
-                <h4>About Gracious</h4>
-                <p>Portfolio Section</p>
-            </div>
-        </div>
-
-        <div class="playback-controls">
-            <div class="control-buttons">
-                <button class="control-btn">🔀</button>
-                <button class="control-btn">⏮</button>
-                <button class="control-btn play">▶</button>
-                <button class="control-btn">⏭</button>
-                <button class="control-btn">🔁</button>
-            </div>
-            <div class="music-bar">
-                <span class="time">0:00</span>
-                <div class="progress">
-                    <div class="progress-fill" id="progress"></div>
+        <!-- Bottom Playback Bar -->
+        <div class="playback-bar">
+            <div class="now-playing">
+                <div class="now-playing-cover">🎵</div>
+                <div class="now-playing-info">
+                    <h4>Gracious Ogyiri Asare</h4>
+                    <p>Artist Profile</p>
                 </div>
-                <span class="time">3:45</span>
+            </div>
+
+            <div class="playback-controls">
+                <div class="control-buttons">
+                    <button class="control-btn" id="shuffleBtn">🔀</button>
+                    <button class="control-btn" id="prevBtn">⏮</button>
+                    <button class="control-btn play-pause" id="playBtn">▶</button>
+                    <button class="control-btn" id="nextBtn">⏭</button>
+                    <button class="control-btn" id="repeatBtn">🔁</button>
+                </div>
+                <div class="progress-bar">
+                    <span class="time" id="currentTime">0:00</span>
+                    <div class="progress-track" id="progressTrack">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="time">3:45</span>
+                </div>
+            </div>
+
+            <div class="extra-controls">
+                <button class="control-btn">🔊</button>
             </div>
         </div>
 
-        <div class="extra-controls">
-            <button class="control-btn">🔊</button>
-        </div>
+        <!-- Popup Modal -->
+        <section class="modal hidden">
+            <button class="btn-close">&times;</button>
+            <div>
+                <h3>Share music with me!</h3>
+                <p>I love discovering new music! Add any track to this shared Spotify playlist.</p>
+            </div>
+            <input type="email" id="email" placeholder="Search for a track" />
+            <button class="btn" id="spotify-login-modal" onclick="location.href='/login'">Login to Spotify</button>
+        </section>
+
+        <div class="overlay hidden"></div>
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>

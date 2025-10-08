@@ -1,112 +1,63 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const header = document.querySelector("header");
-  const vinylRecord = document.querySelector(".vinyl-record");
   const loadingPage = document.querySelector(".loading-page");
   const mainContent = document.querySelector(".main-content");
+  const vinylRecord = document.querySelector(".vinyl-record");
 
-  // Loading Page Animation
-  mainContent.style.display = "none";
-  vinylRecord.style.opacity = 1;
+  // Check if loading animation has been shown this session
+  const hasSeenLoading = sessionStorage.getItem("hasSeenLoading");
 
-  setTimeout(() => {
-    vinylRecord.classList.add("zoom-out");
-  }, 2000);
-
-  setTimeout(() => {
-    loadingPage.style.opacity = 0;
+  if (!hasSeenLoading) {
+    // Show loading animation
+    vinylRecord.style.opacity = 1;
 
     setTimeout(() => {
-      loadingPage.style.display = "none";
-      mainContent.style.display = "block";
-      mainContent.style.opacity = 0;
+      vinylRecord.classList.add("zoom-out");
+    }, 2000);
 
-      setTimeout(() => {
-        mainContent.style.opacity = 1;
-      }, 50);
-    }, 500);
-  }, 2500);
+    setTimeout(() => {
+      loadingPage.classList.add("hide");
+      mainContent.classList.add("show");
+      // Set flag in sessionStorage
+      sessionStorage.setItem("hasSeenLoading", "true");
+    }, 2500);
+  } else {
+    // Skip loading animation
+    loadingPage.style.display = "none";
+    mainContent.style.display = "block";
+    mainContent.classList.add("show");
+  }
 
-  // Sticky Navigation
-  const headerOffset = header.offsetTop;
+  // Sidebar collapse functionality
+  const sidebar = document.getElementById("sidebar");
+  const collapseBtn = document.getElementById("collapseBtn");
+  const collapseIcon = document.getElementById("collapseIcon");
 
-  window.addEventListener("scroll", function () {
-    const scrollY = window.pageYOffset;
-
-    if (scrollY > headerOffset + 350) {
-      header.classList.add("fixed");
-    } else {
-      header.classList.remove("fixed");
-    }
-  });
-
-  // Active Navigation Link
-  const navLinks = document.querySelectorAll(".nav-link");
-  const sections = document.querySelectorAll("section");
-
-  window.addEventListener("scroll", () => {
-    let current = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.clientHeight;
-      if (window.scrollY >= sectionTop - 200) {
-        current = section.getAttribute("id");
-      }
+  if (collapseBtn) {
+    collapseBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+      collapseIcon.textContent = sidebar.classList.contains("collapsed")
+        ? "▶"
+        : "◀";
     });
-
-    navLinks.forEach((link) => {
-      link.classList.remove("active");
-      if (link.getAttribute("href") === `#${current}`) {
-        link.classList.add("active");
-      }
-    });
-  });
-
-  // Modal Functionality
-  const modal = document.querySelector(".modal");
-  const overlay = document.querySelector(".overlay");
-  const openModalBtn = document.querySelector(".add-music-btn");
-  const closeModalBtn = document.querySelector(".btn-close");
-
-  const closeModal = function () {
-    modal.classList.add("hidden");
-    overlay.classList.add("hidden");
-  };
-
-  const openModal = function () {
-    modal.classList.remove("hidden");
-    overlay.classList.remove("hidden");
-  };
-
-  if (closeModalBtn) {
-    closeModalBtn.addEventListener("click", closeModal);
   }
 
-  if (overlay) {
-    overlay.addEventListener("click", closeModal);
-  }
-
-  if (openModalBtn) {
-    openModalBtn.addEventListener("click", openModal);
-  }
-
-  // ========== MUSIC PLAYER FEATURES ==========
-
-  // Scroll-linked Progress Bar
+  // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
     const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight - windowHeight;
+    const documentHeight =
+      document.documentElement.scrollHeight - windowHeight;
     const scrolled = window.scrollY;
     const progress = (scrolled / documentHeight) * 100;
 
-    const progressFill = document.getElementById("progress");
+    const progressFill = document.getElementById("progressFill");
     if (progressFill) {
       progressFill.style.width = progress + "%";
     }
 
-    // Update time display based on scroll
-    const currentTime = document.querySelectorAll(".time")[0];
-    const totalTime = 225; // 3:45 in seconds
-    const currentSeconds = Math.floor((progress / 100) * totalTime);
+    // Update time display
+    const currentTime = document.getElementById("currentTime");
+    const totalSeconds = 225; // 3:45
+    const currentSeconds = Math.floor((progress / 100) * totalSeconds);
     const minutes = Math.floor(currentSeconds / 60);
     const seconds = currentSeconds % 60;
 
@@ -117,7 +68,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Update Now Playing based on scroll position
+  // Update now playing based on scroll position
+  const sections = document.querySelectorAll("section[id]");
   const nowPlayingTitle = document.querySelector(".now-playing-info h4");
   const nowPlayingSubtitle = document.querySelector(".now-playing-info p");
 
@@ -131,19 +83,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const titles = {
-      "about-section": {
-        title: "About Gracious",
-        subtitle: "Portfolio Section",
-      },
-      "experience-section": {
+      hero: { title: "Gracious Ogyiri Asare", subtitle: "Artist Profile" },
+      about: { title: "About Gracious", subtitle: "Biography" },
+      experience: {
         title: "Professional Experience",
         subtitle: "3 tracks · 2024",
       },
-      "projects-section": {
-        title: "Featured Projects",
-        subtitle: "5 albums · 2024",
-      },
-      "contact-section": { title: "Drop A Beat", subtitle: "Contact · 2024" },
+      projects: { title: "Featured Projects", subtitle: "5 albums" },
+      contact: { title: "Get in Touch", subtitle: "Contact" },
     };
 
     if (current && titles[current]) {
@@ -153,31 +100,56 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Play Button - Scroll to top
-  const heroPlayBtn = document.querySelector(".play-btn");
-  const playerPlayBtn = document.querySelector(".control-btn.play");
-  let isPlaying = false;
+  // Active nav state
+  const navItems = document.querySelectorAll(".nav-item");
 
-  if (heroPlayBtn) {
-    heroPlayBtn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+  window.addEventListener("scroll", () => {
+    let current = "";
+
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 300) {
+        current = section.getAttribute("id");
+      }
     });
-  }
 
-  if (playerPlayBtn) {
-    playerPlayBtn.addEventListener("click", () => {
+    navItems.forEach((item) => {
+      item.classList.remove("active");
+      if (item.getAttribute("href") === `#${current}`) {
+        item.classList.add("active");
+      }
+    });
+  });
+
+  // Smooth scroll for navigation
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  });
+
+  // Play/Pause functionality with auto-scroll
+  const playBtn = document.getElementById("playBtn");
+  let isPlaying = false;
+  let scrollInterval;
+
+  if (playBtn) {
+    playBtn.addEventListener("click", () => {
       isPlaying = !isPlaying;
-      playerPlayBtn.textContent = isPlaying ? "⏸" : "▶";
+      playBtn.textContent = isPlaying ? "⏸" : "▶";
 
-      // Optional: Auto-scroll when playing
       if (isPlaying) {
         smoothScroll();
+      } else {
+        clearInterval(scrollInterval);
       }
     });
   }
 
-  // Auto-scroll functionality
-  let scrollInterval;
   function smoothScroll() {
     if (scrollInterval) clearInterval(scrollInterval);
 
@@ -186,9 +158,12 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollBy(0, 1);
 
         // Stop at bottom
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        if (
+          window.innerHeight + window.scrollY >=
+          document.body.offsetHeight
+        ) {
           isPlaying = false;
-          if (playerPlayBtn) playerPlayBtn.textContent = "▶";
+          if (playBtn) playBtn.textContent = "▶";
           clearInterval(scrollInterval);
         }
       } else {
@@ -197,55 +172,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 50);
   }
 
-  // Track hover effect - show play button
-  const experienceItems = document.querySelectorAll(".experience-item");
-
-  experienceItems.forEach((item, index) => {
-    const jobNumber = item.querySelector(".job-number");
-    const originalNumber = jobNumber.textContent;
-
-    item.addEventListener("mouseenter", function () {
-      jobNumber.textContent = "▶";
-      jobNumber.style.color = "#1db954";
+  // Get current section
+  function getCurrentSection() {
+    let current = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 200) {
+        current = section.getAttribute("id");
+      }
     });
-
-    item.addEventListener("mouseleave", function () {
-      jobNumber.textContent = originalNumber;
-      jobNumber.style.color = "#b3b3b3";
-    });
-  });
-
-  // Progress bar click to scroll
-  const progressBar = document.querySelector(".progress");
-
-  if (progressBar) {
-    progressBar.addEventListener("click", function (e) {
-      const rect = this.getBoundingClientRect();
-      const percent = (e.clientX - rect.left) / rect.width;
-      const documentHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollTo = documentHeight * percent;
-
-      window.scrollTo({
-        top: scrollTo,
-        behavior: "smooth",
-      });
-    });
+    return current;
   }
 
-  // Next/Previous Track buttons
-  const nextBtn = document.querySelectorAll(".control-btn")[3]; // ⏭
-  const prevBtn = document.querySelectorAll(".control-btn")[1]; // ⏮
+  // Next/Previous track buttons
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
 
   if (nextBtn) {
     nextBtn.addEventListener("click", () => {
       const currentSection = getCurrentSection();
-      const sectionIds = [
-        "about-section",
-        "experience-section",
-        "projects-section",
-        "contact-section",
-      ];
+      const sectionIds = ["hero", "about", "experience", "projects", "contact"];
       const currentIndex = sectionIds.indexOf(currentSection);
 
       if (currentIndex < sectionIds.length - 1) {
@@ -262,12 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (prevBtn) {
     prevBtn.addEventListener("click", () => {
       const currentSection = getCurrentSection();
-      const sectionIds = [
-        "about-section",
-        "experience-section",
-        "projects-section",
-        "contact-section",
-      ];
+      const sectionIds = ["hero", "about", "experience", "projects", "contact"];
       const currentIndex = sectionIds.indexOf(currentSection);
 
       if (currentIndex > 0) {
@@ -283,40 +224,63 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function getCurrentSection() {
-    let current = "";
-    sections.forEach((section) => {
-      const sectionTop = section.offsetTop;
-      if (window.scrollY >= sectionTop - 200) {
-        current = section.getAttribute("id");
-      }
+  // Progress bar click to scroll
+  const progressTrack = document.getElementById("progressTrack");
+
+  if (progressTrack) {
+    progressTrack.addEventListener("click", function (e) {
+      const rect = this.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      const documentHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrollTo = documentHeight * percent;
+
+      window.scrollTo({
+        top: scrollTo,
+        behavior: "smooth",
+      });
     });
-    return current;
   }
 
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute("href"));
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  });
+  // Modal Functionality
+  const modal = document.querySelector(".modal");
+  const overlay = document.querySelector(".overlay");
+  const openModalBtn = document.querySelector(".add-track-btn");
+  const closeModalBtn = document.querySelector(".btn-close");
+
+  const closeModal = function () {
+    if (modal) modal.classList.add("hidden");
+    if (overlay) overlay.classList.add("hidden");
+  };
+
+  const openModal = function () {
+    if (modal) modal.classList.remove("hidden");
+    if (overlay) overlay.classList.remove("hidden");
+  };
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener("click", closeModal);
+  }
+
+  if (overlay) {
+    overlay.addEventListener("click", closeModal);
+  }
+
+  if (openModalBtn) {
+    openModalBtn.addEventListener("click", openModal);
+  }
 
   // Contact Form Success Message
   const contactForm = document.querySelector(".contact-form form");
 
   if (contactForm) {
     contactForm.addEventListener("submit", function (event) {
-      // Form will submit to Formspree, but we can show a message
       setTimeout(() => {
         const successMessage = document.getElementById("successMessage");
         if (successMessage) {
           successMessage.textContent = "Message sent successfully!";
           successMessage.style.display = "block";
-          successMessage.style.color = "#1db954";
+          successMessage.style.color = "#8b5cf6";
         }
       }, 1000);
     });
