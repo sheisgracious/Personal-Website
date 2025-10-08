@@ -1,214 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gracious Ogyiri Asare</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+</head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Gracious Ogyiri Asare</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
-    </head>
+<body>
+    <!-- Loading Page -->
+    <div class="loading-page">
+        <div class="vinyl-record"></div>
+    </div>
 
-    <body>
- 
-        <!-- Loading Page -->
-        <div class="loading-page">
-            <div class="vinyl-record"></div>
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+        <!-- Sticky Header -->
+        <header class="navbar">
+            <nav>
+                <ul>
+                    <li><a href="#about-section" class="nav-link">About</a></li>
+                    <li><a href="#experience-section" class="nav-link">Experience</a></li>
+                    <li><a href="#projects-section" class="nav-link">Projects</a></li>
+                    <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="add-music-btn" id="spotify-login" title="Add Your Vibe">Add A Track</button>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero-section" id="hero-section">
+            <div class="hero-content">
+                <div>
+                    <h1>Gracious Ogyiri Asare</h1>
+                    <div class="artist-info">
+                        <div class="verified-badge">✓</div>
+                        <span class="monthly-listeners">Verified Developer</span>
+                    </div>
+                    <p class="hero-description">
+                        Full-stack developer crafting digital experiences. Currently studying Computer Science at Boston University.
+                    </p>
+                    <button class="play-btn">▶ Play Portfolio</button>
+                </div>
+                <img src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}" alt="Gracious Ogyiri Asare">
+            </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content" id="main-content">
-            <div class="hero-section" id="hero-section">
-                <div class="hero-content">
-                    <h1>Gracious Ogyiri Asare</h1>
-                    <img src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}" alt="Gracious Ogyiri Asare">
+        <!-- Popup Section -->
+        <section class="modal hidden">
+            <button class="btn-close">&times;</button>
+            <div>
+                <h3>Share music with me!</h3>
+                <p>I love discovering new music! Add any track to this shared Spotify playlist.</p>
+            </div>
+            <input type="email" id="email" placeholder="Search" />
+            <button class="btn" id="spotify-login-modal" onclick="location.href='/login'">Login to Spotify</button>
+        </section>
+
+        <div class="overlay hidden"></div>
+
+        <!-- About Section -->
+        <section id="about-section">
+            <div class="about-section">
+                <div class="about-title-container">
+                    <h2>About the Artist</h2>
+                    <p class="about-me">Welcome! I am Gracious Ogyiri Asare and I love creating things. I enjoy the process of letting concepts in my mind become a reality—whether it's a full-stack website or music track! I am currently a Computer Science major at Boston University, with an interest in full-stack web development and DevOps engineering. I am dedicated to creating impactful solutions, to create value in any way possible.</p>
+                </div>
+                <div class="about-info">
+                    <div>
+                        <p class="about-title">From</p>
+                        <p class="about-pg">Ghana / United States</p>
+                    </div>
+                    <div>
+                        <p class="about-title">Education</p>
+                        <p class="about-pg">Boston University Class of 2026</p>
+                    </div>
+                    <div>
+                        <p class="about-title">Skills</p>
+                        <p class="about-pg">Python, HTML/CSS, Swift, JavaScript</p>
+                    </div>
                 </div>
             </div>
-
-            <!-- Sticky Header -->
-            <header class="navbar">
-                <nav>
-                    <ul>
-                        <li><a href="#about-section" class="nav-link">About</a></li>
-                        <li><a href="#experience-section" class="nav-link">Experience</a></li>
-                        <li><a href="#projects-section" class="nav-link">Projects</a></li>
-                        <li><a href="#contact-section" class="nav-link">Contact</a></li>
-                    </ul>
-                
-       
-                </nav>
-                                <button class="add-music-btn" id="spotify-login" title="Add Your Vibe">Add A Track</button>
-                                <!-- <button class="add-music-btn" id="spotify-login" onclick="location.href='/login'" title="Add Your Vibe">Add A Track</button> -->
-
-            </header>
-
-
-            <!-- Popup Section -->
-<section class="modal hidden">
-  <div class="flex">
-    <button class="btn-close">&times;</button>
-  </div>
-  <div>
-    <h3>Share music with me!</h3>
-    <p>I love discovering new music! Add any track to this shared Spotify playlist.</p>
-  </div>
-
-  <input type="email" id="email" placeholder="Search" />
-  <button class="btn" id="spotify-login" onclick="location.href='/login'">Login to Spotify</button>
-</section>
-
-<div class="overlay hidden"></div>
-
-
-<!-- About Section -->
-
-            <section id="about-section">
-  <div class="about-section">
-    <div class="about-title-container">
-      <h2 class="fade-in">About Gracious</h2>
-      <p class="fade-in about-me"> Welcome! I am Gracious Ogyiri Asare and I love creating things. I enjoy the process of letting concepts in my mind become a reality- whether it's a full-stack website, or music track! I am currently a Computer Science major at Boston University, with an interest in full-stack web development and DevOps engineering. I am dedicated to creating impactful solutions, to create value in any way possible.</p>
-    </div>
-    <div class="about-info">
-      <p class="about-title">From</p>
-      <p class="about-pg">Ghana/United States</p><br>
-      <p class="about-title">Education</p>
-      <p class="about-pg">Boston University Class of 2026</p><br>
-      <p class="about-title">Skills</p>
-      <p class="about-pg">Python, HTML/CSS, Swift, Javascript</p>
-    </div>
-  </div>
-</section>
+        </section>
 
         <!-- Experience Section -->
         <section id="experience-section">
-        <div class="experience-section" id="experience-section">
-            
-            <div class="album-cover">
-                <div class="resume-img">
-                    <a href="{{ url_for('static', filename='assets/Gracious O. Asare.pdf') }}" target="_blank">
-                    <img src="{{ url_for('static', filename='assets/mock-resume-cover.jpg') }}" class="resume-img" alt="Gracious Ogyiri Asare">
+            <div class="experience-section">
+                <div class="album-header">
+                    <div class="album-cover">
+                        <a href="{{ url_for('static', filename='assets/Gracious O. Asare.pdf') }}" target="_blank">
+                            💼
+                        </a>
+                    </div>
+                    <div class="album-info">
+                        <h3>Album</h3>
+                        <h2>Professional Experience</h2>
+                        <div class="album-meta">
+                            <span>Gracious Ogyiri Asare</span>
+                            <span>•</span>
+                            <span>2024</span>
+                            <span>•</span>
+                            <span>3 tracks</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="play-button"></div>
-                </a>
-            </div>
-            
-            <div class="job-number fade-in">
-                <h2 class="fade-in">1</h2>
-                <h2>2</h2>
-                <h2>3</h2>
-            </div>
 
-            <div class="experience-list">
-                <div class="experience-item" id="experience-1" data-logo="{{ url_for('static', filename='assets/job1.png') }}">
-                    <h3>Tech Dev Intern</h3>
-                    <p>Sponsors for Educational Opportunity</p>
-                </div>
-                <div class="experience-item" id="experience-2" data-logo="{{ url_for('static', filename='assets/job2.png') }}">
-                    <h3>Bits Lead</h3>
-                    <p>Boston University Girl's Who Code</p>
-                </div>
-                <div class="experience-item" id="experience-3" data-logo="{{ url_for('static', filename='assets/job3.png') }}">
-                    <h3>Founder/President</h3>
-                    <p>Rophe Jewels</p>
+                <div class="experience-list">
+                    <div class="experience-item" id="experience-1" data-logo="{{ url_for('static', filename='assets/job1.png') }}">
+                        <div class="job-number">1</div>
+                        <div>
+                            <h3>Tech Dev Intern</h3>
+                            <p>Led remote coding programs, boosted membership 40%</p>
+                        </div>
+                        <p>Sponsors for Educational Opportunity</p>
+                        <p class="experience-dates">05.24</p>
+                    </div>
+
+                    <div class="experience-item" id="experience-2" data-logo="{{ url_for('static', filename='assets/job2.png') }}">
+                        <div class="job-number">2</div>
+                        <div>
+                            <h3>Bits Lead</h3>
+                            <p>Managed facilitators, achieved 80% student retention</p>
+                        </div>
+                        <p>Boston University Girl's Who Code</p>
+                        <p class="experience-dates">04.24</p>
+                    </div>
+
+                    <div class="experience-item" id="experience-3" data-logo="{{ url_for('static', filename='assets/job3.png') }}">
+                        <div class="job-number">3</div>
+                        <div>
+                            <h3>Founder/President</h3>
+                            <p>Built and scaled handmade jewelry business</p>
+                        </div>
+                        <p>Rophe Jewels</p>
+                        <p class="experience-dates">01.24</p>
+                    </div>
                 </div>
             </div>
-
-            <div class="experience-dates">
-                <p>05.24</p>
-                <p>04.24</p>
-                <p>01.24</p>
-            </div>
-
-            
-        </div>
-    </section>
+        </section>
 
         <!-- Projects Section -->
         <section id="projects-section">
-        <div class="projects-section fade-in" id="projects-section">
-            <div class="projects-list">
-                <h2 class="fade-in">Featured</h2>
-                <div class="project-item fade-in">
-                    <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Gracious Ogyiri Asare">
-                    <div class="play-button" onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')">
-                        <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Gracious Ogyiri Asare">
+            <div class="projects-section">
+                <h2>Featured Projects</h2>
+                <div class="projects-list">
+                    <div class="project-item">
+                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Stock Portfolio">
+                        <div class="play-button" onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')">
+                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                        </div>
+                        <h3>Stock Portfolio Website</h3>
+                        <p>Flask, Python, HTML/CSS, REST APIs</p>
                     </div>
-                    <h3>Stock Portfolio Website</h3>
-                    <p>Flask, Python, HTML/CSS, REST APIs </p>
+
+                    <div class="project-item">
+                        <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="CrowdSync">
+                        <div class="play-button" onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')">
+                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                        </div>
+                        <h3>CrowdSync</h3>
+                        <p>Python, Flask, JavaScript, HTML/CSS, Ticketmaster API</p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Workout Generator">
+                        <div class="play-button" onclick="window.open('https://github.com/stavros-0/CS411Project', '_blank')">
+                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                        </div>
+                        <h3>Workout/Playlist Generator</h3>
+                        <p>Python, Flask, React, HTML/CSS, Firebase</p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="HeadAid">
+                        <div class="play-button" onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')">
+                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                        </div>
+                        <h3>HeadAid</h3>
+                        <p>Swift, CoreML, HealthKit, SiriKit</p>
+                    </div>
+
+                    <div class="project-item">
+                        <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="TimeZoner">
+                        <div class="play-button" onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')">
+                            <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Play">
+                        </div>
+                        <h3>TimeZoner</h3>
+                        <p>Python, Flask, HTML/CSS, Google Maps API</p>
+                    </div>
                 </div>
-                <div class="project-item fade-in">
-                    <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="Gracious Ogyiri Asare">
-                    <div class="play-button" onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')">
-                        <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Gracious Ogyiri Asare">
-                    </div>
-                    <h3>CrowdSync- Events Search</h3>
-                    <p>Python, Flask, JavaScript, HTML/CSS, Ticketmaster API</p>
-                </div>
-                <div class="project-item fade-in">
-                    <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Gracious Ogyiri Asare">
-                    <div class="play-button" onclick="window.open('https://github.com/stavros-0/CS411Project', '_blank')">
-                        <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Gracious Ogyiri Asare">
-                    </div>
-                    <h3>Workout/Playlist Generator</h3>
-                    <p>Python, Flask, React, HTML/CSS, Firebase</p>
-                </div>
-                <div class="project-item fade-in">
-                    <img src="{{ url_for('static', filename='assets/mock-project2.gif') }}" alt="Gracious Ogyiri Asare">
-                    <div class="play-button" onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')">
-                        <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Gracious Ogyiri Asare">
-                    </div>
-                    <h3>HeadAid- Migraine Tracker App</h3>
-                    <p>Swift, CoreML, HealthKit, SiriKit</p>
-                </div>
-                <div class="project-item fade-in">
-                    <img src="{{ url_for('static', filename='assets/mock-project1.gif') }}" alt="Gracious Ogyiri Asare">
-                    <div class="play-button" onclick="window.open('https://github.com/sheisgracious/Timezone-project', 'https://gpoatimezone.pythonanywhere.com/')">
-                        <img src="{{ url_for('static', filename='assets/mock-playbutton-small.png') }}" alt="Gracious Ogyiri Asare">
-                    </div>
-                    <h3>TimeZoner- Timezone finder</h3>
-                    <p>Python, Flask, HTML/CSS, Google Maps API</p>
-                </div>            
             </div>
-        </div>
         </section>
 
-
-        <!-- Contact me section -->
+        <!-- Contact Section -->
         <section id="contact-section">
-        <div class="contact-section" id="contact-section">
-            
-            <form action="https://formspree.io/f/mldelvjp" method="POST" class="contact-form">
-                <div class="form-title fade-in">
-                    <h2>Drop A Beat ⬇️ </h2> 
-                    <img src= "{{ url_for('static', filename='assets/Gracious-linkedin.png') }}" class="linkedin" onclick="window.open('https://linkedin.com/in/gpoa', '_blank')" alt="Gracious Ogyiri Asare"> 
-                    <img src= "{{ url_for('static', filename='assets/Gracious-github.png') }}" class="github" onclick="window.open('https://github.com/sheisgracious', '_blank')" alt="Gracious Ogyiri Asare"> 
+            <div class="contact-section">
+                <h2>Drop A Beat 🎵</h2>
+                <div class="form-title">
+                    <img src="{{ url_for('static', filename='assets/Gracious-linkedin.png') }}" class="linkedin" onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')" alt="LinkedIn">
+                    <img src="{{ url_for('static', filename='assets/Gracious-github.png') }}" class="github" onclick="window.open('https://github.com/sheisgracious', '_blank')" alt="GitHub">
                 </div>
-                <input type="text" name="name" placeholder="Your Name" class="contact-fields fade-in" required>
-                <input type="email" name="email" placeholder="Your Email" class="contact-fields" fade-in required>
-                <textarea name="message" placeholder="Type a message" class="contact-fields fade-in" required></textarea>
-                <button type="submit" class="fade-in">Send<img src="{{ url_for('static', filename='assets/Gracious-arrow.webp') }}" alt="Gracious Ogyiri Asare"></button>
-            </form>
-        </div>
-        <div id="successMessage" style="display: none;"></div>
-
+                <form action="https://formspree.io/f/mldelvjp" method="POST" class="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" class="contact-fields" required>
+                    <input type="email" name="email" placeholder="Your Email" class="contact-fields" required>
+                    <textarea name="message" placeholder="Type a message" class="contact-fields" required></textarea>
+                    <button type="submit">Send<img src="{{ url_for('static', filename='assets/Gracious-arrow.webp') }}" alt="Arrow"></button>
+                </form>
+            </div>
+            <div id="successMessage" style="display: none;"></div>
         </section>
 
         <!-- Footer -->
         <footer>
             <p>© 2024 Gracious Ogyiri Asare | gpoa@bu.edu</p>
-            <div class="social-media">
-            </div>
         </footer>
+    </div>
 
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-        <!-- <div class="music-player">
-            <div class="music-bar">
-                <div class="progress" id= "progress" > </div>    
+    <!-- Bottom Playback Bar -->
+    <div class="music-player">
+        <div class="now-playing">
+            <div class="now-playing-cover">🎵</div>
+            <div class="now-playing-info">
+                <h4>About Gracious</h4>
+                <p>Portfolio Section</p>
             </div>
-        </div> -->
-    </body>
+        </div>
+
+        <div class="playback-controls">
+            <div class="control-buttons">
+                <button class="control-btn">🔀</button>
+                <button class="control-btn">⏮</button>
+                <button class="control-btn play">▶</button>
+                <button class="control-btn">⏭</button>
+                <button class="control-btn">🔁</button>
+            </div>
+            <div class="music-bar">
+                <span class="time">0:00</span>
+                <div class="progress">
+                    <div class="progress-fill" id="progress"></div>
+                </div>
+                <span class="time">3:45</span>
+            </div>
+        </div>
+
+        <div class="extra-controls">
+            <button class="control-btn">🔊</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
 </html>
