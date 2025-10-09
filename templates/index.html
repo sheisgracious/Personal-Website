@@ -362,7 +362,10 @@
     <div class="playback-bar">
       <div class="now-playing">
         <div class="now-playing-cover">
-            <img src="{{ url_for('static', filename='assets/Gracious-Track-Cover.png') }}" alt="Track Cover">
+          <img
+            src="{{ url_for('static', filename='assets/Gracious-Track-Cover.png') }}"
+            alt="Track Cover"
+          />
         </div>
         <div class="now-playing-info">
           <h4>Gracious Ogyiri Asare</h4>
@@ -421,12 +424,14 @@
       </div>
 
       <div id="spotify-search-section" style="display: none">
-        <input
-          type="text"
-          id="trackSearchInput"
-          placeholder="Search for a track"
-        />
-        <button class="btn" id="searchBtn">Search</button>
+        <div class="search-container">
+          <input
+            type="text"
+            id="trackSearchInput"
+            placeholder="Search for a track..."
+          />
+          <button class="btn" id="searchBtn">Search</button>
+        </div>
         <div id="searchResults"></div>
       </div>
     </section>
