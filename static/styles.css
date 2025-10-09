@@ -572,8 +572,15 @@ body {
   gap: 16px;
 }
 
+
 .track:hover {
   background: rgba(255, 255, 255, 0.1);
+}
+
+.album-art {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 
 .track-num {
@@ -619,6 +626,8 @@ body {
   color: var(--text-secondary);
   text-align: right;
 }
+
+
 
 /* Projects Section */
 .projects-carousel {
@@ -1045,6 +1054,20 @@ footer {
   z-index: 4000;
   transform: translate(-50%, -50%);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.modal a {
+  text-decoration: none;
+  color: var(--accent-hover);
+  font-weight: bold;
+}
+
+.modal a:hover {
+  text-decoration: underline;
+}
+
+.modal a:visited {
+  text-decoration: none;
 }
 
 .modal h3 {

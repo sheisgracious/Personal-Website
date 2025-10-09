@@ -1,4 +1,4 @@
-// static/script.js
+// script.js - UPDATED
 document.addEventListener("DOMContentLoaded", function () {
   const loadingPage = document.querySelector(".loading-page");
   const mainContent = document.querySelector(".main-content");
@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const hasSeenLoading = sessionStorage.getItem("hasSeenLoading");
 
   if (!hasSeenLoading) {
-    // Show loading animation
     vinylRecord.style.opacity = 1;
 
     setTimeout(() => {
@@ -18,11 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
       loadingPage.classList.add("hide");
       mainContent.classList.add("show");
-      // Set flag in sessionStorage
       sessionStorage.setItem("hasSeenLoading", "true");
     }, 2500);
   } else {
-    // Skip loading animation
     loadingPage.style.display = "none";
     mainContent.style.display = "block";
     mainContent.classList.add("show");
@@ -44,14 +41,12 @@ document.addEventListener("DOMContentLoaded", function () {
       carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     });
 
-    // Update button states based on scroll position
     carousel.addEventListener("scroll", () => {
       prevBtn.disabled = carousel.scrollLeft <= 0;
       nextBtn.disabled =
         carousel.scrollLeft >= carousel.scrollWidth - carousel.offsetWidth - 1;
     });
 
-    // Initial button state
     prevBtn.disabled = true;
   }
 
@@ -67,9 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
       progressFill.style.width = progress + "%";
     }
 
-    // Update time display
     const currentTime = document.getElementById("currentTime");
-    const totalSeconds = 225; // 3:45
+    const totalSeconds = 225;
     const currentSeconds = Math.floor((progress / 100) * totalSeconds);
     const minutes = Math.floor(currentSeconds / 60);
     const seconds = currentSeconds % 60;
@@ -98,10 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const titles = {
       hero: { title: "Gracious Ogyiri Asare", subtitle: "Welcome" },
       about: { title: "About Me", subtitle: "Gracious" },
-      experience: {
-        title: "Experience",
-        subtitle: "Gracious",
-      },
+      experience: { title: "Experience", subtitle: "Gracious" },
       projects: { title: "Featured Projects", subtitle: "Gracious" },
       contact: { title: "Contact", subtitle: "Drop A Beat" },
     };
@@ -118,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   window.addEventListener("scroll", () => {
     let current = "";
-
     sections.forEach((section) => {
       const sectionTop = section.offsetTop;
       if (window.scrollY >= sectionTop - 300) {
@@ -145,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Play/Pause functionality with auto-scroll
+  // Play/Pause functionality
   const playBtn = document.getElementById("playBtn");
   let isPlaying = false;
   let scrollInterval;
@@ -169,8 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollInterval = setInterval(() => {
       if (isPlaying) {
         window.scrollBy(0, 1);
-
-        // Stop at bottom
         if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
           isPlaying = false;
           if (playBtn) playBtn.textContent = "▶";
@@ -285,11 +273,11 @@ document.addEventListener("DOMContentLoaded", function () {
         credentials: "same-origin",
       });
 
-      console.log("Dashboard response status:", res.status);
+      console.log("🔍 Dashboard response status:", res.status);
 
       if (res.ok) {
         const data = await res.json();
-        console.log("Dashboard data:", data);
+        console.log("✅ Logged in! Data:", data);
 
         const loginBtn = document.getElementById("spotify-login-modal");
         const searchSection = document.getElementById("spotify-search-section");
@@ -297,15 +285,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (loginBtn && searchSection) {
           loginBtn.style.display = "none";
           searchSection.style.display = "block";
-          console.log("UI updated to show search");
+          console.log("✅ UI updated to show search");
         }
         return true;
       } else {
-        console.log("Not logged in");
+        console.log("❌ Not logged in");
         return false;
       }
     } catch (err) {
-      console.error("Error checking Spotify login:", err);
+      console.error("❌ Error checking Spotify login:", err);
       return false;
     }
   }
@@ -314,34 +302,50 @@ document.addEventListener("DOMContentLoaded", function () {
   const spotifyLoginBtn = document.getElementById("spotify-login-modal");
   if (spotifyLoginBtn) {
     spotifyLoginBtn.addEventListener("click", function () {
-      console.log("Login button clicked");
-      sessionStorage.setItem("modalWasOpen", "true");
+      console.log("🔑 Login button clicked, redirecting to Spotify...");
+      localStorage.setItem("modalShouldReopen", "true");
       window.location.href = "/login";
     });
   }
 
-  // Reopen modal after returning from Spotify login
-  if (sessionStorage.getItem("modalWasOpen")) {
-    console.log("Reopening modal after login");
+  // Check URL for spotify_login=success parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("spotify_login") === "success") {
+    console.log("🎉 Returned from Spotify login successfully!");
 
+    // Clean URL
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+    // Reopen modal
     setTimeout(() => {
       if (modal && overlay) {
-        modal.classList.remove("hidden");
-        overlay.classList.remove("hidden");
-
+        openModal();
         setTimeout(() => {
           checkSpotifyLogin();
         }, 500);
       }
     }, 300);
-
-    sessionStorage.removeItem("modalWasOpen");
   }
 
-  // Open modal button handler 
+  // Also check localStorage for modal state
+  if (localStorage.getItem("modalShouldReopen") === "true") {
+    console.log("📂 Reopening modal after login...");
+    localStorage.removeItem("modalShouldReopen");
+
+    setTimeout(() => {
+      if (modal && overlay) {
+        openModal();
+        setTimeout(() => {
+          checkSpotifyLogin();
+        }, 500);
+      }
+    }, 300);
+  }
+
+  // Open modal button handler
   if (openModalBtn) {
     openModalBtn.addEventListener("click", () => {
-      console.log("Add track button clicked");
+      console.log("🎵 Add track button clicked");
       openModal();
       setTimeout(checkSpotifyLogin, 300);
     });
@@ -356,63 +360,65 @@ document.addEventListener("DOMContentLoaded", function () {
   const searchResults = document.getElementById("searchResults");
 
   if (searchBtn && trackSearchInput) {
-    // Allow Enter key to search
-    trackSearchInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") {
-        searchBtn.click();
-      }
-    });
+    let searchTimeout;
 
-    searchBtn.addEventListener("click", async () => {
+    trackSearchInput.addEventListener("input", () => {
       const query = trackSearchInput.value.trim();
-      if (!query) {
-        searchResults.innerHTML = "<p>Please enter a search term</p>";
-        return;
-      }
+      clearTimeout(searchTimeout);
 
-      searchResults.innerHTML = "<p>Searching...</p>";
-
-      try {
-        const res = await fetch(`/search?q=${encodeURIComponent(query)}`, {
-          credentials: "same-origin",
-        });
-
-        if (res.status === 401) {
-          searchResults.innerHTML = "<p>Please log in to Spotify first</p>";
-          const loginBtn = document.getElementById("spotify-login-modal");
-          const searchSection = document.getElementById(
-            "spotify-search-section"
-          );
-          if (loginBtn && searchSection) {
-            loginBtn.style.display = "block";
-            searchSection.style.display = "none";
-          }
+      // Wait 400ms after user stops typing before searching
+      searchTimeout = setTimeout(async () => {
+        if (!query) {
+          searchResults.innerHTML = "";
           return;
         }
 
-        const data = await res.json();
-        searchResults.innerHTML = "";
+        searchResults.innerHTML = "<p>Searching...</p>";
 
-        if (data.tracks && data.tracks.items.length > 0) {
-          data.tracks.items.forEach((track) => {
-            const div = document.createElement("div");
-            div.classList.add("search-result");
-            div.innerHTML = `
-              <strong>${track.name}</strong> — ${track.artists[0].name}
-              <button class="btn add-btn" data-uri="${track.uri}">Add</button>
-            `;
-            searchResults.appendChild(div);
+        try {
+          const res = await fetch(`/search?q=${encodeURIComponent(query)}`, {
+            credentials: "same-origin",
           });
 
-          // Add event listener for "Add" buttons
-          document.querySelectorAll(".add-btn").forEach((btn) => {
-            btn.addEventListener("click", async (e) => {
-              const uri = e.target.getAttribute("data-uri");
-              const originalText = e.target.textContent;
-              e.target.textContent = "Adding...";
-              e.target.disabled = true;
+          if (res.status === 401) {
+            searchResults.innerHTML =
+              "<p>❌ Please log in to Spotify first</p>";
+            return;
+          }
 
-              try {
+          const data = await res.json();
+          searchResults.innerHTML = "";
+
+          if (data.tracks && data.tracks.items.length > 0) {
+            data.tracks.items.forEach((item) => {
+              const track = item;
+              const albumImage =
+                track.album && track.album.images && track.album.images.length
+                  ? track.album.images[1]?.url || track.album.images[0].url
+                  : "https://via.placeholder.com/50";
+
+              const div = document.createElement("div");
+              div.classList.add("search-result");
+              div.innerHTML = `
+                  <div class="track-item">
+                    <img src="${albumImage}" alt="${track.name}" class="album-art" />
+                    <div class="track-info">
+                      <strong>${track.name}</strong><br>
+                      <span class="artist">${track.artists[0].name}</span>
+                    </div>
+                    <button class="btn add-btn" data-uri="${track.uri}">Add</button>
+                  </div>
+                `;
+              searchResults.appendChild(div);
+            });
+
+            document.querySelectorAll(".add-btn").forEach((btn) => {
+              btn.addEventListener("click", async (e) => {
+                const uri = e.target.getAttribute("data-uri");
+                const originalText = e.target.textContent;
+                e.target.textContent = "Adding...";
+                e.target.disabled = true;
+
                 const response = await fetch("/add_track", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
@@ -421,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 if (response.ok) {
-                  e.target.textContent = "✅ Added!";
+                  e.target.textContent = "Added!";
                   e.target.style.backgroundColor = "#1db954";
                   setTimeout(() => {
                     e.target.textContent = originalText;
@@ -435,20 +441,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     e.target.textContent = originalText;
                   }, 2000);
                 }
-              } catch (error) {
-                console.error("Error adding track:", error);
-                e.target.textContent = "❌ Error";
-                e.target.disabled = false;
-              }
+              });
             });
-          });
-        } else {
-          searchResults.textContent = "No results found.";
+          } else {
+            searchResults.textContent = "No results found.";
+          }
+        } catch (error) {
+          console.error("❌ Search error:", error);
+          searchResults.innerHTML = "<p>Error searching. Please try again.</p>";
         }
-      } catch (error) {
-        console.error("Search error:", error);
-        searchResults.innerHTML = "<p>Error searching. Please try again.</p>";
-      }
+      }, 400);
     });
   }
 
@@ -469,11 +471,3 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
-// Clear form after submission
-function clearForm() {
-  const form = document.querySelector(".contact-form form");
-  if (form) {
-    form.reset();
-  }
-}
