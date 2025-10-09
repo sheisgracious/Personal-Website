@@ -11,10 +11,10 @@ app.secret_key = os.getenv("SECRET_KEY", os.urandom(24).hex())  # Use env var or
 
 # Session configuration - CRITICAL FIXES
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = False  # Set to True in production with HTTPS
+app.config['SESSION_COOKIE_SECURE'] = True  # Set to False in production 
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # 1 hour
-app.config['SESSION_TYPE'] = 'filesystem'  # Important for persistence
+app.config['SESSION_TYPE'] = 'filesystem'  
 
 # Spotify API credentials
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
@@ -204,7 +204,4 @@ def logout():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    # print(f"🎵 Spotify Client ID: {SPOTIFY_CLIENT_ID[:10]}...")
-    # print(f"🔗 Redirect URI: {SPOTIFY_REDIRECT_URI}")
-    # print(f"📝 Playlist ID: {SPOTIFY_PLAYLIST_ID}")
-    app.run(debug=True)
+    app.run(debug=False, host='0.0.0.0')
