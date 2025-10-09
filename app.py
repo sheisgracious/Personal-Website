@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, redirect, request, session, url_for, render_template
+from flask import Flask, redirect, request, session, url_for, render_template, jsonify
 import requests
 import os
 from dotenv import load_dotenv
@@ -7,7 +7,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Secure session handling
+app.secret_key = os.urandom(24)
+
+# Session configuration 
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = False  
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['PERMANENT_SESSION_LIFETIME'] = 3600  # 1 hour
 
 # Spotify API credentials
 SPOTIFY_CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
@@ -51,7 +57,6 @@ def index():
 @app.route("/login")
 def login():
     '''Redirect to Spotify for authentication'''
-
     scope = "playlist-modify-public streaming"
     auth_query = f"{AUTH_URL}?response_type=code&client_id={SPOTIFY_CLIENT_ID}&redirect_uri={SPOTIFY_REDIRECT_URI}&scope={scope}"
     return redirect(auth_query)
@@ -73,26 +78,36 @@ def callback():
             },
         )
         response_data = response.json()
+        
+        # Store tokens in session
         session["access_token"] = response_data.get("access_token")
         session["refresh_token"] = response_data.get("refresh_token")
-        return redirect(url_for("dashboard"))
+        session.permanent = True  # Make session persistent
+        
+        # Debug logging
+        print(f"Session after login: {dict(session)}")
+        
+        return redirect(url_for("index"))
     return "Authorization failed."
 
 @app.route("/dashboard")
 def dashboard():
-    '''Display playlist management options'''
+    """Check login status"""
+    # Debug logging 
+    print(f"Dashboard check - Session contents: {dict(session)}")
+    
     if "access_token" in session:
-        return "Welcome! Add your vibe to the playlist."
-    return redirect(url_for("login"))
+        return jsonify({"status": "logged_in"}), 200
+    return jsonify({"status": "unauthorized"}), 401
 
 @app.route("/add_track", methods=["POST"])
 def add_track():
     if "access_token" not in session:
-        return redirect(url_for("login"))
+        return jsonify({"error": "Not authenticated"}), 401
     
     track_uri = request.json.get("track_uri")
     if not track_uri:
-        return {"error": "No track URI provided"}, 400
+        return jsonify({"error": "No track URI provided"}), 400
 
     add_url = f"https://api.spotify.com/v1/playlists/{SPOTIFY_PLAYLIST_ID}/tracks"
     headers = {"Authorization": f"Bearer {session['access_token']}"}
@@ -101,44 +116,39 @@ def add_track():
     response = requests.post(add_url, headers=headers, json=data)
 
     if response.status_code == 401:
-            new_token = refresh_access_token()
-            if not new_token:
-                return redirect(url_for("login"))  
+        new_token = refresh_access_token()
+        if not new_token:
+            return jsonify({"error": "Session expired"}), 401
 
-            headers = {"Authorization": f"Bearer {new_token}"}
-            response = requests.post(add_url, headers=headers, json=data)
-
+        headers = {"Authorization": f"Bearer {new_token}"}
+        response = requests.post(add_url, headers=headers, json=data)
 
     return response.json(), response.status_code
-
 
 @app.route("/search", methods=["GET"])
 def search():
     if "access_token" not in session:
-        return redirect(url_for("login"))
+        return jsonify({"error": "Not authenticated"}), 401
 
     query = request.args.get("q")
     if not query:
-        return {"error": "No query provided"}, 400
+        return jsonify({"error": "No query provided"}), 400
 
     search_url = "https://api.spotify.com/v1/search"
     headers = {"Authorization": f"Bearer {session['access_token']}"}
     params = {"q": query, "type": "track", "limit": 5}
 
     response = requests.get(search_url, headers=headers, params=params)
+    
     if response.status_code == 401:
         new_token = refresh_access_token()
         if new_token:
             headers["Authorization"] = f"Bearer {new_token}"
             response = requests.get(search_url, headers=headers, params=params)
         else:
-            return redirect(url_for("login"))
+            return jsonify({"error": "Session expired"}), 401
 
     return response.json(), response.status_code
 
-
-
 if __name__ == "__main__":
     app.run(debug=True)
-
-

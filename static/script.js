@@ -1,3 +1,4 @@
+// static/script.js
 document.addEventListener("DOMContentLoaded", function () {
   const loadingPage = document.querySelector(".loading-page");
   const mainContent = document.querySelector(".main-content");
@@ -53,20 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initial button state
     prevBtn.disabled = true;
   }
-
-  // Sidebar collapse functionality
-  // const sidebar = document.getElementById("sidebar");
-  // const collapseBtn = document.getElementById("collapseBtn");
-  // const collapseIcon = document.getElementById("collapseIcon");
-
-  // if (collapseBtn) {
-  //   collapseBtn.addEventListener("click", () => {
-  //     sidebar.classList.toggle("collapsed");
-  //     collapseIcon.textContent = sidebar.classList.contains("collapsed")
-  //       ? "▶"
-  //       : "◀";
-  //   });
-  // }
 
   // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
@@ -265,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Modal Functionality
+  // ============= MODAL FUNCTIONALITY =============
   const modal = document.querySelector(".modal");
   const overlay = document.querySelector(".overlay");
   const openModalBtn = document.querySelector(".add-track-btn");
@@ -289,8 +276,180 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.addEventListener("click", closeModal);
   }
 
+  // ============= SPOTIFY INTEGRATION =============
+
+  // Check if user is logged in to Spotify
+  async function checkSpotifyLogin() {
+    try {
+      const res = await fetch("/dashboard", {
+        credentials: "same-origin",
+      });
+
+      console.log("Dashboard response status:", res.status);
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("Dashboard data:", data);
+
+        const loginBtn = document.getElementById("spotify-login-modal");
+        const searchSection = document.getElementById("spotify-search-section");
+
+        if (loginBtn && searchSection) {
+          loginBtn.style.display = "none";
+          searchSection.style.display = "block";
+          console.log("UI updated to show search");
+        }
+        return true;
+      } else {
+        console.log("Not logged in");
+        return false;
+      }
+    } catch (err) {
+      console.error("Error checking Spotify login:", err);
+      return false;
+    }
+  }
+
+  // Handle Spotify login button
+  const spotifyLoginBtn = document.getElementById("spotify-login-modal");
+  if (spotifyLoginBtn) {
+    spotifyLoginBtn.addEventListener("click", function () {
+      console.log("Login button clicked");
+      sessionStorage.setItem("modalWasOpen", "true");
+      window.location.href = "/login";
+    });
+  }
+
+  // Reopen modal after returning from Spotify login
+  if (sessionStorage.getItem("modalWasOpen")) {
+    console.log("Reopening modal after login");
+
+    setTimeout(() => {
+      if (modal && overlay) {
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+
+        setTimeout(() => {
+          checkSpotifyLogin();
+        }, 500);
+      }
+    }, 300);
+
+    sessionStorage.removeItem("modalWasOpen");
+  }
+
+  // Open modal button handler 
   if (openModalBtn) {
-    openModalBtn.addEventListener("click", openModal);
+    openModalBtn.addEventListener("click", () => {
+      console.log("Add track button clicked");
+      openModal();
+      setTimeout(checkSpotifyLogin, 300);
+    });
+  }
+
+  // Check login on page load
+  checkSpotifyLogin();
+
+  // Spotify track search and add functionality
+  const searchBtn = document.getElementById("searchBtn");
+  const trackSearchInput = document.getElementById("trackSearchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  if (searchBtn && trackSearchInput) {
+    // Allow Enter key to search
+    trackSearchInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        searchBtn.click();
+      }
+    });
+
+    searchBtn.addEventListener("click", async () => {
+      const query = trackSearchInput.value.trim();
+      if (!query) {
+        searchResults.innerHTML = "<p>Please enter a search term</p>";
+        return;
+      }
+
+      searchResults.innerHTML = "<p>Searching...</p>";
+
+      try {
+        const res = await fetch(`/search?q=${encodeURIComponent(query)}`, {
+          credentials: "same-origin",
+        });
+
+        if (res.status === 401) {
+          searchResults.innerHTML = "<p>Please log in to Spotify first</p>";
+          const loginBtn = document.getElementById("spotify-login-modal");
+          const searchSection = document.getElementById(
+            "spotify-search-section"
+          );
+          if (loginBtn && searchSection) {
+            loginBtn.style.display = "block";
+            searchSection.style.display = "none";
+          }
+          return;
+        }
+
+        const data = await res.json();
+        searchResults.innerHTML = "";
+
+        if (data.tracks && data.tracks.items.length > 0) {
+          data.tracks.items.forEach((track) => {
+            const div = document.createElement("div");
+            div.classList.add("search-result");
+            div.innerHTML = `
+              <strong>${track.name}</strong> — ${track.artists[0].name}
+              <button class="btn add-btn" data-uri="${track.uri}">Add</button>
+            `;
+            searchResults.appendChild(div);
+          });
+
+          // Add event listener for "Add" buttons
+          document.querySelectorAll(".add-btn").forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              const uri = e.target.getAttribute("data-uri");
+              const originalText = e.target.textContent;
+              e.target.textContent = "Adding...";
+              e.target.disabled = true;
+
+              try {
+                const response = await fetch("/add_track", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  credentials: "same-origin",
+                  body: JSON.stringify({ track_uri: uri }),
+                });
+
+                if (response.ok) {
+                  e.target.textContent = "✅ Added!";
+                  e.target.style.backgroundColor = "#1db954";
+                  setTimeout(() => {
+                    e.target.textContent = originalText;
+                    e.target.disabled = false;
+                    e.target.style.backgroundColor = "";
+                  }, 2000);
+                } else {
+                  e.target.textContent = "❌ Failed";
+                  e.target.disabled = false;
+                  setTimeout(() => {
+                    e.target.textContent = originalText;
+                  }, 2000);
+                }
+              } catch (error) {
+                console.error("Error adding track:", error);
+                e.target.textContent = "❌ Error";
+                e.target.disabled = false;
+              }
+            });
+          });
+        } else {
+          searchResults.textContent = "No results found.";
+        }
+      } catch (error) {
+        console.error("Search error:", error);
+        searchResults.innerHTML = "<p>Error searching. Please try again.</p>";
+      }
+    });
   }
 
   // Contact Form Success Message
@@ -318,5 +477,3 @@ function clearForm() {
     form.reset();
   }
 }
-
-
