@@ -391,47 +391,41 @@
     </div>
 
     <!-- Popup Modal -->
-    <section class="modal hidden">
-      <button class="btn-close">&times;</button>
-      <div>
-        <h3>Share music with me!</h3>
-        <p
-          >I love discovering new music! Add any track to this
-          <a
-            href="https://open.spotify.com/playlist/2GxNX8X5ZXGI5N7SZgCMHD?si=gSqn0jdXSN6-dK9nylP4qA"
-            >shared Spotify playlist.</a
-          >
-        </p>
-      </div>
+    <!-- Popup Modal -->
+<section class="modal hidden">
+  <button class="btn-close">&times;</button>
+  
+  <div>
+    <h3>Share music with me!</h3>
+    <p>I love discovering new music! Add any track to this <a href="https://open.spotify.com/playlist/2GxNX8X5ZXGI5N7SZgCMHD?si=gSqn0jdXSN6-dK9nylP4qA" target="_blank">shared Spotify playlist</a>.</p>
+  </div>
 
-      <iframe
-        style="border-radius: 12px"
-        src="https://open.spotify.com/embed/playlist/2GxNX8X5ZXGI5N7SZgCMHD"
-        width="100%"
-        height="380"
-        frameborder="0"
-        allowfullscreen=""
-        allow="clipboard-write;"
-        loading="lazy"
-      >
-      </iframe>
+  <iframe
+    style="border-radius: 12px"
+    src="https://open.spotify.com/embed/playlist/2GxNX8X5ZXGI5N7SZgCMHD"
+    width="100%"
+    height="380"
+    frameborder="0"
+    allowfullscreen=""
+    allow="clipboard-write;"
+    loading="lazy"
+  ></iframe>
 
-      <div id="spotify-actions">
-        <button class="btn" id="spotify-login-modal">Login to Spotify</button>
-      </div>
+  <div id="spotify-actions">
+    <button class="btn" id="spotify-login-modal">Login to Spotify</button>
+  </div>
 
-      <div id="spotify-search-section" style="display: none">
-        <input
-          type="text"
-          id="trackSearchInput"
-          placeholder="Search for a track"
-        />
-        <button class="btn" id="searchBtn">Search</button>
-        <div id="searchResults"></div>
-      </div>
-    </section>
+  <div id="spotify-search-section" style="display: none">
+    <input
+      type="text"
+      id="trackSearchInput"
+      placeholder="Search for a track..."
+    />
+    <div id="searchResults"></div>
+  </div>
+</section>
 
-    <div class="overlay hidden"></div>
+<div class="overlay hidden"></div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
