@@ -470,4 +470,63 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 1000);
     });
   }
+
+  // Theme Toggle
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.querySelector(".theme-icon");
+  const themeTooltip = document.getElementById("themeTooltip");
+
+  // Check for saved theme preference or default to system preference
+  const savedTheme = localStorage.getItem("theme");
+  const systemPrefersDark = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches;
+  const currentTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
+
+  if (currentTheme === "light") {
+    document.documentElement.classList.add("light-mode");
+    themeIcon.textContent = "🌙";
+    themeTooltip.textContent = "Switch to Dark Mode";
+  } else {
+    themeIcon.textContent = "☀️";
+    themeTooltip.textContent = "Switch to Light Mode";
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener("click", () => {
+      document.documentElement.classList.toggle("light-mode");
+
+      const isLight = document.documentElement.classList.contains("light-mode");
+
+      if (isLight) {
+        themeIcon.textContent = "🌙";
+        themeTooltip.textContent = "Switch to Dark Mode";
+        localStorage.setItem("theme", "light");
+      } else {
+        themeIcon.textContent = "☀️";
+        themeTooltip.textContent = "Switch to Light Mode";
+        localStorage.setItem("theme", "dark");
+      }
+    });
+  }
+
+  // Optional: Listen for system theme changes
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      // Only auto-switch if user hasn't manually set a preference
+      if (!localStorage.getItem("theme")) {
+        if (e.matches) {
+          // Dark mode
+          document.documentElement.classList.remove("light-mode");
+          themeIcon.textContent = "☀️";
+          themeTooltip.textContent = "Switch to Light Mode";
+        } else {
+          // Light mode
+          document.documentElement.classList.add("light-mode");
+          themeIcon.textContent = "🌙";
+          themeTooltip.textContent = "Switch to Dark Mode";
+        }
+      }
+    });
 });

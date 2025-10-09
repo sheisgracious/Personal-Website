@@ -15,7 +15,8 @@
   --border-subtle: rgba(124, 58, 237, 0.18);
 }
 
-/* :root {
+/* To Do */
+:root.light-mode {
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
   --bg-elevated: #242424;
@@ -25,7 +26,7 @@
   --accent-hover: #a78bfa;
   --border-subtle: rgba(255, 255, 255, 0.1);
 }
- */
+
 
 .hero {
   background: linear-gradient(135deg, #1a0f3d 0%, #0d0821 40%, #140b30 100%);
@@ -231,6 +232,8 @@ body {
 .sidebar:hover .nav-text {
   opacity: 1;
 }
+
+
 
 .add-track-btn {
   margin-top: auto;
@@ -1035,6 +1038,56 @@ footer {
   gap: 16px;
   flex: 1;
   justify-content: flex-end;
+  align-items: center;
+}
+
+.theme-toggle {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.theme-toggle:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 20px;
+}
+
+.theme-tooltip {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  /* background: var(--bg-elevated); */
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); */
+  color: var(--text-primary);
+  margin-right: 8px;
+  z-index: 1000;
+}
+
+.theme-toggle:hover .theme-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(-5px);
 }
 
 /* Modal */
