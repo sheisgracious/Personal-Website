@@ -54,7 +54,7 @@
 }
 
 .project-card:hover {
-  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+  box-shadow: 0 12px 40px var(--bg-elevated);
   transform: translateY(-8px);
 }
 
@@ -572,7 +572,6 @@ body {
   gap: 16px;
 }
 
-
 .track:hover {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -626,8 +625,6 @@ body {
   color: var(--text-secondary);
   text-align: right;
 }
-
-
 
 /* Projects Section */
 .projects-carousel {
@@ -712,7 +709,7 @@ body {
 }
 
 .project-card:hover {
-  background: #2a2a2a;
+  background: var(--bg-elevated);
   transform: translateY(-4px);
 }
 
@@ -781,6 +778,9 @@ body {
 }
 
 /* Contact Section */
+.content-section h2 {
+  font-size: 2em;
+}
 .contact-section {
   text-align: center;
   display: flex;
@@ -805,11 +805,13 @@ body {
   margin: 32px 0;
 }
 
-.social-btn {
-  width: 48px;
-  height: 48px;
-  background: var(--bg-elevated);
-  border-radius: 50%;
+.social-btn img {
+  width: 45px;
+  height: 45px;
+  gap: 12px;
+  /* background: var(--accent-primary); */
+  /* background: var(--bg-elevated); */
+  /* border-radius: 30%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -820,7 +822,6 @@ body {
 }
 
 .social-btn:hover {
-  background: var(--accent-primary);
   color: #fff;
   transform: scale(1.1);
 }

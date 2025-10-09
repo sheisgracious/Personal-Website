@@ -204,7 +204,7 @@ def logout():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    print(f"🎵 Spotify Client ID: {SPOTIFY_CLIENT_ID[:10]}...")
-    print(f"🔗 Redirect URI: {SPOTIFY_REDIRECT_URI}")
-    print(f"📝 Playlist ID: {SPOTIFY_PLAYLIST_ID}")
+    # print(f"🎵 Spotify Client ID: {SPOTIFY_CLIENT_ID[:10]}...")
+    # print(f"🔗 Redirect URI: {SPOTIFY_REDIRECT_URI}")
+    # print(f"📝 Playlist ID: {SPOTIFY_PLAYLIST_ID}")
     app.run(debug=True)
