@@ -306,17 +306,33 @@
             <div
               class="social-btn"
               onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')"
-              ><img
+            >
+              <img
                 src="{{ url_for('static', filename='assets/Gracious-light-linkedin.webp') }}"
-                alt="Linkedin Logo"
-            /></div>
+                alt="LinkedIn Logo"
+                class="social-icon dark-icon"
+              />
+              <img
+                src="{{ url_for('static', filename='assets/Gracious-linkedin.png') }}"
+                alt="LinkedIn Logo"
+                class="social-icon light-icon"
+              />
+            </div>
             <div
               class="social-btn"
               onclick="window.open('https://github.com/sheisgracious', '_blank')"
-              ><img
+            >
+              <img
                 src="{{ url_for('static', filename='assets/Gracious-light-github.webp') }}"
-                alt="Linkedin Logo"
-            /></div>
+                alt="GitHub Logo"
+                class="social-icon dark-icon"
+              />
+              <img
+                src="{{ url_for('static', filename='assets/Gracious-github.png') }}"
+                alt="GitHub Logo"
+                class="social-icon light-icon"
+              />
+            </div>
           </div>
           <div class="contact-form">
             <form action="https://formspree.io/f/mldelvjp" method="POST">

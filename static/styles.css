@@ -15,16 +15,15 @@
   --border-subtle: rgba(124, 58, 237, 0.18);
 }
 
-/* To Do */
 :root.light-mode {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #1a1a1a;
-  --bg-elevated: #242424;
-  --text-primary: #ffffff;
-  --text-secondary: #b3b3b3;
-  --accent-primary: #8b5cf6;
-  --accent-hover: #a78bfa;
-  --border-subtle: rgba(255, 255, 255, 0.1);
+    --bg-primary: #f5f1eb;
+    --bg-secondary: #ebe4db;
+    --bg-elevated: #f9f6f1;
+    --text-primary: #2d2520;
+    --text-secondary: #6b5d52;
+    --accent-primary: #d97706;
+    --accent-hover: #f59e0b;
+    --border-subtle: rgba(0, 0, 0, 0.08);
 }
 
 
@@ -382,6 +381,7 @@ body {
 }
 
 .play-btn-hero:hover .tooltip {
+  color: var(--text-primary);
   opacity: 1;
   transform: translateY(-10px);
 }
@@ -642,7 +642,7 @@ body {
   transform: translateY(-50%);
   width: 48px;
   height: 48px;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--accent-primary);
   border: 1px solid var(--border-subtle);
   border-radius: 50%;
   display: flex;
@@ -808,20 +808,37 @@ body {
   margin: 32px 0;
 }
 
+.social-btn {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
 .social-btn img {
   width: 45px;
   height: 45px;
-  gap: 12px;
-  /* background: var(--accent-primary); */
-  /* background: var(--bg-elevated); */
-  /* border-radius: 30%; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s, color 0.2s;
-  font-size: 20px;
-  color: var(--text-secondary);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: opacity 0.3s;
+}
+
+.dark-icon {
+  display: block;
+}
+
+.light-icon {
+  display: none;
+}
+
+:root.light-mode .dark-icon {
+  display: none;
+}
+
+:root.light-mode .light-icon {
+  display: block;
 }
 
 .social-btn:hover {
