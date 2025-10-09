@@ -93,7 +93,7 @@ body {
     left: 0;
     top: 0;
     bottom: 0;
-    width: 280px;
+    width: 72px;
     background: var(--bg-primary);
     padding: 24px 12px;
     display: flex;
@@ -104,15 +104,8 @@ body {
     border-right: 1px solid var(--border-subtle);
 }
 
-.sidebar.collapsed {
-    width: 72px;
-}
-
-.sidebar.collapsed .nav-text,
-.sidebar.collapsed .logo-text,
-.sidebar.collapsed .add-track-btn {
-    opacity: 0;
-    pointer-events: none;
+.sidebar:hover {
+    width: 280px;
 }
 
 .sidebar-header {
@@ -138,23 +131,16 @@ body {
 }
 
 .logo-text {
+    opacity: 0;
     transition: opacity 0.3s;
 }
 
-.collapse-btn {
-    background: none;
-    border: none;
-    color: var(--text-secondary);
-    cursor: pointer;
-    font-size: 14px;
-    padding: 4px;
-    transition: color 0.2s;
-    opacity: 0.5;
+.sidebar:hover .logo-text {
+    opacity: 1;
 }
 
-.collapse-btn:hover {
-    color: var(--text-primary);
-    opacity: 1;
+.collapse-btn {
+    display: none;
 }
 
 .nav-section {
@@ -193,7 +179,13 @@ body {
 }
 
 .nav-text {
+    opacity: 0;
     transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+.sidebar:hover .nav-text {
+    opacity: 1;
 }
 
 .add-track-btn {
@@ -206,8 +198,14 @@ body {
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.3s;
+    transition: all 0.3s;
     box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+    opacity: 0;
+    text-align: center;
+}
+
+.sidebar:hover .add-track-btn {
+    opacity: 1;
 }
 
 .add-track-btn:hover {
@@ -215,21 +213,36 @@ body {
     box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
 }
 
+.add-track-icon {
+    display: block;
+    opacity: 1;
+    font-size: 24px;
+    padding: 8px;
+}
+
+.sidebar:hover .add-track-icon {
+    display: none;
+}
+
+.add-track-text {
+    display: none;
+}
+
+.sidebar:hover .add-track-text {
+    display: block;
+}
+
 /* Main Content */
 .main-content {
-    margin-left: 280px;
+    margin-left: 72px;
     min-height: 100vh;
     padding-bottom: 100px;
     transition: margin-left 0.3s ease;
 }
 
-.sidebar.collapsed ~ .main-content {
-    margin-left: 72px;
-}
-
 /* Hero Section */
 .hero {
-    padding: 80px 60px 60px;
+    padding: 180px 60px 120px;
     background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
     position: relative;
 }
@@ -243,8 +256,8 @@ body {
 }
 
 .hero-image {
-    width: 232px;
-    height: 232px;
+    width: 320px;
+    height: 320px;
     border-radius: 8px;
     object-fit: cover;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
@@ -418,30 +431,45 @@ body {
     background: var(--bg-secondary);
 }
 
-.album-header {
-    display: flex;
-    gap: 32px;
-    align-items: flex-end;
-    margin-bottom: 48px;
+.experience-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 48px;
+    align-items: start;
 }
 
 .album-cover {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     border-radius: 8px;
     background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 72px;
+    font-size: 80px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-    flex-shrink: 0;
     cursor: pointer;
     transition: transform 0.2s;
+    position: sticky;
+    top: 80px;
 }
 
 .album-cover:hover {
     transform: scale(1.02);
+}
+
+.experience-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.album-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .album-info h3 {
@@ -449,13 +477,11 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-secondary);
-    margin-bottom: 8px;
 }
 
 .album-info h2 {
     font-size: 48px;
     font-weight: 900;
-    margin-bottom: 16px;
     letter-spacing: -1px;
 }
 
@@ -536,27 +562,44 @@ body {
 }
 
 .carousel {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-primary) var(--bg-elevated);
     padding-bottom: 20px;
+    scroll-behavior: smooth;
 }
 
 .carousel::-webkit-scrollbar {
-    display: none;
+    height: 8px;
+}
+
+.carousel::-webkit-scrollbar-track {
+    background: var(--bg-elevated);
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 4px;
+}
+
+.carousel::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
 }
 
 .project-card {
-    flex: 0 0 200px;
+    flex: 0 0 auto;
     scroll-snap-align: start;
     background: var(--bg-elevated);
     border-radius: 8px;
     overflow: hidden;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
+    min-width: 0;
 }
 
 .project-card:hover {
@@ -565,8 +608,8 @@ body {
 }
 
 .project-cover {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    aspect-ratio: 1;
     position: relative;
     overflow: hidden;
 }
@@ -720,19 +763,13 @@ footer {
     color: var(--text-secondary);
     font-size: 12px;
     border-top: 1px solid var(--border-subtle);
-    margin-left: 280px;
-    transition: margin-left 0.3s ease;
-}
-
-.sidebar.collapsed ~ footer {
-    margin-left: 72px;
 }
 
 /* Bottom Playback Bar */
 .playback-bar {
     position: fixed;
     bottom: 0;
-    left: 280px;
+    left: 72px;
     right: 0;
     height: 90px;
     background: var(--bg-secondary);
@@ -743,10 +780,6 @@ footer {
     padding: 0 16px;
     z-index: 99;
     transition: left 0.3s ease;
-}
-
-.sidebar.collapsed ~ .playback-bar {
-    left: 72px;
 }
 
 .now-playing {
@@ -971,18 +1004,20 @@ footer {
 
 /* Responsive */
 @media (max-width: 1024px) {
-    .sidebar {
-        width: 240px;
+    .carousel {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    .main-content,
-    footer,
-    .playback-bar {
-        margin-left: 240px;
+    .experience-container {
+        grid-template-columns: 1fr;
     }
 
-    .playback-bar {
-        left: 240px;
+    .album-cover {
+        width: 180px;
+        height: 180px;
+        margin: 0 auto;
+        position: relative;
+        top: 0;
     }
 }
 
@@ -996,12 +1031,8 @@ footer {
     }
 
     .main-content,
-    footer,
     .playback-bar {
         margin-left: 0;
-    }
-
-    .playback-bar {
         left: 0;
     }
 
@@ -1024,5 +1055,9 @@ footer {
 
     .playback-controls {
         display: none;
+    }
+
+    .carousel {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
