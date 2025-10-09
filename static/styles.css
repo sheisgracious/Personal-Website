@@ -447,12 +447,12 @@ body {
 }
 
 .experience-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 350px 1fr; 
-    gap: 48px;
-    /* align-items: stretch; */
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 48px;
+  /* align-items: stretch; */
 }
 
 .album-cover {
@@ -472,9 +472,9 @@ body {
 
 .album-cover img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 8px;
 }
 
