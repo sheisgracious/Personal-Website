@@ -27,6 +27,33 @@ document.addEventListener("DOMContentLoaded", function () {
     mainContent.classList.add("show");
   }
 
+  // Project Carousel Navigation
+  const carousel = document.getElementById("projectCarousel");
+  const prevBtn = document.getElementById("carouselPrev");
+  const nextBtn = document.getElementById("carouselNext");
+
+  if (carousel && prevBtn && nextBtn) {
+    const scrollAmount = carousel.offsetWidth;
+
+    nextBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    });
+
+    prevBtn.addEventListener("click", () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    });
+
+    // Update button states based on scroll position
+    carousel.addEventListener("scroll", () => {
+      prevBtn.disabled = carousel.scrollLeft <= 0;
+      nextBtn.disabled =
+        carousel.scrollLeft >= carousel.scrollWidth - carousel.offsetWidth - 1;
+    });
+
+    // Initial button state
+    prevBtn.disabled = true;
+  }
+
   // Sidebar collapse functionality
   // const sidebar = document.getElementById("sidebar");
   // const collapseBtn = document.getElementById("collapseBtn");
@@ -44,8 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
     const windowHeight = window.innerHeight;
-    const documentHeight =
-      document.documentElement.scrollHeight - windowHeight;
+    const documentHeight = document.documentElement.scrollHeight - windowHeight;
     const scrolled = window.scrollY;
     const progress = (scrolled / documentHeight) * 100;
 
@@ -158,10 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
         window.scrollBy(0, 1);
 
         // Stop at bottom
-        if (
-          window.innerHeight + window.scrollY >=
-          document.body.offsetHeight
-        ) {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
           isPlaying = false;
           if (playBtn) playBtn.textContent = "▶";
           clearInterval(scrollInterval);
@@ -185,11 +208,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Next/Previous track buttons
-  const nextBtn = document.getElementById("nextBtn");
-  const prevBtn = document.getElementById("prevBtn");
+  const nextTBtn = document.getElementById("nextBtn");
+  const prevTBtn = document.getElementById("prevBtn");
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
+  if (nextTBtn) {
+    nextTBtn.addEventListener("click", () => {
       const currentSection = getCurrentSection();
       const sectionIds = ["hero", "about", "experience", "projects", "contact"];
       const currentIndex = sectionIds.indexOf(currentSection);
@@ -205,8 +228,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
+  if (prevTBtn) {
+    prevTBtn.addEventListener("click", () => {
       const currentSection = getCurrentSection();
       const sectionIds = ["hero", "about", "experience", "projects", "contact"];
       const currentIndex = sectionIds.indexOf(currentSection);
@@ -295,3 +318,5 @@ function clearForm() {
     form.reset();
   }
 }
+
+
