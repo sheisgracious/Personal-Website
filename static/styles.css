@@ -242,7 +242,7 @@ body {
 
 /* Hero Section */
 .hero {
-    padding: 180px 60px 120px;
+    padding: 180px 80px 120px;
     background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
     position: relative;
 }
@@ -250,7 +250,7 @@ body {
 .hero-content {
     display: flex;
     align-items: flex-end;
-    gap: 32px;
+    gap: 54px;
     max-width: 1400px;
     margin: 0 auto;
 }
@@ -370,7 +370,7 @@ body {
 
 /* Content Sections */
 .content-section {
-    padding: 60px;
+    padding: 60px 90px 60px;
     max-width: 1400px;
     margin: 0 auto;
 }
