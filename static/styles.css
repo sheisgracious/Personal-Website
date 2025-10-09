@@ -5,6 +5,17 @@
 }
 
 :root {
+  --bg-primary: #0d0821;
+  --bg-secondary: #1a0f3d;
+  --bg-elevated: #251652;
+  --text-primary: #f5f3ff;
+  --text-secondary: #ddd6fe;
+  --accent-primary: #7c3aed;
+  --accent-hover: #8b5cf6;
+  --border-subtle: rgba(124, 58, 237, 0.18);
+}
+
+/* :root {
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
   --bg-elevated: #242424;
@@ -13,6 +24,38 @@
   --accent-primary: #8b5cf6;
   --accent-hover: #a78bfa;
   --border-subtle: rgba(255, 255, 255, 0.1);
+}
+ */
+
+.hero {
+  background: linear-gradient(135deg, #1a0f3d 0%, #0d0821 40%, #140b30 100%);
+}
+
+.experience-section {
+  background: linear-gradient(180deg, #1a0f3d 0%, #140b30 100%);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #0d0821 0%, #1a0f3d 100%);
+  border-right: 1px solid rgba(124, 58, 237, 0.25);
+}
+
+.play-btn-hero {
+  background: linear-gradient(135deg, #7c3aed 0%, #8b5cf6 100%);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.6);
+}
+
+.album-cover {
+  box-shadow: 0 12px 48px rgba(124, 58, 237, 0.35);
+}
+
+.track:hover {
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.project-card:hover {
+  box-shadow: 0 12px 40px rgba(124, 58, 237, 0.2);
+  transform: translateY(-8px);
 }
 
 body {
