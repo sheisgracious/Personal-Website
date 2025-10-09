@@ -28,18 +28,18 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Sidebar collapse functionality
-  const sidebar = document.getElementById("sidebar");
-  const collapseBtn = document.getElementById("collapseBtn");
-  const collapseIcon = document.getElementById("collapseIcon");
+  // const sidebar = document.getElementById("sidebar");
+  // const collapseBtn = document.getElementById("collapseBtn");
+  // const collapseIcon = document.getElementById("collapseIcon");
 
-  if (collapseBtn) {
-    collapseBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("collapsed");
-      collapseIcon.textContent = sidebar.classList.contains("collapsed")
-        ? "▶"
-        : "◀";
-    });
-  }
+  // if (collapseBtn) {
+  //   collapseBtn.addEventListener("click", () => {
+  //     sidebar.classList.toggle("collapsed");
+  //     collapseIcon.textContent = sidebar.classList.contains("collapsed")
+  //       ? "▶"
+  //       : "◀";
+  //   });
+  // }
 
   // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
@@ -83,14 +83,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const titles = {
-      hero: { title: "Gracious Ogyiri Asare", subtitle: "Artist Profile" },
-      about: { title: "About Gracious", subtitle: "Biography" },
+      hero: { title: "Gracious Ogyiri Asare", subtitle: "Welcome" },
+      about: { title: "About Me", subtitle: "Gracious" },
       experience: {
-        title: "Professional Experience",
-        subtitle: "3 tracks · 2024",
+        title: "Experience",
+        subtitle: "Gracious",
       },
-      projects: { title: "Featured Projects", subtitle: "5 albums" },
-      contact: { title: "Get in Touch", subtitle: "Contact" },
+      projects: { title: "Featured Projects", subtitle: "Gracious" },
+      contact: { title: "Contact", subtitle: "Drop A Beat" },
     };
 
     if (current && titles[current]) {
@@ -278,11 +278,20 @@ document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         const successMessage = document.getElementById("successMessage");
         if (successMessage) {
-          successMessage.textContent = "Message sent successfully!";
+          successMessage.textContent = "Thank you! Message Received!";
           successMessage.style.display = "block";
           successMessage.style.color = "#8b5cf6";
+          successMessage.style.font = "bold 1em Arial, sans-serif";
         }
       }, 1000);
     });
   }
 });
+
+// Clear form after submission
+function clearForm() {
+  const form = document.querySelector(".contact-form form");
+  if (form) {
+    form.reset();
+  }
+}

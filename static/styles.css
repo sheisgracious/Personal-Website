@@ -402,8 +402,7 @@ body {
 }
 
 .metadata-item {
-    border-bottom: 1px solid var(--border-subtle);
-    padding-bottom: 16px;
+    padding-bottom: 14px;
 }
 
 .metadata-item:last-child {
