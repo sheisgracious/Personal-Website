@@ -111,6 +111,33 @@ def add_track():
 
     return response.json(), response.status_code
 
+
+@app.route("/search", methods=["GET"])
+def search():
+    if "access_token" not in session:
+        return redirect(url_for("login"))
+
+    query = request.args.get("q")
+    if not query:
+        return {"error": "No query provided"}, 400
+
+    search_url = "https://api.spotify.com/v1/search"
+    headers = {"Authorization": f"Bearer {session['access_token']}"}
+    params = {"q": query, "type": "track", "limit": 5}
+
+    response = requests.get(search_url, headers=headers, params=params)
+    if response.status_code == 401:
+        new_token = refresh_access_token()
+        if new_token:
+            headers["Authorization"] = f"Bearer {new_token}"
+            response = requests.get(search_url, headers=headers, params=params)
+        else:
+            return redirect(url_for("login"))
+
+    return response.json(), response.status_code
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
