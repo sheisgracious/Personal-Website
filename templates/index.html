@@ -377,13 +377,26 @@
           playlist.</p
         >
       </div>
-      <input type="email" id="email" placeholder="Search for a track" />
-      <button
-        class="btn"
-        id="spotify-login-modal"
-        onclick="location.href='/login'"
-        >Login to Spotify</button
-      >
+
+      <div id="spotify-actions">
+        <button
+          class="btn"
+          id="spotify-login-modal"
+          onclick="location.href='/login'"
+        >
+          Login to Spotify
+        </button>
+      </div>
+
+      <div id="spotify-search-section" style="display: none">
+        <input
+          type="text"
+          id="trackSearchInput"
+          placeholder="Search for a track"
+        />
+        <button class="btn" id="searchBtn">Search</button>
+        <div id="searchResults"></div>
+      </div>
     </section>
 
     <div class="overlay hidden"></div>
