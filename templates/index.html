@@ -22,15 +22,19 @@
   </head>
 
   <body>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle side menu">
+    <button
+      class="mobile-menu-btn"
+      id="mobileMenuBtn"
+      aria-label="Toggle side menu"
+    >
       <span></span>
       <span></span>
       <span></span>
     </button>
     <!-- Loading Page -->
-    <div class="loading-page" aria-label="Loading content with vinyl record animation">
+    <section class="loading-page" aria-label="Loading" role="region">
       <div class="vinyl-record"></div>
-    </div>
+    </section>
 
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
@@ -39,7 +43,11 @@
           <span class="logo-icon">🅖</span>
           <span class="logo-text">Gracious</span>
         </div>
-        <button class="collapse-btn" id="collapseBtn" aria-label="Collapse sidebar">
+        <button
+          class="collapse-btn"
+          id="collapseBtn"
+          aria-label="Collapse sidebar"
+        >
           <span id="collapseIcon">◀</span>
         </button>
       </div>
@@ -67,11 +75,13 @@
         </a>
       </nav>
 
-      <button class="add-track-btn" aria-label="Add a track to shared playlist">+ Add A Track</button>
+      <button class="add-track-btn" aria-label="Add a track to shared playlist"
+        >+ Add A Track</button
+      >
     </aside>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content" aria-label="Main page">
+    <main class="main-content" id="main-content">
       <!-- Hero Section -->
       <section id="hero" class="hero" aria-label="Introduction section">
         <div class="hero-content">
@@ -83,7 +93,7 @@
           <div class="hero-info">
             <div class="verified-badge">
               <span class="verified-icon">✓</span>
-              GRAY-shus oh-JEE-ree ah-SAH-ree
+              <p>GRAY-shus oh-JEE-ree ah-SAH-ree</p>
             </div>
             <h1>Gracious Ogyiri Asare</h1>
             <p class="hero-meta"
@@ -103,7 +113,7 @@
                 href="https://www.linkedin.com/in/graciousogyiriasare/"
                 target="_blank"
                 class="connect-btn"
-                aria-label="Connect on LinkedIn"
+                aria-label="Visit Gracious's LinkedIn profile"
                 >Connect</a
               >
             </div>
@@ -149,7 +159,11 @@
       </section>
 
       <!-- Experience Section -->
-      <section id="experience" class="experience-section" aria-label="Experience section">
+      <section
+        id="experience"
+        class="experience-section"
+        aria-label="Experience section"
+      >
         <div class="experience-container">
           <!-- LEFT SIDE: Image -->
           <div
@@ -220,13 +234,31 @@
       </section>
 
       <!-- Projects Section -->
-      <section id="projects" class="content-section" aria-label="Projects section">
+      <section
+        id="projects"
+        class="content-section"
+        aria-label="Projects section"
+      >
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-carousel">
-          <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous projects">‹</button>
-          <button class="carousel-nav next" id="carouselNext" aria-label="Next projects">›</button>
+          <button
+            class="carousel-nav prev"
+            id="carouselPrev"
+            aria-label="Previous projects"
+            >‹</button
+          >
+          <button
+            class="carousel-nav next"
+            id="carouselNext"
+            aria-label="Next projects"
+            >›</button
+          >
 
-          <div class="carousel" id="projectCarousel" aria-label="Projects carousel">
+          <div
+            class="carousel"
+            id="projectCarousel"
+            aria-label="Projects carousel"
+          >
             <div
               class="project-card"
               onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')"
@@ -318,14 +350,18 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="content-section" aria-label="Contact section">
+      <section
+        id="contact"
+        class="content-section"
+        aria-label="Contact section"
+      >
         <h2 class="section-title">Get in Touch</h2>
         <div class="contact-content">
           <div class="social-links" aria-label="Social media links">
             <div
               class="social-btn"
               onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')"
-              aria-label="Gracious's LinkedIn profile"
+              aria-label="Visit Gracious's LinkedIn profile"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-linkedin.webp') }}"
@@ -341,7 +377,7 @@
             <div
               class="social-btn"
               onclick="window.open('https://github.com/sheisgracious', '_blank')"
-              aria-label="Gracious's GitHub profile"
+              aria-label="Visit Gracious's GitHub profile"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-github.webp') }}"
@@ -383,10 +419,19 @@
                   aria-label="Your message"
                 ></textarea>
               </div>
-              <button type="submit" class="submit-btn" aria-label="Submit contact form">Submit</button>
+              <button
+                type="submit"
+                class="submit-btn"
+                aria-label="Submit contact form"
+                >Submit</button
+              >
             </form>
           </div>
-          <div id="successMessage" style="display: none" aria-live="polite"></div>
+          <div
+            id="successMessage"
+            style="display: none"
+            aria-live="polite"
+          ></div>
         </div>
       </section>
 
@@ -396,10 +441,13 @@
           >© 2025 Gracious Ogyiri Asare | Inspired by Apple Music and Spotify</p
         >
       </footer>
-    </div>
+    </main>
 
     <!-- Bottom Playback Bar -->
-    <div class="playback-bar" aria-label="Playback controls for portfolio walkthrough">
+    <div
+      class="playback-bar"
+      aria-label="Playback controls for portfolio walkthrough"
+    >
       <div class="now-playing">
         <div class="now-playing-cover">
           <img
@@ -415,13 +463,32 @@
 
       <div class="playback-controls">
         <div class="control-buttons">
-          <button class="control-btn" id="prevBtn" aria-label="Previous section">⏮</button>
-          <button aria-label="Play/pause web auto scroll" class="control-btn play-pause" id="playBtn">▶</button>
-          <button class="control-btn" id="nextBtn" aria-label="Next section">⏭</button>
+          <button
+            class="control-btn"
+            id="prevBtn"
+            aria-label="Previous section"
+          >
+          
+            ⏮
+          </button>
+          <button
+            aria-label="Play/pause web auto scroll"
+            class="control-btn play-pause"
+            id="playBtn"
+          >
+            ▶
+          </button>
+          <button class="control-btn" id="nextBtn" aria-label="Next section">
+            ⏭
+            
+          </button>
         </div>
-        <div class="progress-bar">
+        <div
+          class="progress-bar"
+          aria-label="Progress bar for portfolio walkthrough"
+        >
           <span class="time" id="currentTime">0:00</span>
-          <div class="progress-track" id="progressTrack" aria-label="Scroll progress">
+          <div class="progress-track" id="progressTrack">
             <div class="progress-fill" id="progressFill"></div>
           </div>
           <span class="time">3:45</span>
@@ -429,17 +496,141 @@
       </div>
 
       <div class="extra-controls">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+        <!-- Accessibility Button -->
+        <button
+          class="a11y-toggle-btn"
+          id="a11yToggleBtn"
+          aria-label="Open accessibility settings"
+          aria-expanded="false"
+        >
+          <span>♿</span>
+          <span class="a11y-tooltip">Accessibility Settings</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          aria-label="Toggle light/dark mode"
+        >
           <span class="theme-icon">☀️</span>
-          <span class="theme-tooltip" id="themeTooltip"
-            >Switch to Light Mode</span
-          >
+          <span class="theme-tooltip" id="themeTooltip">
+            Switch to Light Mode
+          </span>
         </button>
       </div>
     </div>
 
+    <!-- Accessibility Panel -->
+    <div
+      class="a11y-panel"
+      role="dialog"
+      aria-labelledby="a11y-panel-title"
+      aria-modal="true"
+    >
+      <div class="a11y-panel-header">
+        <h3 class="a11y-panel-title" id="a11y-panel-title">Accessibility Options</h3>
+        <button class="a11y-close-btn" aria-label="Close accessibility panel">
+          ×
+        </button>
+      </div>
+
+      <div class="a11y-section">
+        <label class="a11y-section-label">Text Size</label>
+        <div class="text-size-controls">
+          <button
+            class="text-size-btn"
+            data-size="small"
+            aria-label="Small text size"
+          >
+            A-
+          </button>
+          <button
+            class="text-size-btn active"
+            data-size="default"
+            aria-label="Default text size"
+          >
+            A
+          </button>
+          <button
+            class="text-size-btn"
+            data-size="large"
+            aria-label="Large text size"
+          >
+            A+
+          </button>
+          <button
+            class="text-size-btn"
+            data-size="xlarge"
+            aria-label="Extra large text size"
+          >
+            A++
+          </button>
+        </div>
+      </div>
+
+      <div class="a11y-section">
+        <label class="a11y-toggle">
+          <div>
+            <div class="a11y-toggle-label"> High Contrast </div>
+            <div class="a11y-toggle-description">Increase color contrast</div>
+          </div>
+          <input
+            type="checkbox"
+            id="highContrastToggle"
+            aria-label="Toggle high contrast mode"
+          />
+          <span class="switch"></span>
+        </label>
+
+        <label class="a11y-toggle">
+          <div>
+            <div class="a11y-toggle-label"> Dyslexia Font </div>
+            <div class="a11y-toggle-description"
+              >Use dyslexia-friendly font</div
+            >
+          </div>
+          <input
+            type="checkbox"
+            id="dyslexiaFontToggle"
+            aria-label="Toggle dyslexia-friendly font"
+          />
+          <span class="switch"></span>
+        </label>
+      </div>
+
+      <button
+        class="a11y-reset-btn"
+        id="a11yResetBtn"
+        aria-label="Reset all accessibility settings"
+      >
+        Reset to Default
+      </button>
+
+      <div
+        style="
+          margin-top: 12px;
+          font-size: 11px;
+          color: var(--text-secondary);
+          text-align: center;
+        "
+      >
+        Press
+        <kbd
+          style="
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 3px;
+          "
+        >
+          Alt+A
+        </kbd>
+        to toggle panel
+      </div>
+    </div>
+
     <!-- Popup Modal -->
-    <section class="modal hidden" aria-label="Add track to playlist" aria-modal="true">
+    <section class="modal hidden" aria-label="Add track to playlist">
       <button aria-label="Close modal" class="btn-close">&times;</button>
       <div>
         <h3>Share music with me!</h3>
@@ -466,7 +657,12 @@
       </iframe>
 
       <div id="spotify-actions">
-        <button class="btn" id="spotify-login-modal" aria-label="Login to Spotify">Login to Spotify</button>
+        <button
+          class="btn"
+          id="spotify-login-modal"
+          aria-label="Login to Spotify"
+          >Login to Spotify</button
+        >
       </div>
 
       <div id="spotify-search-section" style="display: none">
@@ -477,7 +673,9 @@
             placeholder="Search for a track..."
             aria-label="Search for tracks"
           />
-          <button class="btn" id="searchBtn" aria-label="Search track">Search</button>
+          <button class="btn" id="searchBtn" aria-label="Search track"
+            >Search</button
+          >
         </div>
         <div id="searchResults" aria-label="Search results"></div>
       </div>

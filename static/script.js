@@ -273,11 +273,11 @@ document.addEventListener("DOMContentLoaded", function () {
         credentials: "same-origin",
       });
 
-      console.log("🔍 Dashboard response status:", res.status);
+      // console.log("Dashboard response status:", res.status);
 
       if (res.ok) {
         const data = await res.json();
-        console.log("✅ Logged in! Data:", data);
+        console.log("Logged in! Data:", data);
 
         const loginBtn = document.getElementById("spotify-login-modal");
         const searchSection = document.getElementById("spotify-search-section");
@@ -285,15 +285,15 @@ document.addEventListener("DOMContentLoaded", function () {
         if (loginBtn && searchSection) {
           loginBtn.style.display = "none";
           searchSection.style.display = "block";
-          console.log("✅ UI updated to show search");
+          // console.log("✅ UI updated to show search");
         }
         return true;
       } else {
-        console.log("❌ Not logged in");
+        // console.log("❌ Not logged in");
         return false;
       }
     } catch (err) {
-      console.error("❌ Error checking Spotify login:", err);
+      // console.error("❌ Error checking Spotify login:", err);
       return false;
     }
   }
@@ -302,7 +302,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const spotifyLoginBtn = document.getElementById("spotify-login-modal");
   if (spotifyLoginBtn) {
     spotifyLoginBtn.addEventListener("click", function () {
-      console.log("🔑 Login button clicked, redirecting to Spotify...");
+      // console.log("🔑 Login button clicked, redirecting to Spotify...");
       localStorage.setItem("modalShouldReopen", "true");
       window.location.href = "/login";
     });
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check URL for spotify_login=success parameter
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("spotify_login") === "success") {
-    console.log("🎉 Returned from Spotify login successfully!");
+    // console.log("🎉 Returned from Spotify login successfully!");
 
     // Clean URL
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -329,7 +329,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Also check localStorage for modal state
   if (localStorage.getItem("modalShouldReopen") === "true") {
-    console.log("📂 Reopening modal after login...");
     localStorage.removeItem("modalShouldReopen");
 
     setTimeout(() => {
@@ -345,7 +344,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Open modal button handler
   if (openModalBtn) {
     openModalBtn.addEventListener("click", () => {
-      console.log("🎵 Add track button clicked");
       openModal();
       setTimeout(checkSpotifyLogin, 300);
     });
@@ -528,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // Mobile menu toggle
+  // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileBackdrop = document.getElementById("mobileBackdrop");
   const sidebar = document.getElementById("sidebar");
@@ -576,4 +574,360 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+  setTimeout(() => {
+    A11yManager.init();
+    KeyboardNav.init();
+    FormA11y.init();
+    PageAnnouncer.init();
+  }, 50);
 });
+
+// Accessibility Panel Manager
+const A11yManager = {
+  init() {
+    this.setupPanel();
+    if (this.button && this.panel) {
+      this.loadSettings();
+      this.attachEventListeners();
+      this.setupKeyboardShortcuts();
+    }
+  },
+
+  setupPanel() {
+    this.button = document.getElementById("a11yToggleBtn");
+    this.panel = document.querySelector(".a11y-panel");
+  },
+
+  attachEventListeners() {
+    // Toggle panel
+    this.button.addEventListener("click", () => this.togglePanel());
+
+    // Close button
+    const closeBtn = this.panel.querySelector(".a11y-close-btn");
+    if (closeBtn) {
+      closeBtn.addEventListener("click", () => this.closePanel());
+    }
+
+    // Text size controls
+    const textSizeBtns = this.panel.querySelectorAll(".text-size-btn");
+    textSizeBtns.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        textSizeBtns.forEach((b) => b.classList.remove("active"));
+        e.target.classList.add("active");
+        this.setTextSize(e.target.dataset.size);
+      });
+    });
+
+    // High contrast toggle
+    const highContrastToggle = document.getElementById("highContrastToggle");
+    if (highContrastToggle) {
+      highContrastToggle.addEventListener("change", (e) => {
+        this.toggleHighContrast(e.target.checked);
+      });
+    }
+
+    // Dyslexia font toggle
+    const dyslexiaFontToggle = document.getElementById("dyslexiaFontToggle");
+    if (dyslexiaFontToggle) {
+      dyslexiaFontToggle.addEventListener("change", (e) => {
+        this.toggleDyslexiaFont(e.target.checked);
+      });
+    }
+
+    // Reset button
+    const resetBtn = document.getElementById("a11yResetBtn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => this.resetSettings());
+    }
+
+    // Close panel when clicking outside
+    document.addEventListener("click", (e) => {
+      if (this.panel.classList.contains("active")) {
+        if (!this.panel.contains(e.target) && !this.button.contains(e.target)) {
+          this.closePanel();
+        }
+      }
+    });
+
+    // ESC key to close
+    this.panel.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        this.closePanel();
+        this.button.focus();
+      }
+    });
+  },
+
+  setupKeyboardShortcuts() {
+    document.addEventListener("keydown", (e) => {
+      // Alt + A to toggle accessibility panel
+      if (e.altKey && e.key.toLowerCase() === "a") {
+        e.preventDefault();
+        this.togglePanel();
+      }
+    });
+  },
+
+  togglePanel() {
+    const isActive = this.panel.classList.toggle("active");
+    this.button.setAttribute("aria-expanded", isActive);
+
+    if (isActive) {
+      const firstButton = this.panel.querySelector("button, input");
+      setTimeout(() => firstButton?.focus(), 100);
+    }
+  },
+
+  closePanel() {
+    this.panel.classList.remove("active");
+    this.button.setAttribute("aria-expanded", "false");
+  },
+
+  setTextSize(size) {
+    document.body.classList.remove("text-small", "text-large", "text-xlarge");
+
+    if (size !== "default") {
+      document.body.classList.add(`text-${size}`);
+    }
+
+    localStorage.setItem("a11y-text-size", size);
+    this.announceChange(`Text size changed to ${size}`);
+  },
+
+  toggleHighContrast(enabled) {
+    document.body.classList.toggle("high-contrast", enabled);
+    localStorage.setItem("a11y-high-contrast", enabled);
+    this.announceChange(
+      `High contrast mode ${enabled ? "enabled" : "disabled"}`
+    );
+  },
+
+  toggleDyslexiaFont(enabled) {
+    document.body.classList.toggle("dyslexia-font", enabled);
+    localStorage.setItem("a11y-dyslexia-font", enabled);
+    this.announceChange(
+      `Dyslexia-friendly font ${enabled ? "enabled" : "disabled"}`
+    );
+  },
+
+  resetSettings() {
+    // Reset text size
+    document.body.classList.remove("text-small", "text-large", "text-xlarge");
+    const textSizeBtns = this.panel.querySelectorAll(".text-size-btn");
+    textSizeBtns.forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.size === "default");
+    });
+
+    // Reset high contrast
+    document.body.classList.remove("high-contrast");
+    const highContrastToggle = document.getElementById("highContrastToggle");
+    if (highContrastToggle) highContrastToggle.checked = false;
+
+    // Reset dyslexia font
+    document.body.classList.remove("dyslexia-font");
+    const dyslexiaFontToggle = document.getElementById("dyslexiaFontToggle");
+    if (dyslexiaFontToggle) dyslexiaFontToggle.checked = false;
+
+    // Clear localStorage
+    localStorage.removeItem("a11y-text-size");
+    localStorage.removeItem("a11y-high-contrast");
+    localStorage.removeItem("a11y-dyslexia-font");
+
+    this.announceChange("All accessibility settings reset to default");
+  },
+
+  loadSettings() {
+    // Load text size
+    const textSize = localStorage.getItem("a11y-text-size");
+    if (textSize && textSize !== "default") {
+      document.body.classList.add(`text-${textSize}`);
+      const btn = this.panel.querySelector(`[data-size="${textSize}"]`);
+      if (btn) {
+        this.panel
+          .querySelectorAll(".text-size-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      }
+    }
+
+    // Load high contrast
+    const highContrast = localStorage.getItem("a11y-high-contrast") === "true";
+    if (highContrast) {
+      document.body.classList.add("high-contrast");
+      const toggle = document.getElementById("highContrastToggle");
+      if (toggle) toggle.checked = true;
+    }
+
+    // Load dyslexia font
+    const dyslexiaFont = localStorage.getItem("a11y-dyslexia-font") === "true";
+    if (dyslexiaFont) {
+      document.body.classList.add("dyslexia-font");
+      const toggle = document.getElementById("dyslexiaFontToggle");
+      if (toggle) toggle.checked = true;
+    }
+  },
+
+  announceChange(message) {
+    let liveRegion = document.getElementById("a11y-live-region");
+    if (!liveRegion) {
+      liveRegion = document.createElement("div");
+      liveRegion.id = "a11y-live-region";
+      liveRegion.setAttribute("aria-live", "polite");
+      liveRegion.setAttribute("aria-atomic", "true");
+      liveRegion.className = "sr-only";
+      document.body.appendChild(liveRegion);
+    }
+    liveRegion.textContent = message;
+  },
+};
+
+// Enhanced Keyboard Navigation
+const KeyboardNav = {
+  init() {
+    this.setupModalFocusTrap();
+    this.setupCarouselKeyboard();
+  },
+
+  setupModalFocusTrap() {
+    const modal = document.querySelector(".modal");
+    if (!modal) return;
+
+    modal.addEventListener("keydown", (e) => {
+      if (e.key === "Tab") {
+        const focusableElements = modal.querySelectorAll(
+          'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey && document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        } else if (!e.shiftKey && document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    });
+  },
+
+  setupCarouselKeyboard() {
+    const carousel = document.getElementById("projectCarousel");
+    if (!carousel) return;
+
+    const cards = carousel.querySelectorAll(".project-card");
+    let currentIndex = 0;
+
+    carousel.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+
+        if (e.key === "ArrowLeft" && currentIndex > 0) {
+          currentIndex--;
+        } else if (e.key === "ArrowRight" && currentIndex < cards.length - 1) {
+          currentIndex++;
+        }
+
+        cards[currentIndex].scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    });
+  },
+};
+
+// Form Accessibility Enhancements
+const FormA11y = {
+  init() {
+    this.enhanceContactForm();
+  },
+
+  enhanceContactForm() {
+    const form = document.querySelector(".contact-form form");
+    if (!form) return;
+
+    const inputs = form.querySelectorAll("input, textarea");
+    inputs.forEach((input) => {
+      const placeholder = input.getAttribute("placeholder");
+      if (placeholder && !input.previousElementSibling?.tagName === "LABEL") {
+        const label = document.createElement("label");
+        label.setAttribute("for", input.name);
+        label.textContent = placeholder;
+        label.className = "sr-only";
+        input.parentNode.insertBefore(label, input);
+        input.id = input.name;
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      const successMessage = document.getElementById("successMessage");
+      if (successMessage) {
+        successMessage.setAttribute("role", "status");
+        successMessage.setAttribute("aria-live", "polite");
+      }
+    });
+  },
+};
+
+// Page Announcer for Screen Readers
+const PageAnnouncer = {
+  init() {
+    this.createLiveRegion();
+    this.watchSectionChanges();
+  },
+
+  createLiveRegion() {
+    const liveRegion = document.createElement("div");
+    liveRegion.id = "page-announcer";
+    liveRegion.setAttribute("aria-live", "polite");
+    liveRegion.setAttribute("aria-atomic", "true");
+    liveRegion.className = "sr-only";
+    document.body.appendChild(liveRegion);
+    this.liveRegion = liveRegion;
+  },
+
+  watchSectionChanges() {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionName =
+              entry.target.getAttribute("aria-label") ||
+              entry.target.querySelector("h2")?.textContent ||
+              "Section";
+            this.announce(`Now viewing ${sectionName}`);
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      observer.observe(section);
+    });
+  },
+
+  announce(message) {
+    if (this.liveRegion) {
+      this.liveRegion.textContent = "";
+      setTimeout(() => {
+        this.liveRegion.textContent = message;
+      }, 100);
+    }
+  },
+};
+
+// if (
+//   window.location.hostname === "localhost" ||
+//   window.location.hostname === "127.0.0.1"
+// ) {
+//   console.log("Accessibility Features Available:");
+//   console.log("- Text size controls");
+//   console.log("- High contrast mode");
+//   console.log("- Dyslexia-friendly font");
+//   console.log("- Keyboard navigation");
+//   console.log("- Screen reader support");
+//   console.log("\nPress Alt+A to open accessibility panel");
+// }

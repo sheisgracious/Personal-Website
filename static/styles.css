@@ -16,14 +16,14 @@
 }
 
 :root.light-mode {
-    --bg-primary: #f5f1eb;
-    --bg-secondary: #ebe4db;
-    --bg-elevated: #f9f6f1;
-    --text-primary: #2d2520;
-    --text-secondary: #6b5d52;
-    --accent-primary: #d97706;
-    --accent-hover: #f59e0b;
-    --border-subtle: rgba(0, 0, 0, 0.08);
+  --bg-primary: #f5f1eb;
+  --bg-secondary: #ebe4db;
+  --bg-elevated: #f9f6f1;
+  --text-primary: #2d2520;
+  --text-secondary: #6b5d52;
+  --accent-primary: #d97706;
+  --accent-hover: #f59e0b;
+  --border-subtle: rgba(0, 0, 0, 0.08);
 }
 
 *:focus-visible {
@@ -235,8 +235,6 @@ body {
 .sidebar:hover .nav-text {
   opacity: 1;
 }
-
-
 
 .add-track-btn {
   margin-top: auto;
@@ -890,7 +888,7 @@ body {
 }
 
 .submit-btn {
-  background: var(--accent-primary);
+  background: var(--accent-hover);
   border: none;
   padding: 14px 48px;
   border-radius: 500px;
@@ -903,7 +901,7 @@ body {
 }
 
 .submit-btn:hover {
-  background: var(--accent-hover);
+  background: var(--accent-primary);
   transform: translateY(-2px);
 }
 
@@ -1092,23 +1090,25 @@ footer {
   right: 100%;
   top: 50%;
   transform: translateY(-50%);
-  /* background: var(--bg-elevated); */
+  background: var(--bg-elevated);
   padding: 8px 12px;
   border-radius: 4px;
   font-size: 12px;
+  font-weight: bold;
   white-space: nowrap;
   opacity: 0;
   transition: opacity 0.2s, transform 0.2s;
   pointer-events: none;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   color: var(--text-primary);
   margin-right: 8px;
   z-index: 1000;
 }
 
 .theme-toggle:hover .theme-tooltip {
+  color: var(--text-primary);
   opacity: 1;
-  transform: translateY(-50%) translateX(-5px);
+  transform: translateY(-50px);
 }
 
 /* Modal */
@@ -1724,19 +1724,1019 @@ footer {
   border-width: 0;
 }
 
-/* Skip to main content link */
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--accent-primary);
-  color: white;
-  padding: 8px 16px;
-  text-decoration: none;
-  z-index: 10000;
-  border-radius: 0 0 4px 0;
+/* Accessibility (ax) button */
+.a11y-toggle-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 20px;
+  position: relative;
+  flex-shrink: 0;
 }
 
-.skip-link:focus {
-  top: 0;
+.a11y-toggle-btn:hover {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--text-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+.a11y-toggle-btn:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.a11y-tooltip {
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  background: var(--bg-elevated);
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+  color: var(--text-primary);
+  margin-right: 8px;
+  z-index: 1000;
+}
+
+.a11y-toggle-btn:hover .a11y-tooltip {
+  color: var(--text-primary);
+  opacity: 1;
+  transform: translateY(-50px) translateX(+5px);
+}
+
+/* AX Panel */
+.a11y-panel {
+  position: fixed;
+  bottom: 110px;
+  right: 80px;
+  width: 320px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--accent-primary);
+  border-radius: 16px;
+  padding: 24px;
+  z-index: 201;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.a11y-panel.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+
+.a11y-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border-subtle);
+}
+
+.a11y-panel-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.a11y-close-btn {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 50%;
+  color: var(--text-secondary);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.a11y-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* Panel Content */
+.a11y-section {
+  margin-bottom: 20px;
+}
+
+.a11y-section:last-child {
+  margin-bottom: 0;
+}
+
+.a11y-section-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Text Size Controls */
+.text-size-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.text-size-btn {
+  flex: 1;
+  padding: 10px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.text-size-btn:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+.text-size-btn.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: #fff;
+}
+
+.text-size-btn:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Toggle Switches */
+.a11y-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-subtle);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.a11y-toggle:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.a11y-toggle-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.a11y-toggle-description {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+/* Custom Switch */
+.switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: var(--bg-primary);
+  border-radius: 12px;
+  transition: background 0.3s;
+  border: 2px solid var(--border-subtle);
+}
+
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: var(--text-secondary);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.a11y-toggle input:checked + .switch {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.a11y-toggle input:checked + .switch::after {
+  left: 22px;
+  background: #fff;
+}
+
+.a11y-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.a11y-toggle input:focus-visible + .switch {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Reset Button */
+.a11y-reset-btn {
+  width: 100%;
+  padding: 12px 24px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-subtle);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 16px;
+}
+
+.a11y-reset-btn:hover {
+  background: rgba(124, 58, 237, 0.1);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* AX modes */
+/* Text Size Variations */
+/* ===== TEXT SIZE ACCESSIBILITY ===== */
+
+/* Small Text Size */
+body.text-small {
+  font-size: 14px;
+}
+
+body.text-small .hero h1 {
+  font-size: 60px;
+}
+
+body.text-small .hero-meta {
+  font-size: 13px;
+}
+
+body.text-small .verified-badge {
+  font-size: 11px;
+}
+
+body.text-small .connect-btn {
+  font-size: 13px;
+}
+
+body.text-small .section-title {
+  font-size: 20px;
+}
+
+body.text-small .about-text,
+body.text-small .metadata-value {
+  font-size: 13px;
+}
+
+body.text-small .metadata-label {
+  font-size: 10px;
+}
+
+body.text-small .album-info h2 {
+  font-size: 40px;
+}
+
+body.text-small .album-info h3 {
+  font-size: 11px;
+}
+
+body.text-small .album-meta {
+  font-size: 13px;
+}
+
+body.text-small .track-info h4 {
+  font-size: 14px;
+}
+
+body.text-small .track-info p {
+  font-size: 12px;
+}
+
+body.text-small .track-company,
+body.text-small .track-date {
+  font-size: 12px;
+}
+
+body.text-small .project-info h3 {
+  font-size: 13px;
+}
+
+body.text-small .project-info p {
+  font-size: 11px;
+}
+
+body.text-small .contact-form input,
+body.text-small .contact-form textarea,
+body.text-small .contact-form button {
+  font-size: 13px;
+}
+
+body.text-small footer {
+  font-size: 11px;
+}
+
+body.text-small .sidebar {
+  font-size: 13px;
+}
+
+body.text-small .logo-text {
+  font-size: 20px;
+}
+
+body.text-small .nav-item {
+  font-size: 12px;
+}
+
+body.text-small .nav-icon {
+  font-size: 20px;
+}
+
+body.text-small .add-track-btn {
+  font-size: 12px;
+}
+
+body.text-small .now-playing-info h4 {
+  font-size: 12px;
+}
+
+body.text-small .now-playing-info p {
+  font-size: 10px;
+}
+
+body.text-small .control-btn {
+  font-size: 16px;
+}
+
+body.text-small .time {
+  font-size: 10px;
+}
+
+body.text-small .modal {
+  font-size: 13px;
+}
+
+body.text-small .modal h3 {
+  font-size: 20px;
+}
+
+body.text-small .modal p {
+  font-size: 12px;
+}
+
+body.text-small .btn,
+body.text-small #trackSearchInput {
+  font-size: 12px;
+}
+
+body.text-small .track-item .track-info strong {
+  font-size: 13px;
+}
+
+body.text-small .track-item .track-info .artist {
+  font-size: 11px;
+}
+
+body.text-small .track-item .add-btn {
+  font-size: 11px;
+  padding: 6px 16px;
+}
+
+body.text-small .a11y-panel {
+  font-size: 13px;
+}
+
+body.text-small .a11y-panel-title {
+  font-size: 18px;
+}
+
+body.text-small .text-size-btn {
+  font-size: 12px;
+  padding: 8px;
+}
+
+body.text-small .a11y-toggle-label {
+  font-size: 12px;
+}
+
+body.text-small .a11y-toggle-description {
+  font-size: 10px;
+}
+
+body.text-small .a11y-reset-btn {
+  font-size: 12px;
+}
+
+/* Large Text Size */
+body.text-large {
+  font-size: 17px;
+}
+
+body.text-large .hero h1 {
+  font-size: 84px;
+}
+
+body.text-large .hero-meta {
+  font-size: 15px;
+}
+
+body.text-large .verified-badge {
+  font-size: 13px;
+}
+
+body.text-large .connect-btn {
+  font-size: 15px;
+}
+
+body.text-large .section-title {
+  font-size: 28px;
+}
+
+body.text-large .about-text,
+body.text-large .metadata-value {
+  font-size: 16px;
+}
+
+body.text-large .metadata-label {
+  font-size: 12px;
+}
+
+body.text-large .album-info h2 {
+  font-size: 56px;
+}
+
+body.text-large .album-info h3 {
+  font-size: 13px;
+}
+
+body.text-large .album-meta {
+  font-size: 15px;
+}
+
+body.text-large .track-info h4 {
+  font-size: 16px;
+}
+
+body.text-large .track-info p {
+  font-size: 14px;
+}
+
+body.text-large .track-company,
+body.text-large .track-date {
+  font-size: 14px;
+}
+
+body.text-large .project-info h3 {
+  font-size: 15px;
+}
+
+body.text-large .project-info p {
+  font-size: 13px;
+}
+
+body.text-large .contact-form input,
+body.text-large .contact-form textarea,
+body.text-large .contact-form button {
+  font-size: 15px;
+}
+
+body.text-large footer {
+  font-size: 13px;
+}
+
+body.text-large .sidebar {
+  font-size: 15px;
+}
+
+body.text-large .logo-text {
+  font-size: 22px;
+}
+
+body.text-large .nav-item {
+  font-size: 14px;
+}
+
+body.text-large .nav-icon {
+  font-size: 22px;
+}
+
+body.text-large .add-track-btn {
+  font-size: 14px;
+}
+
+body.text-large .now-playing-info h4 {
+  font-size: 14px;
+}
+
+body.text-large .now-playing-info p {
+  font-size: 12px;
+}
+
+body.text-large .control-btn {
+  font-size: 18px;
+}
+
+body.text-large .time {
+  font-size: 12px;
+}
+
+body.text-large .modal {
+  font-size: 15px;
+}
+
+body.text-large .modal h3 {
+  font-size: 22px;
+}
+
+body.text-large .modal p {
+  font-size: 14px;
+}
+
+body.text-large .btn,
+body.text-large #trackSearchInput {
+  font-size: 14px;
+}
+
+body.text-large .track-item .track-info strong {
+  font-size: 15px;
+}
+
+body.text-large .track-item .track-info .artist {
+  font-size: 13px;
+}
+
+body.text-large .track-item .add-btn {
+  font-size: 13px;
+  padding: 8px 20px;
+}
+
+body.text-large .a11y-panel {
+  font-size: 15px;
+}
+
+body.text-large .a11y-panel-title {
+  font-size: 22px;
+}
+
+body.text-large .text-size-btn {
+  font-size: 14px;
+  padding: 10px;
+}
+
+body.text-large .a11y-toggle-label {
+  font-size: 14px;
+}
+
+body.text-large .a11y-toggle-description {
+  font-size: 11px;
+}
+
+body.text-large .a11y-reset-btn {
+  font-size: 14px;
+}
+
+/* Extra Large Text Size */
+body.text-xlarge {
+  font-size: 19px;
+}
+
+body.text-xlarge .hero h1 {
+  font-size: 96px;
+}
+
+body.text-xlarge .hero-meta {
+  font-size: 17px;
+}
+
+body.text-xlarge .verified-badge {
+  font-size: 15px;
+}
+
+body.text-xlarge .connect-btn {
+  font-size: 17px;
+}
+
+body.text-xlarge .section-title {
+  font-size: 32px;
+}
+
+body.text-xlarge .about-text,
+body.text-xlarge .metadata-value {
+  font-size: 18px;
+}
+
+body.text-xlarge .metadata-label {
+  font-size: 14px;
+}
+
+body.text-xlarge .album-info h2 {
+  font-size: 64px;
+}
+
+body.text-xlarge .album-info h3 {
+  font-size: 15px;
+}
+
+body.text-xlarge .album-meta {
+  font-size: 17px;
+}
+
+body.text-xlarge .track-info h4 {
+  font-size: 18px;
+}
+
+body.text-xlarge .track-info p {
+  font-size: 16px;
+}
+
+body.text-xlarge .track-company,
+body.text-xlarge .track-date {
+  font-size: 16px;
+}
+
+body.text-xlarge .project-info h3 {
+  font-size: 17px;
+}
+
+body.text-xlarge .project-info p {
+  font-size: 15px;
+}
+
+body.text-xlarge .contact-form input,
+body.text-xlarge .contact-form textarea,
+body.text-xlarge .contact-form button {
+  font-size: 17px;
+}
+
+body.text-xlarge footer {
+  font-size: 15px;
+}
+
+body.text-xlarge .sidebar {
+  font-size: 17px;
+}
+
+body.text-xlarge .logo-text {
+  font-size: 24px;
+}
+
+body.text-xlarge .nav-item {
+  font-size: 16px;
+}
+
+body.text-xlarge .nav-icon {
+  font-size: 24px;
+}
+
+body.text-xlarge .add-track-btn {
+  font-size: 16px;
+}
+
+body.text-xlarge .now-playing-info h4 {
+  font-size: 16px;
+}
+
+body.text-xlarge .now-playing-info p {
+  font-size: 14px;
+}
+
+body.text-xlarge .control-btn {
+  font-size: 20px;
+}
+
+body.text-xlarge .time {
+  font-size: 14px;
+}
+
+body.text-xlarge .modal {
+  font-size: 17px;
+}
+
+body.text-xlarge .modal h3 {
+  font-size: 24px;
+}
+
+body.text-xlarge .modal p {
+  font-size: 16px;
+}
+
+body.text-xlarge .btn,
+body.text-xlarge #trackSearchInput {
+  font-size: 16px;
+}
+
+body.text-xlarge .track-item .track-info strong {
+  font-size: 17px;
+}
+
+body.text-xlarge .track-item .track-info .artist {
+  font-size: 15px;
+}
+
+body.text-xlarge .track-item .add-btn {
+  font-size: 15px;
+  padding: 10px 24px;
+}
+
+body.text-xlarge .a11y-panel {
+  font-size: 17px;
+}
+
+body.text-xlarge .a11y-panel-title {
+  font-size: 24px;
+}
+
+body.text-xlarge .text-size-btn {
+  font-size: 16px;
+  padding: 12px;
+}
+
+body.text-xlarge .a11y-toggle-label {
+  font-size: 16px;
+}
+
+body.text-xlarge .a11y-toggle-description {
+  font-size: 12px;
+}
+
+body.text-xlarge .a11y-reset-btn {
+  font-size: 16px;
+}
+
+/* Mobile Responsive Text Sizes */
+@media (max-width: 768px) {
+  body.text-small .hero h1 {
+    font-size: 42px;
+  }
+  
+  body.text-large .hero h1 {
+    font-size: 56px;
+  }
+  
+  body.text-xlarge .hero h1 {
+    font-size: 54px;
+  }
+  
+  body.text-small .album-info h2 {
+    font-size: 32px;
+  }
+  
+  body.text-large .album-info h2 {
+    font-size: 38px;
+  }
+  
+  body.text-xlarge .album-info h2 {
+    font-size: 42px;
+  }
+  
+  .a11y-panel {
+    bottom: 90px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .a11y-panel {
+    padding: 20px;
+  }
+  
+  .text-size-controls {
+    gap: 6px;
+  }
+  
+  body.text-small .text-size-btn {
+    padding: 6px;
+    font-size: 11px;
+  }
+  
+  body.text-large .text-size-btn {
+    padding: 8px;
+    font-size: 13px;
+  }
+  
+  body.text-xlarge .text-size-btn {
+    padding: 10px;
+    font-size: 15px;
+  }
+}
+
+
+/* High Contrast Mode */
+body.high-contrast {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-elevated: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --accent-primary: #a78bfa;
+  --accent-hover: #c4b5fd;
+  --border-subtle: rgba(255, 255, 255, 0.3);
+}
+
+body.high-contrast .hero {
+  background: #000000;
+}
+
+body.high-contrast .experience-section {
+  background: #0a0a0a;
+}
+
+body.high-contrast *:focus-visible {
+  outline: 4px solid #a78bfa;
+  outline-offset: 3px;
+}
+
+body.high-contrast .track:hover {
+  background: rgba(167, 139, 250, 0.2);
+}
+
+body.high-contrast .nav-item:hover,
+body.high-contrast .nav-item.active {
+  background: rgba(167, 139, 250, 0.2);
+}
+
+/* Dyslexia-Friendly Font */
+@import url("https://fonts.cdnfonts.com/css/opendyslexic");
+
+body.dyslexia-font {
+  font-family: "OpenDyslexic", "Comic Sans MS", sans-serif !important;
+}
+
+body.dyslexia-font * {
+  font-family: "OpenDyslexic", "Comic Sans MS", sans-serif !important;
+}
+
+/* Increase letter spacing for dyslexia mode */
+body.dyslexia-font {
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+}
+
+body.dyslexia-font .hero h1,
+body.dyslexia-font .album-info h2 {
+  letter-spacing: 0;
+}
+
+/* docused indicators */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-nav:focus-visible {
+  outline: 4px solid var(--accent-primary);
+  outline-offset: 4px;
+}
+
+/* responsive adjustments */
+@media (max-width: 768px) {
+  .a11y-panel {
+    bottom: 90px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .a11y-toggle-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  /* Ensure text sizes work on mobile */
+  body.text-xlarge .hero h1 {
+    font-size: 54px;
+  }
+
+  body.text-large .hero h1 {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .a11y-panel {
+    padding: 20px;
+  }
+
+  .text-size-controls {
+    gap: 6px;
+  }
+
+  .text-size-btn {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/*  */
+@media (max-width: 768px) {
+  body.text-xlarge .hero h1 {
+    font-size: 54px;
+  }
+  
+  body.text-large .hero h1 {
+    font-size: 56px;
+  }
+  
+  body.text-small .hero h1 {
+    font-size: 42px;
+  }
+  
+  body.text-xlarge .album-info h2 {
+    font-size: 42px;
+  }
+  
+  body.text-large .album-info h2 {
+    font-size: 38px;
+  }
+  
+  body.text-small .album-info h2 {
+    font-size: 32px;
+  }
+}
+
+/* Better contrast for text-secondary in light mode */
+:root.light-mode {
+  --text-secondary: #5a4a3f;
+}
+
+/* Better contrast for disabled buttons */
+button:disabled,
+.carousel-nav:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* print styles */
+
+@media print {
+  .sidebar,
+  .playback-bar,
+  .a11y-panel,
+  .loading-page,
+  .mobile-menu-btn {
+    display: none !important;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
 }
