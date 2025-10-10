@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Portfolio of Gracious Ogyiri Asare - Computer Science student at Boston University specializing in full-stack web development and DevOps engineering" />
     <title>Gracious Ogyiri Asare - Portfolio</title>
     <link
       rel="stylesheet"
@@ -17,87 +18,82 @@
   </head>
 
   <body>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div class="mobile-backdrop" id="mobileBackdrop"></div>
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Loading Page -->
-    <div class="loading-page">
-      <div class="vinyl-record"></div>
+    <div class="loading-page" role="status" aria-label="Loading portfolio">
+      <div class="vinyl-record" aria-hidden="true"></div>
+      <span class="sr-only">Loading content...</span>
     </div>
 
     <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Main navigation">
       <div class="sidebar-header">
         <div class="logo">
-          <span class="logo-icon">🅖</span>
+          <span class="logo-icon" aria-hidden="true">🅖</span>
           <span class="logo-text">Gracious</span>
         </div>
-        <button class="collapse-btn" id="collapseBtn">
-          <span id="collapseIcon">◀</span>
-        </button>
       </div>
 
       <nav class="nav-section">
-        <a href="#hero" class="nav-item active">
-          <span class="nav-icon">🏠</span>
+        <a href="#hero" class="nav-item active" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">🏠</span>
           <span class="nav-text">Home</span>
         </a>
         <a href="#about" class="nav-item">
-          <span class="nav-icon">👤</span>
+          <span class="nav-icon" aria-hidden="true">👤</span>
           <span class="nav-text">About</span>
         </a>
         <a href="#experience" class="nav-item">
-          <span class="nav-icon">💼</span>
+          <span class="nav-icon" aria-hidden="true">💼</span>
           <span class="nav-text">Experience</span>
         </a>
         <a href="#projects" class="nav-item">
-          <span class="nav-icon">🔧</span>
+          <span class="nav-icon" aria-hidden="true">🔧</span>
           <span class="nav-text">Projects</span>
         </a>
         <a href="#contact" class="nav-item">
-          <span class="nav-icon">📞</span>
+          <span class="nav-icon" aria-hidden="true">📞</span>
           <span class="nav-text">Contact</span>
         </a>
       </nav>
 
-      <button class="add-track-btn">+ Add A Track</button>
+      <button class="add-track-btn" aria-label="Add a track to shared Spotify playlist">+ Add A Track</button>
     </aside>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <main class="main-content" id="main-content">
       <!-- Hero Section -->
-      <section id="hero" class="hero">
+      <section id="hero" class="hero" aria-labelledby="hero-heading">
         <div class="hero-content">
           <img
             src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}"
-            alt="Gracious"
+            alt="Portrait of Gracious Ogyiri Asare"
             class="hero-image"
           />
           <div class="hero-info">
             <div class="verified-badge">
-              <span class="verified-icon">✓</span>
-              GRAY-shus oh-JEE-ree ah-SAH-ree
+              <span class="verified-icon" aria-hidden="true">✓</span>
+              <span aria-label="Pronunciation: Gray-shus oh-jee-ree ah-sah-ree">GRAY-shus oh-JEE-ree ah-SAH-ree</span>
             </div>
-            <h1>Gracious Ogyiri Asare</h1>
-            <p class="hero-meta"
-              >Innovative Technology · Entrepreneurship · Boston University
-              '26</p
-            >
+            <h1 id="hero-heading">Gracious Ogyiri Asare</h1>
+            <p class="hero-meta">Innovative Technology · Entrepreneurship · Boston University '26</p>
             <div class="hero-actions">
               <button
                 class="play-btn-hero"
                 onclick="window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')"
+                aria-label="View my resume in new tab"
               >
-                ▶
-                <span class="tooltip">View My Resume</span>
+                <span aria-hidden="true">▶</span>
+                <span class="tooltip" role="tooltip">View My Resume</span>
               </button>
-              <a
+              
                 href="https://www.linkedin.com/in/graciousogyiriasare/"
                 target="_blank"
+                rel="noopener noreferrer"
                 class="connect-btn"
+                aria-label="Connect with me on LinkedIn (opens in new tab)"
                 >Connect</a
               >
             </div>
@@ -106,16 +102,16 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="content-section">
-        <h2 class="section-title">About</h2>
+      <section id="about" class="content-section" aria-labelledby="about-heading">
+        <h2 id="about-heading" class="section-title">About</h2>
         <div class="about-grid">
           <div class="about-text">
-            <p
-              >I love creating things. I enjoy the process of letting concepts
+            <p>
+              I love creating things. I enjoy the process of letting concepts
               in my mind become a reality - whether it's a full-stack website or
-              just a song! As a Computer Science major, I’m passionate about
+              just a song! As a Computer Science major, I'm passionate about
               using technology to drive digital empowerment, foster creativity,
-              and build user-centric solutions. Beyond coding, I’m deeply
+              and build user-centric solutions. Beyond coding, I'm deeply
               interested in entrepreneurship, music, and building impactful
               projects. With my minor in Hospitality Administration, I believe
               in enhancing human experiences. My goal is to blend technology,
@@ -126,7 +122,7 @@
           <div class="about-metadata">
             <div class="metadata-item">
               <div class="metadata-label">Location</div>
-              <div class="metadata-value">Boston, Massachussets</div>
+              <div class="metadata-value">Boston, Massachusetts</div>
             </div>
             <div class="metadata-item">
               <div class="metadata-label">Education</div>
@@ -134,25 +130,27 @@
             </div>
             <div class="metadata-item">
               <div class="metadata-label">Skills</div>
-              <div class="metadata-value"
-                >Python, HTML/CSS, JavaScript, Swift,
-              </div>
+              <div class="metadata-value">Python, HTML/CSS, JavaScript, Swift</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Experience Section -->
-      <section id="experience" class="experience-section">
+      <section id="experience" class="experience-section" aria-labelledby="experience-heading">
         <div class="experience-container">
           <!-- LEFT SIDE: Image -->
           <div
             class="album-cover"
+            role="button"
+            tabindex="0"
+            aria-label="View full resume PDF"
             onclick="window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')"
+            onkeydown="if(event.key==='Enter' || event.key===' '){event.preventDefault(); window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')}"
           >
             <img
               src="{{ url_for('static', filename='assets/Gracious Ogyiri Asare Resume Cover.png') }}"
-              alt="Gracious"
+              alt="Resume cover with professional experience highlights"
             />
           </div>
 
@@ -160,52 +158,54 @@
           <div class="experience-content">
             <div class="album-header">
               <div class="album-info">
-                <h2> Experience</h2>
+                <h2 id="experience-heading">Experience</h2>
                 <br />
                 <p class="album-meta">Work · 2025</p>
               </div>
             </div>
 
-            <div class="tracklist">
-              <div class="track">
+            <div class="tracklist" role="list">
+              <div class="track" role="listitem">
                 <div>
-                  <div class="track-num">1</div>
-                  <div class="play-icon">▶</div>
+                  <div class="track-num" aria-hidden="true">1</div>
+                  <div class="play-icon" aria-hidden="true">▶</div>
                 </div>
                 <div class="track-info">
-                  <h4>AI/ML Fellow</h4>
+                  <h3>AI/ML Fellow</h3>
                   <p>Break Through Tech @ MIT</p>
                 </div>
-                <div class="track-company"
-                  >Python, TensorFlow, Matplotlib, Scikit-learn</div
-                >
-                <div class="track-date">Present</div>
+                <div class="track-company" aria-label="Technologies: Python, TensorFlow, Matplotlib, Scikit-learn">
+                  Python, TensorFlow, Matplotlib, Scikit-learn
+                </div>
+                <time class="track-date" datetime="2025">Present</time>
               </div>
-              <div class="track">
+              <div class="track" role="listitem">
                 <div>
-                  <div class="track-num">2</div>
-                  <div class="play-icon">▶</div>
+                  <div class="track-num" aria-hidden="true">2</div>
+                  <div class="play-icon" aria-hidden="true">▶</div>
                 </div>
                 <div class="track-info">
-                  <h4>QA Automation Intern</h4>
+                  <h3>QA Automation Intern</h3>
                   <p>Apple Inc.</p>
                 </div>
-                <div class="track-company">Swift, XCTest/XCUITests, Quick</div>
-                <div class="track-date">05.25-08.25</div>
+                <div class="track-company" aria-label="Technologies: Swift, XCTest/XCUITests, Quick">
+                  Swift, XCTest/XCUITests, Quick
+                </div>
+                <time class="track-date" datetime="2025-05/2025-08">05.25-08.25</time>
               </div>
-              <div class="track">
+              <div class="track" role="listitem">
                 <div>
-                  <div class="track-num">3</div>
-                  <div class="play-icon">▶</div>
+                  <div class="track-num" aria-hidden="true">3</div>
+                  <div class="play-icon" aria-hidden="true">▶</div>
                 </div>
                 <div class="track-info">
-                  <h4>Tech Developer Intern</h4>
+                  <h3>Tech Developer Intern</h3>
                   <p>Sponsors for Educational Opportunity</p>
                 </div>
-                <div class="track-company"
-                  >HTML/CSS, JavaScript, MongoDB, Pandas, SQLAlchemy, MySQL</div
-                >
-                <div class="track-date">05.24 - 08.24</div>
+                <div class="track-company" aria-label="Technologies: HTML/CSS, JavaScript, MongoDB, Pandas, SQLAlchemy, MySQL">
+                  HTML/CSS, JavaScript, MongoDB, Pandas, SQLAlchemy, MySQL
+                </div>
+                <time class="track-date" datetime="2024-05/2024-08">05.24 - 08.24</time>
               </div>
             </div>
           </div>
@@ -213,195 +213,245 @@
       </section>
 
       <!-- Projects Section -->
-      <section id="projects" class="content-section">
-        <h2 class="section-title">Featured Projects</h2>
+      <section id="projects" class="content-section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading" class="section-title">Featured Projects</h2>
         <div class="projects-carousel">
-          <button class="carousel-nav prev" id="carouselPrev">‹</button>
-          <button class="carousel-nav next" id="carouselNext">›</button>
+          <button class="carousel-nav prev" id="carouselPrev" aria-label="View previous projects">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button class="carousel-nav next" id="carouselNext" aria-label="View next projects">
+            <span aria-hidden="true">›</span>
+          </button>
 
-          <div class="carousel" id="projectCarousel">
-            <div
+          <div class="carousel" id="projectCarousel" role="list" aria-label="Featured projects carousel">
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="Stock Portfolio Website project - Click to view on GitHub"
               onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')}"
             >
-              <div class="project-cover project-1">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-1" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
                 <h3>Stock Portfolio Website</h3>
                 <p>Flask, Python, HTML/CSS, REST APIs</p>
               </div>
-            </div>
+            </article>
 
-            <div
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="CrowdSync project - Click to view on GitHub"
               onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')}"
             >
-              <div class="project-cover project-2">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-2" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
                 <h3>CrowdSync</h3>
                 <p>Python, Flask, JavaScript, Ticketmaster API</p>
               </div>
-            </div>
+            </article>
 
-            <div
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="Spark Bytes Campus Food Event Finder project - Click to view on GitHub"
               onclick="window.open('https://github.com/ame0102/sparkbytes', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/ame0102/sparkbytes', '_blank')}"
             >
-              <div class="project-cover project-3">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-3" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
-                <h3>Spark Bytes- Campus Food Event Finder </h3>
-                <p
-                  >React(Next.js), TypeScript, Supabase, PostgreSQL, Ant
-                  Design</p
-                >
+                <h3>Spark Bytes- Campus Food Event Finder</h3>
+                <p>React(Next.js), TypeScript, Supabase, PostgreSQL, Ant Design</p>
               </div>
-            </div>
+            </article>
 
-            <div
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="HeadAid project - Click to view on GitHub"
               onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/sheisgracious/HeadAid', '_blank')}"
             >
-              <div class="project-cover project-4">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-4" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
                 <h3>HeadAid</h3>
                 <p>Swift, CoreML, HealthKit, SiriKit</p>
               </div>
-            </div>
+            </article>
 
-            <div
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="iWEP Landing Page project - Click to view on GitHub"
               onclick="window.open('https://github.com/sheisgracious/iwep-website', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/sheisgracious/iwep-website', '_blank')}"
             >
-              <div class="project-cover project-5">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-5" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
                 <h3>iWEP Landing Page</h3>
                 <p>Python, HTML/CSS, JavaScript</p>
               </div>
-            </div>
+            </article>
 
-            <div
+            <article
               class="project-card"
+              role="listitem"
+              tabindex="0"
+              aria-label="TimeZoner project - Click to view on GitHub"
               onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')"
+              onkeydown="if(event.key==='Enter'){window.open('https://github.com/sheisgracious/Timezone-project', '_blank')}"
             >
-              <div class="project-cover project-5">
-                <div class="play-overlay">▶</div>
+              <div class="project-cover project-5" aria-hidden="true">
+                <div class="play-overlay" aria-hidden="true">▶</div>
               </div>
               <div class="project-info">
                 <h3>TimeZoner</h3>
                 <p>Python, HTML/CSS, Google Maps API</p>
               </div>
-            </div>
+            </article>
           </div>
         </div>
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="content-section">
-        <h2 class="section-title">Get in Touch</h2>
+      <section id="contact" class="content-section" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" class="section-title">Get in Touch</h2>
         <div class="contact-content">
-          <div class="social-links">
-            <div
+          <div class="social-links" role="list" aria-label="Social media links">
+            
+              href="https://linkedin.com/in/graciousogyiriasare"
+              target="_blank"
+              rel="noopener noreferrer"
               class="social-btn"
-              onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')"
+              role="listitem"
+              aria-label="LinkedIn profile (opens in new tab)"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-linkedin.webp') }}"
-                alt="LinkedIn Logo"
+                alt=""
                 class="social-icon dark-icon"
+                aria-hidden="true"
               />
               <img
                 src="{{ url_for('static', filename='assets/Gracious-linkedin.png') }}"
-                alt="LinkedIn Logo"
+                alt=""
                 class="social-icon light-icon"
+                aria-hidden="true"
               />
-            </div>
-            <div
+            </a>
+            
+              href="https://github.com/sheisgracious"
+              target="_blank"
+              rel="noopener noreferrer"
               class="social-btn"
-              onclick="window.open('https://github.com/sheisgracious', '_blank')"
+              role="listitem"
+              aria-label="GitHub profile (opens in new tab)"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-github.webp') }}"
-                alt="GitHub Logo"
+                alt=""
                 class="social-icon dark-icon"
+                aria-hidden="true"
               />
               <img
                 src="{{ url_for('static', filename='assets/Gracious-github.png') }}"
-                alt="GitHub Logo"
+                alt=""
                 class="social-icon light-icon"
+                aria-hidden="true"
               />
-            </div>
+            </a>
           </div>
           <div class="contact-form">
-            <form action="https://formspree.io/f/mldelvjp" method="POST">
+            <form action="https://formspree.io/f/mldelvjp" method="POST" aria-label="Contact form">
               <div class="form-group">
+                <label for="contact-name" class="sr-only">Your Name</label>
                 <input
                   type="text"
+                  id="contact-name"
                   name="name"
                   placeholder="Your Name"
                   required
+                  aria-required="true"
                 />
               </div>
               <div class="form-group">
+                <label for="contact-email" class="sr-only">Your Email</label>
                 <input
                   type="email"
+                  id="contact-email"
                   name="email"
                   placeholder="Your Email"
                   required
+                  aria-required="true"
                 />
               </div>
               <div class="form-group">
+                <label for="contact-message" class="sr-only">Your Message</label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   placeholder="Your Message"
                   required
+                  aria-required="true"
                 ></textarea>
               </div>
               <button type="submit" class="submit-btn">Submit</button>
             </form>
           </div>
-          <div id="successMessage" style="display: none"></div>
+          <div id="successMessage" style="display: none" role="status" aria-live="polite"></div>
         </div>
       </section>
 
       <!-- Footer -->
-      <footer>
-        <p
-          >© 2025 Gracious Ogyiri Asare | Inspired by Apple Music and Spotify</p
-        >
+      <footer role="contentinfo">
+        <p>© 2025 Gracious Ogyiri Asare | Inspired by Apple Music and Spotify</p>
       </footer>
-    </div>
+    </main>
 
     <!-- Bottom Playback Bar -->
-    <div class="playback-bar">
+    <div class="playback-bar" role="complementary" aria-label="Portfolio navigation controls">
       <div class="now-playing">
         <div class="now-playing-cover">
           <img
             src="{{ url_for('static', filename='assets/Gracious-Track-Cover.png') }}"
-            alt="Track Cover"
+            alt="Current section thumbnail"
           />
         </div>
         <div class="now-playing-info">
-          <h4>Gracious Ogyiri Asare</h4>
+          <h2>Gracious Ogyiri Asare</h2>
           <p>Artist Profile</p>
         </div>
       </div>
 
-      <div class="playback-controls">
+      <div class="playback-controls" aria-label="Section navigation">
         <div class="control-buttons">
-          <button class="control-btn" id="prevBtn">⏮</button>
-          <button class="control-btn play-pause" id="playBtn">▶</button>
-          <button class="control-btn" id="nextBtn">⏭</button>
+          <button class="control-btn" id="prevBtn" aria-label="Go to previous section">
+            <span aria-hidden="true">⏮</span>
+          </button>
+          <button class="control-btn play-pause" id="playBtn" aria-label="Auto-scroll through portfolio">
+            <span aria-hidden="true">▶</span>
+          </button>
+          <button class="control-btn" id="nextBtn" aria-label="Go to next section">
+            <span aria-hidden="true">⏭</span>
+          </button>
         </div>
-        <div class="progress-bar">
+        <div class="progress-bar" role="progressbar" aria-label="Portfolio scroll progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
           <span class="time" id="currentTime">0:00</span>
           <div class="progress-track" id="progressTrack">
             <div class="progress-fill" id="progressFill"></div>
@@ -411,26 +461,26 @@
       </div>
 
       <div class="extra-controls">
-        <button class="theme-toggle" id="themeToggle">
-          <span class="theme-icon">☀️</span>
-          <span class="theme-tooltip" id="themeTooltip"
-            >Switch to Light Mode</span
-          >
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark and light mode">
+          <span class="theme-icon" aria-hidden="true">☀️</span>
+          <span class="theme-tooltip" id="themeTooltip" role="tooltip">Switch to Light Mode</span>
         </button>
       </div>
     </div>
 
     <!-- Popup Modal -->
-    <section class="modal hidden">
-      <button class="btn-close">&times;</button>
+    <section class="modal hidden" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-description" aria-modal="true">
+      <button class="btn-close" aria-label="Close modal">&times;</button>
       <div>
-        <h3>Share music with me!</h3>
-        <p
-          >I love discovering new music! Add any track to this
-          <a
+        <h3 id="modal-title">Share music with me!</h3>
+        <p id="modal-description">
+          I love discovering new music! Add any track to this
+          
             href="https://open.spotify.com/playlist/2GxNX8X5ZXGI5N7SZgCMHD?si=gSqn0jdXSN6-dK9nylP4qA"
-            >shared Spotify playlist.</a
-          >
+            target="_blank"
+            rel="noopener noreferrer"
+            >shared Spotify playlist</a
+          >.
         </p>
       </div>
 
@@ -443,6 +493,7 @@
         allowfullscreen=""
         allow="clipboard-write;"
         loading="lazy"
+        title="Spotify playlist embed"
       >
       </iframe>
 
@@ -452,18 +503,20 @@
 
       <div id="spotify-search-section" style="display: none">
         <div class="search-container">
+          <label for="trackSearchInput" class="sr-only">Search for a track</label>
           <input
             type="text"
             id="trackSearchInput"
             placeholder="Search for a track..."
+            aria-label="Search for a track to add to playlist"
           />
-          <button class="btn" id="searchBtn">Search</button>
+          <button class="btn" id="searchBtn" aria-label="Search">Search</button>
         </div>
-        <div id="searchResults"></div>
+        <div id="searchResults" role="region" aria-live="polite" aria-label="Search results"></div>
       </div>
     </section>
 
-    <div class="overlay hidden"></div>
+    <div class="overlay hidden" aria-hidden="true"></div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
   </body>
