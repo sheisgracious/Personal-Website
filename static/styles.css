@@ -26,6 +26,10 @@
     --border-subtle: rgba(0, 0, 0, 0.08);
 }
 
+*:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
 
 .hero {
   background: linear-gradient(135deg, #1a0f3d 0%, #0d0821 40%, #140b30 100%);
