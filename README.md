@@ -89,9 +89,9 @@ Modify the "track list" in the experience section of `templates/index.html`.
 ## Features in Development
 
 - [ ] Making accessiblity enhancements
-- [ ] Spotify playlist integration
+- [x] Spotify playlist integration
 - [ ] Enhanced mobile responsiveness
-- [ ] Dark/Light mode toggle
+- [x] Dark/Light mode toggle
 - [ ] Additional section for Leadership & Other
 
 ## Acknowledgments
