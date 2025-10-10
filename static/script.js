@@ -527,4 +527,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
+
+    // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const mobileBackdrop = document.getElementById("mobileBackdrop");
+  const sidebar = document.getElementById("sidebar");
+
+  function closeMobileMenu() {
+    if (sidebar) sidebar.classList.remove("mobile-open");
+    if (mobileMenuBtn) mobileMenuBtn.classList.remove("active");
+    if (mobileBackdrop) mobileBackdrop.classList.remove("active");
+  }
+
+  function openMobileMenu() {
+    if (sidebar) sidebar.classList.add("mobile-open");
+    if (mobileMenuBtn) mobileMenuBtn.classList.add("active");
+    if (mobileBackdrop) mobileBackdrop.classList.add("active");
+  }
+
+  if (mobileMenuBtn && sidebar) {
+    mobileMenuBtn.addEventListener("click", () => {
+      if (sidebar.classList.contains("mobile-open")) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    // Close sidebar when clicking on nav items
+    const navItems = document.querySelectorAll(".nav-item");
+    navItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        if (window.innerWidth <= 768) {
+          closeMobileMenu();
+        }
+      });
+    });
+
+    // Close sidebar when clicking backdrop
+    if (mobileBackdrop) {
+      mobileBackdrop.addEventListener("click", closeMobileMenu);
+    }
+
+    // Close menu on window resize if going to desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        closeMobileMenu();
+      }
+    });
+  }
 });
