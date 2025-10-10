@@ -22,58 +22,58 @@
   </head>
 
   <body>
-    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle side menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
     <!-- Loading Page -->
-    <div class="loading-page">
+    <div class="loading-page" aria-label="Loading content with vinyl record animation">
       <div class="vinyl-record"></div>
     </div>
 
     <!-- Sidebar -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <div class="sidebar-header">
         <div class="logo">
           <span class="logo-icon">🅖</span>
           <span class="logo-text">Gracious</span>
         </div>
-        <button class="collapse-btn" id="collapseBtn">
+        <button class="collapse-btn" id="collapseBtn" aria-label="Collapse sidebar">
           <span id="collapseIcon">◀</span>
         </button>
       </div>
 
-      <nav class="nav-section">
-        <a href="#hero" class="nav-item active">
+      <nav class="nav-section" aria-label="Main navigation">
+        <a href="#hero" class="nav-item active" aria-label="Home section">
           <span class="nav-icon">🏠</span>
           <span class="nav-text">Home</span>
         </a>
-        <a href="#about" class="nav-item">
+        <a href="#about" class="nav-item" aria-label="About section">
           <span class="nav-icon">👤</span>
           <span class="nav-text">About</span>
         </a>
-        <a href="#experience" class="nav-item">
+        <a href="#experience" class="nav-item" aria-label="Experience section">
           <span class="nav-icon">💼</span>
           <span class="nav-text">Experience</span>
         </a>
-        <a href="#projects" class="nav-item">
+        <a href="#projects" class="nav-item" aria-label="Projects section">
           <span class="nav-icon">🔧</span>
           <span class="nav-text">Projects</span>
         </a>
-        <a href="#contact" class="nav-item">
+        <a href="#contact" class="nav-item" aria-label="Contact section">
           <span class="nav-icon">📞</span>
           <span class="nav-text">Contact</span>
         </a>
       </nav>
 
-      <button class="add-track-btn">+ Add A Track</button>
+      <button class="add-track-btn" aria-label="Add a track to shared playlist">+ Add A Track</button>
     </aside>
 
     <!-- Main Content -->
-    <div class="main-content" id="main-content">
+    <div class="main-content" id="main-content" aria-label="Main page">
       <!-- Hero Section -->
-      <section id="hero" class="hero">
+      <section id="hero" class="hero" aria-label="Introduction section">
         <div class="hero-content">
           <img
             src="{{ url_for('static', filename='assets/mock-gracious-cover.jpg') }}"
@@ -94,6 +94,7 @@
               <button
                 class="play-btn-hero"
                 onclick="window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')"
+                aria-label="Open Gracious's resume"
               >
                 ▶
                 <span class="tooltip">View My Resume</span>
@@ -102,6 +103,7 @@
                 href="https://www.linkedin.com/in/graciousogyiriasare/"
                 target="_blank"
                 class="connect-btn"
+                aria-label="Connect on LinkedIn"
                 >Connect</a
               >
             </div>
@@ -110,16 +112,16 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="content-section">
+      <section id="about" class="content-section" aria-label="About section">
         <h2 class="section-title">About</h2>
         <div class="about-grid">
           <div class="about-text">
             <p
               >I love creating things. I enjoy the process of letting concepts
               in my mind become a reality - whether it's a full-stack website or
-              just a song! As a Computer Science major, I’m passionate about
+              just a song! As a Computer Science major, I'm passionate about
               using technology to drive digital empowerment, foster creativity,
-              and build user-centric solutions. Beyond coding, I’m deeply
+              and build user-centric solutions. Beyond coding, I'm deeply
               interested in entrepreneurship, music, and building impactful
               projects. With my minor in Hospitality Administration, I believe
               in enhancing human experiences. My goal is to blend technology,
@@ -147,12 +149,13 @@
       </section>
 
       <!-- Experience Section -->
-      <section id="experience" class="experience-section">
+      <section id="experience" class="experience-section" aria-label="Experience section">
         <div class="experience-container">
           <!-- LEFT SIDE: Image -->
           <div
             class="album-cover"
             onclick="window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')"
+            aria-label="Open Gracious's resume"
           >
             <img
               src="{{ url_for('static', filename='assets/Gracious Ogyiri Asare Resume Cover.png') }}"
@@ -170,8 +173,8 @@
               </div>
             </div>
 
-            <div class="tracklist">
-              <div class="track">
+            <div class="tracklist" aria-label="Work experience list">
+              <div class="track" aria-label="AI/ML Fellow position">
                 <div>
                   <div class="track-num">1</div>
                   <div class="play-icon">▶</div>
@@ -185,7 +188,7 @@
                 >
                 <div class="track-date">Present</div>
               </div>
-              <div class="track">
+              <div class="track" aria-label="QA Automation Intern position">
                 <div>
                   <div class="track-num">2</div>
                   <div class="play-icon">▶</div>
@@ -197,7 +200,7 @@
                 <div class="track-company">Swift, XCTest/XCUITests, Quick</div>
                 <div class="track-date">05.25-08.25</div>
               </div>
-              <div class="track">
+              <div class="track" aria-label="Tech Developer Intern position">
                 <div>
                   <div class="track-num">3</div>
                   <div class="play-icon">▶</div>
@@ -217,16 +220,17 @@
       </section>
 
       <!-- Projects Section -->
-      <section id="projects" class="content-section">
+      <section id="projects" class="content-section" aria-label="Projects section">
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-carousel">
-          <button class="carousel-nav prev" id="carouselPrev">‹</button>
-          <button class="carousel-nav next" id="carouselNext">›</button>
+          <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous projects">‹</button>
+          <button class="carousel-nav next" id="carouselNext" aria-label="Next projects">›</button>
 
-          <div class="carousel" id="projectCarousel">
+          <div class="carousel" id="projectCarousel" aria-label="Projects carousel">
             <div
               class="project-card"
               onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')"
+              aria-label="Stock Portfolio Website project"
             >
               <div class="project-cover project-1">
                 <div class="play-overlay">▶</div>
@@ -240,6 +244,7 @@
             <div
               class="project-card"
               onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')"
+              aria-label="CrowdSync project"
             >
               <div class="project-cover project-2">
                 <div class="play-overlay">▶</div>
@@ -253,6 +258,7 @@
             <div
               class="project-card"
               onclick="window.open('https://github.com/ame0102/sparkbytes', '_blank')"
+              aria-label="Spark Bytes project"
             >
               <div class="project-cover project-3">
                 <div class="play-overlay">▶</div>
@@ -269,6 +275,7 @@
             <div
               class="project-card"
               onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')"
+              aria-label="HeadAid project"
             >
               <div class="project-cover project-4">
                 <div class="play-overlay">▶</div>
@@ -282,6 +289,7 @@
             <div
               class="project-card"
               onclick="window.open('https://github.com/sheisgracious/iwep-website', '_blank')"
+              aria-label="iWEP Landing Page project"
             >
               <div class="project-cover project-5">
                 <div class="play-overlay">▶</div>
@@ -295,6 +303,7 @@
             <div
               class="project-card"
               onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')"
+              aria-label="TimeZoner project"
             >
               <div class="project-cover project-5">
                 <div class="play-overlay">▶</div>
@@ -309,13 +318,14 @@
       </section>
 
       <!-- Contact Section -->
-      <section id="contact" class="content-section">
+      <section id="contact" class="content-section" aria-label="Contact section">
         <h2 class="section-title">Get in Touch</h2>
         <div class="contact-content">
-          <div class="social-links">
+          <div class="social-links" aria-label="Social media links">
             <div
               class="social-btn"
               onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')"
+              aria-label="Gracious's LinkedIn profile"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-linkedin.webp') }}"
@@ -331,6 +341,7 @@
             <div
               class="social-btn"
               onclick="window.open('https://github.com/sheisgracious', '_blank')"
+              aria-label="Gracious's GitHub profile"
             >
               <img
                 src="{{ url_for('static', filename='assets/Gracious-light-github.webp') }}"
@@ -344,7 +355,7 @@
               />
             </div>
           </div>
-          <div class="contact-form">
+          <div class="contact-form" aria-label="Contact form">
             <form action="https://formspree.io/f/mldelvjp" method="POST">
               <div class="form-group">
                 <input
@@ -352,6 +363,7 @@
                   name="name"
                   placeholder="Your Name"
                   required
+                  aria-label="Your name"
                 />
               </div>
               <div class="form-group">
@@ -360,6 +372,7 @@
                   name="email"
                   placeholder="Your Email"
                   required
+                  aria-label="Your email"
                 />
               </div>
               <div class="form-group">
@@ -367,17 +380,18 @@
                   name="message"
                   placeholder="Your Message"
                   required
+                  aria-label="Your message"
                 ></textarea>
               </div>
-              <button type="submit" class="submit-btn">Submit</button>
+              <button type="submit" class="submit-btn" aria-label="Submit contact form">Submit</button>
             </form>
           </div>
-          <div id="successMessage" style="display: none"></div>
+          <div id="successMessage" style="display: none" aria-live="polite"></div>
         </div>
       </section>
 
       <!-- Footer -->
-      <footer>
+      <footer aria-label="Webpage footer">
         <p
           >© 2025 Gracious Ogyiri Asare | Inspired by Apple Music and Spotify</p
         >
@@ -385,7 +399,7 @@
     </div>
 
     <!-- Bottom Playback Bar -->
-    <div class="playback-bar">
+    <div class="playback-bar" aria-label="Playback controls for portfolio walkthrough">
       <div class="now-playing">
         <div class="now-playing-cover">
           <img
@@ -401,13 +415,13 @@
 
       <div class="playback-controls">
         <div class="control-buttons">
-          <button class="control-btn" id="prevBtn">⏮</button>
-          <button class="control-btn play-pause" id="playBtn">▶</button>
-          <button class="control-btn" id="nextBtn">⏭</button>
+          <button class="control-btn" id="prevBtn" aria-label="Previous section">⏮</button>
+          <button aria-label="Play/pause web auto scroll" class="control-btn play-pause" id="playBtn">▶</button>
+          <button class="control-btn" id="nextBtn" aria-label="Next section">⏭</button>
         </div>
         <div class="progress-bar">
           <span class="time" id="currentTime">0:00</span>
-          <div class="progress-track" id="progressTrack">
+          <div class="progress-track" id="progressTrack" aria-label="Scroll progress">
             <div class="progress-fill" id="progressFill"></div>
           </div>
           <span class="time">3:45</span>
@@ -415,7 +429,7 @@
       </div>
 
       <div class="extra-controls">
-        <button class="theme-toggle" id="themeToggle">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
           <span class="theme-icon">☀️</span>
           <span class="theme-tooltip" id="themeTooltip"
             >Switch to Light Mode</span
@@ -425,8 +439,8 @@
     </div>
 
     <!-- Popup Modal -->
-    <section class="modal hidden">
-      <button class="btn-close">&times;</button>
+    <section class="modal hidden" aria-label="Add track to playlist" aria-modal="true">
+      <button aria-label="Close modal" class="btn-close">&times;</button>
       <div>
         <h3>Share music with me!</h3>
         <p
@@ -447,11 +461,12 @@
         allowfullscreen=""
         allow="clipboard-write;"
         loading="lazy"
+        title="Spotify playlist"
       >
       </iframe>
 
       <div id="spotify-actions">
-        <button class="btn" id="spotify-login-modal">Login to Spotify</button>
+        <button class="btn" id="spotify-login-modal" aria-label="Login to Spotify">Login to Spotify</button>
       </div>
 
       <div id="spotify-search-section" style="display: none">
@@ -460,10 +475,11 @@
             type="text"
             id="trackSearchInput"
             placeholder="Search for a track..."
+            aria-label="Search for tracks"
           />
-          <button class="btn" id="searchBtn">Search</button>
+          <button class="btn" id="searchBtn" aria-label="Search track">Search</button>
         </div>
-        <div id="searchResults"></div>
+        <div id="searchResults" aria-label="Search results"></div>
       </div>
     </section>
 
