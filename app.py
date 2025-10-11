@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, redirect, request, session, url_for, render_template, jsonify
+from flask import Flask, redirect, request, session, url_for, render_template, jsonify, send_from_directory
 import requests
 import os
 from dotenv import load_dotenv
@@ -202,6 +202,10 @@ def logout():
     session.clear()
     print("🚪 User logged out")
     return redirect(url_for("index"))
+
+@app.route('/myresume')
+def resume():
+    return send_from_directory('static/assets', 'Ogyiri Asare Gracious Resume.pdf')
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))  
