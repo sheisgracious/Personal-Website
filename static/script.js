@@ -1,4 +1,4 @@
-// script.js - UPDATED
+// script.js
 document.addEventListener("DOMContentLoaded", function () {
   const loadingPage = document.querySelector(".loading-page");
   const mainContent = document.querySelector(".main-content");
@@ -31,23 +31,65 @@ document.addEventListener("DOMContentLoaded", function () {
   const nextBtn = document.getElementById("carouselNext");
 
   if (carousel && prevBtn && nextBtn) {
-    const scrollAmount = carousel.offsetWidth;
+    // Simple scroll function
+    function scrollCarousel(direction) {
+      const cards = carousel.querySelectorAll(".project-card");
+      if (cards.length === 0) return;
 
-    nextBtn.addEventListener("click", () => {
-      carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    });
+      // Get the width of one card including margin/gap
+      const card = cards[0];
+      const cardStyle = window.getComputedStyle(card);
+      const cardWidth = card.offsetWidth;
+      const cardMargin = parseInt(cardStyle.marginRight) || 0;
+      const scrollAmount = cardWidth + cardMargin;
 
-    prevBtn.addEventListener("click", () => {
-      carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    });
+      carousel.scrollBy({
+        left: direction === "next" ? scrollAmount : -scrollAmount,
+        behavior: "smooth",
+      });
+    }
 
+    // Button events
+    nextBtn.addEventListener("click", () => scrollCarousel("next"));
+    prevBtn.addEventListener("click", () => scrollCarousel("prev"));
+
+    // Update button states
     carousel.addEventListener("scroll", () => {
-      prevBtn.disabled = carousel.scrollLeft <= 0;
+      prevBtn.disabled = carousel.scrollLeft <= 10; // Small buffer
       nextBtn.disabled =
-        carousel.scrollLeft >= carousel.scrollWidth - carousel.offsetWidth - 1;
+        carousel.scrollLeft >= carousel.scrollWidth - carousel.offsetWidth - 10;
     });
 
     prevBtn.disabled = true;
+  }
+
+  // Simple Swipe Functionality
+  const carouselSwipe = document.getElementById("projectCarousel");
+  if (carouselSwipe) {
+    let startX = 0;
+
+    carouselSwipe.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      e.preventDefault();  
+    });
+
+    carouselSwipe.addEventListener("touchmove", (e) => {
+      e.preventDefault(); 
+    });
+
+    carouselSwipe.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 30) {
+        // Reduced threshold for better sensitivity
+        if (diff > 0) {
+          document.getElementById("carouselNext")?.click(); 
+        } else {
+          document.getElementById("carouselPrev")?.click(); 
+        }
+      }
+    });
   }
 
   // Smooth scroll progress bar
@@ -240,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // ============= MODAL FUNCTIONALITY =============
+  // ============= MODAL FUNCTIONALITY ======
   const modal = document.querySelector(".modal");
   const overlay = document.querySelector(".overlay");
   const openModalBtn = document.querySelector(".add-track-btn");
@@ -501,8 +543,6 @@ document.addEventListener("DOMContentLoaded", function () {
               successMessage.style.display = "none";
             }, 5000);
           }
-
-          
         } else {
           // Error handling
           const errorMessage = document.getElementById("successMessage");
@@ -546,7 +586,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const themeIcon = document.querySelector(".theme-icon");
   const themeTooltip = document.getElementById("themeTooltip");
 
-  // Check for saved theme preference or default to system preference
+  // Check for saved theme preference or default to system preference (to fix)
   const savedTheme = localStorage.getItem("theme");
   const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)"
@@ -598,6 +638,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileBackdrop = document.getElementById("mobileBackdrop");
@@ -633,6 +674,31 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     });
+
+    // Simple mobile sidebar close gestures
+    function initMobileSidebarGestures() {
+      const sidebar = document.getElementById("sidebar");
+      const mobileBackdrop = document.getElementById("mobileBackdrop");
+
+      // Close when tapping backdrop
+      if (mobileBackdrop) {
+        mobileBackdrop.addEventListener("click", closeMobileMenu);
+      }
+
+      // Close when tapping main content
+      document.addEventListener("click", (e) => {
+        if (
+          sidebar.classList.contains("mobile-open") &&
+          !sidebar.contains(e.target) &&
+          e.target.id !== "mobileMenuBtn"
+        ) {
+          closeMobileMenu();
+        }
+      });
+    }
+
+    // Initialize
+    initMobileSidebarGestures();
 
     // Close sidebar when clicking backdrop
     if (mobileBackdrop) {
