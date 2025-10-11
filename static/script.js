@@ -453,19 +453,91 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Contact Form Success Message
+  // Contact Form Success Message - AJAX Version (No page reload)
   const contactForm = document.querySelector(".contact-form form");
 
   if (contactForm) {
-    contactForm.addEventListener("submit", function (event) {
-      setTimeout(() => {
-        const successMessage = document.getElementById("successMessage");
-        if (successMessage) {
-          successMessage.textContent = "Thank you! Message Received!";
-          successMessage.style.display = "block";
-          successMessage.style.color = "#8b5cf6";
-          successMessage.style.font = "bold 1em Arial, sans-serif";
+    contactForm.addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent default form submission
+
+      // Store the form position
+      const formRect = contactForm.getBoundingClientRect();
+      const formPosition = formRect.top + window.scrollY;
+
+      // Get form data
+      const formData = new FormData(contactForm);
+
+      try {
+        // Show loading state
+        const submitBtn = contactForm.querySelector(".submit-btn");
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = "Sending...";
+        submitBtn.disabled = true;
+
+        // Send form data to Formspree
+        const response = await fetch(contactForm.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        });
+
+        if (response.ok) {
+          // Success - clear form and show message
+          contactForm.reset();
+
+          const successMessage = document.getElementById("successMessage");
+          if (successMessage) {
+            successMessage.textContent = "Thank you! Message Received!";
+            successMessage.style.display = "block";
+            successMessage.style.font = "bold 1em Arial, sans-serif";
+            successMessage.setAttribute("role", "status");
+            successMessage.setAttribute("aria-live", "polite");
+            successMessage.classList.remove("error");
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+              successMessage.style.display = "none";
+            }, 5000);
+          }
+
+          
+        } else {
+          // Error handling
+          const errorMessage = document.getElementById("successMessage");
+          if (errorMessage) {
+            errorMessage.textContent =
+              "Sorry, there was an error. Please try again.";
+            errorMessage.style.display = "block";
+            errorMessage.classList.add("error");
+
+            // Hide error message after 5 seconds
+            setTimeout(() => {
+              errorMessage.style.display = "none";
+            }, 5000);
+          }
         }
-      }, 1000);
+      } catch (error) {
+        // Network error
+        const errorMessage = document.getElementById("successMessage");
+        if (errorMessage) {
+          errorMessage.textContent =
+            "Network error. Please check your connection.";
+          errorMessage.style.display = "block";
+          errorMessage.classList.add("error");
+
+          // Hide after 5 seconds
+          setTimeout(() => {
+            errorMessage.style.display = "none";
+          }, 5000);
+        }
+      } finally {
+        // Reset button state
+        const submitBtn = contactForm.querySelector(".submit-btn");
+        submitBtn.textContent = "Submit";
+        submitBtn.disabled = false;
+      }
     });
   }
 

@@ -13,6 +13,7 @@
   --accent-primary: #7c3aed;
   --accent-hover: #8b5cf6;
   --border-subtle: rgba(124, 58, 237, 0.18);
+  --text-error: #ffdbdb;
 }
 
 :root.light-mode {
@@ -24,6 +25,7 @@
   --accent-primary: #d97706;
   --accent-hover: #f59e0b;
   --border-subtle: rgba(0, 0, 0, 0.08);
+  --text-error: #b91c1c;
 }
 
 *:focus-visible {
@@ -903,6 +905,20 @@ body {
 .submit-btn:hover {
   background: var(--accent-primary);
   transform: translateY(-2px);
+}
+
+#successMessage {
+  text-align: center;
+  display: none;
+  /* margin: 20px auto; */
+  padding-top: 10px;
+  font-weight: bold;
+  font-size: 1em;
+  color: var(--text-secondary);
+}
+
+#successMessage.error {
+  color: var(--text-error);
 }
 
 /* Footer */
@@ -2509,27 +2525,27 @@ body.text-xlarge .a11y-reset-btn {
   body.text-small .hero h1 {
     font-size: 42px;
   }
-  
+
   body.text-large .hero h1 {
     font-size: 56px;
   }
-  
+
   body.text-xlarge .hero h1 {
     font-size: 54px;
   }
-  
+
   body.text-small .album-info h2 {
     font-size: 32px;
   }
-  
+
   body.text-large .album-info h2 {
     font-size: 38px;
   }
-  
+
   body.text-xlarge .album-info h2 {
     font-size: 42px;
   }
-  
+
   .a11y-panel {
     bottom: 90px;
     right: 16px;
@@ -2544,27 +2560,26 @@ body.text-xlarge .a11y-reset-btn {
   .a11y-panel {
     padding: 20px;
   }
-  
+
   .text-size-controls {
     gap: 6px;
   }
-  
+
   body.text-small .text-size-btn {
     padding: 6px;
     font-size: 11px;
   }
-  
+
   body.text-large .text-size-btn {
     padding: 8px;
     font-size: 13px;
   }
-  
+
   body.text-xlarge .text-size-btn {
     padding: 10px;
     font-size: 15px;
   }
 }
-
 
 /* High Contrast Mode */
 body.high-contrast {
@@ -2686,23 +2701,23 @@ textarea:focus-visible,
   body.text-xlarge .hero h1 {
     font-size: 54px;
   }
-  
+
   body.text-large .hero h1 {
     font-size: 56px;
   }
-  
+
   body.text-small .hero h1 {
     font-size: 42px;
   }
-  
+
   body.text-xlarge .album-info h2 {
     font-size: 42px;
   }
-  
+
   body.text-large .album-info h2 {
     font-size: 38px;
   }
-  
+
   body.text-small .album-info h2 {
     font-size: 32px;
   }
