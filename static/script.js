@@ -63,34 +63,108 @@ document.addEventListener("DOMContentLoaded", function () {
     prevBtn.disabled = true;
   }
 
-  // Simple Swipe Functionality
+  // Swipe Functionality- fixed issue with links tapped
   const carouselSwipe = document.getElementById("projectCarousel");
   if (carouselSwipe) {
     let startX = 0;
+    let isSwiping = false;
 
     carouselSwipe.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
-      e.preventDefault();  
+      isSwiping = false;
     });
 
     carouselSwipe.addEventListener("touchmove", (e) => {
-      e.preventDefault(); 
+      const currentX = e.touches[0].clientX;
+      const diff = startX - currentX;
+
+      // 
+      if (Math.abs(diff) > 10) {
+        e.preventDefault();
+        isSwiping = true;
+      }
     });
 
     carouselSwipe.addEventListener("touchend", (e) => {
       const endX = e.changedTouches[0].clientX;
       const diff = startX - endX;
 
-      if (Math.abs(diff) > 30) {
-        // Reduced threshold for better sensitivity
+      if (Math.abs(diff) > 30 && isSwiping) {
         if (diff > 0) {
-          document.getElementById("carouselNext")?.click(); 
+          document.getElementById("carouselNext")?.click();
         } else {
-          document.getElementById("carouselPrev")?.click(); 
+          document.getElementById("carouselPrev")?.click();
         }
       }
+      //
     });
   }
+
+  // Activities Carousel TO DO
+  // const activitiesCarousel = document.getElementById("activitiesCarousel");
+  // const activitiesPrevBtn = document.getElementById("activitiesCarouselPrev");
+  // const activitiesNextBtn = document.getElementById("activitiesCarouselNext");
+
+  // if (activitiesCarousel && activitiesPrevBtn && activitiesNextBtn) {
+  //   function scrollActivitiesCarousel(direction) {
+  //     const cards = activitiesCarousel.querySelectorAll(
+  //       ".activity-card-wrapper"
+  //     );
+  //     if (cards.length === 0) return;
+
+  //     const card = cards[0];
+  //     const cardStyle = window.getComputedStyle(card);
+  //     const cardWidth = card.offsetWidth;
+  //     const gap = parseInt(cardStyle.marginRight) || 24;
+  //     const scrollAmount = cardWidth + gap;
+
+  //     activitiesCarousel.scrollBy({
+  //       left: direction === "next" ? scrollAmount : -scrollAmount,
+  //       behavior: "smooth",
+  //     });
+  //   }
+
+  //   activitiesNextBtn.addEventListener("click", () =>
+  //     scrollActivitiesCarousel("next")
+  //   );
+  //   activitiesPrevBtn.addEventListener("click", () =>
+  //     scrollActivitiesCarousel("prev")
+  //   );
+
+  //   // Update button states
+  //   function updateArrowStates() {
+  //     activitiesPrevBtn.disabled = activitiesCarousel.scrollLeft <= 10;
+  //     activitiesNextBtn.disabled =
+  //       activitiesCarousel.scrollLeft >=
+  //       activitiesCarousel.scrollWidth - activitiesCarousel.offsetWidth - 10;
+  //   }
+
+  //   activitiesCarousel.addEventListener("scroll", updateArrowStates);
+  //   updateArrowStates();
+  // }
+
+  // // Swipe functionality for activities carousel
+  // const activitiesCarouselSwipe = document.getElementById("activitiesCarousel");
+  // if (activitiesCarouselSwipe) {
+  //   let startX = 0;
+
+  //   activitiesCarouselSwipe.addEventListener("touchstart", (e) => {
+  //     startX = e.touches[0].clientX;
+  //   });
+
+  //   activitiesCarouselSwipe.addEventListener("touchend", (e) => {
+  //     const endX = e.changedTouches[0].clientX;
+  //     const diff = startX - endX;
+
+  //     if (Math.abs(diff) > 50) {
+  //       if (diff > 0) {
+  //         document.getElementById("activitiesCarouselNext")?.click();
+  //       } else {
+  //         document.getElementById("activitiesCarouselPrev")?.click();
+  //       }
+  //     }
+  //   });
+  // }
 
   // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
@@ -637,7 +711,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
     });
-
 
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");

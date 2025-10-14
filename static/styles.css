@@ -656,6 +656,7 @@ body {
   position: relative;
   margin-top: 24px;
   padding: 0 30px;
+  padding-bottom: 25px;
 }
 
 .carousel-nav {
@@ -706,6 +707,7 @@ body {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   padding: 0 4px;
+  /* padding-bottom: ; */
 }
 
 .carousel::-webkit-scrollbar-track {
@@ -778,6 +780,7 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   color: #fff;
   font-size: 16px;
+  background-color: var(--accent-primary);
 }
 
 .project-card:hover .play-overlay {
@@ -800,6 +803,270 @@ body {
   font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.5;
+}
+
+/* Activities Section */
+.activities-section-wrapper {
+  padding: 60px 90px 60px;
+  background-color: var(--bg-secondary);
+}
+
+.activities-carousel-wrapper {
+  position: relative;
+  margin-top: 24px;
+}
+
+/* Arrows */
+.activities-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--bg-secondary);
+  backdrop-filter: blur(10px);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: var(--text-primary);
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+.activities-carousel-wrapper:hover .activities-arrow {
+  opacity: 1;
+}
+
+.activities-arrow:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.activities-arrow:disabled {
+  opacity: 0 !important;
+  cursor: not-allowed;
+}
+
+.activities-arrow-prev {
+  left: -24px;
+}
+
+.activities-arrow-next {
+  right: -24px;
+}
+
+/* Activities Grid */
+.activities-carousel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  overflow: visible;
+}
+
+/* Card Wrapper with Label */
+.activity-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.activity-category-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Large Activity Cards */
+.activity-card-large {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  aspect-ratio: 16 / 10;
+  min-height: 320px;
+}
+
+.activity-card-large:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.activity-card-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* Gradient overlay */
+.activity-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+}
+
+.activity-card-text {
+  z-index: 2;
+}
+
+.activity-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.2;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.activity-description {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.4;
+  max-width: 85%;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Play button overlay */
+.activity-play-overlay {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  color: #000;
+  font-size: 16px;
+  z-index: 3;
+  padding-left: 3px;
+}
+
+.activity-card-large:hover .activity-play-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .activities-carousel {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .activity-card-large {
+    min-height: 280px;
+  }
+
+  .activity-title {
+    font-size: 28px;
+  }
+
+  .activities-arrow {
+    display: none;
+  }
+}
+
+/* Mobile Responsive - Carousel Mode */
+@media (max-width: 768px) {
+  .activities-section-wrapper {
+    padding: 48px 24px;
+  }
+
+  .activities-carousel-wrapper {
+    margin: 0 -24px;
+    padding: 0 24px;
+  }
+
+  .activities-arrow {
+    display: none;
+  }
+
+  .activities-carousel {
+    display: flex;
+    grid-template-columns: none;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .activities-carousel::-webkit-scrollbar {
+    display: none;
+  }
+
+  .activity-card-wrapper {
+    flex: 0 0 85%;
+    min-width: 280px;
+    scroll-snap-align: start;
+  }
+
+  .activity-card-large {
+    min-height: 260px;
+  }
+
+  .activity-card-overlay {
+    padding: 24px;
+  }
+
+  .activity-play-overlay {
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .activity-title {
+    font-size: 24px;
+  }
+
+  .activity-description {
+    font-size: 13px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .activity-card-wrapper {
+    flex: 0 0 90%;
+  }
+
+  .activity-card-large {
+    min-height: 240px;
+  }
+
+  .activity-title {
+    font-size: 22px;
+  }
+
+  .activity-description {
+    font-size: 12px;
+  }
 }
 
 /* Contact Section */
