@@ -304,6 +304,51 @@ body {
   display: block;
 }
 
+/* Force the sidebar expansion on first load */
+.sidebar.force-expand {
+  width: 280px !important;
+}
+
+.sidebar.force-expand .nav-text,
+.sidebar.force-expand .logo-text,
+.sidebar.force-expand .add-track-btn {
+  opacity: 1 !important;
+}
+
+.sidebar.force-expand .add-track-icon {
+  display: none !important;
+}
+
+.sidebar.force-expand .add-track-text {
+  display: block !important;
+}
+
+/* Add Track Button Pulse Animation */
+.add-track-btn.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 24px rgba(139, 92, 246, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+  }
+}
+
+/* Ensure pulse works when sidebar is expanded */
+.sidebar:hover .add-track-btn.pulse,
+.sidebar.force-expand .add-track-btn.pulse {
+  animation: pulse 2s infinite;
+}
+
 /* Main Content */
 .main-content {
   margin-left: 72px;

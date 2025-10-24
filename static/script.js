@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const currentX = e.touches[0].clientX;
       const diff = startX - currentX;
 
-      // 
+      //
       if (Math.abs(diff) > 10) {
         e.preventDefault();
         isSwiping = true;
@@ -792,6 +792,25 @@ document.addEventListener("DOMContentLoaded", function () {
     PageAnnouncer.init();
   }, 50);
 });
+
+// Auto-expand sidebar on for 5 seconds 
+setTimeout(() => {
+  const sidebar = document.querySelector('.sidebar');
+  const addTrackBtn = document.querySelector('.add-track-btn');
+  
+  if (sidebar && addTrackBtn) {
+    sidebar.classList.add('force-expand');
+    // pulse to draw attention
+    addTrackBtn.classList.add('pulse');
+    
+    // 5 seconds
+    setTimeout(() => {
+      sidebar.classList.remove('force-expand');
+      addTrackBtn.classList.remove('pulse');
+    }, 5000);
+  }
+}, 1000); 
+
 
 // Accessibility Panel Manager
 const A11yManager = {
