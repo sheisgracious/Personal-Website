@@ -660,7 +660,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const themeIcon = document.querySelector(".theme-icon");
   const themeTooltip = document.getElementById("themeTooltip");
 
-  // Check for saved theme preference or default to system preference (to fix)
+  // Check for saved theme preference or default to system preference
   const savedTheme = localStorage.getItem("theme");
   const systemPrefersDark = window.matchMedia(
     "(prefers-color-scheme: dark)"
@@ -669,10 +669,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (currentTheme === "light") {
     document.documentElement.classList.add("light-mode");
-    themeIcon.textContent = "🌙";
+    themeIcon.innerHTML = '<i class="fa-solid fa-moon"></i>';
     themeTooltip.textContent = "Switch to Dark Mode";
   } else {
-    themeIcon.textContent = "☀️";
+    themeIcon.innerHTML = '<i class="fa-solid fa-sun"></i>';
     themeTooltip.textContent = "Switch to Light Mode";
   }
 
@@ -683,11 +683,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const isLight = document.documentElement.classList.contains("light-mode");
 
       if (isLight) {
-        themeIcon.textContent = "🌙";
+        themeIcon.innerHTML = '<i class="fa-solid fa-moon"></i>';
         themeTooltip.textContent = "Switch to Dark Mode";
         localStorage.setItem("theme", "light");
       } else {
-        themeIcon.textContent = "☀️";
+        themeIcon.innerHTML = '<i class="fa-solid fa-sun"></i>';
         themeTooltip.textContent = "Switch to Light Mode";
         localStorage.setItem("theme", "dark");
       }
@@ -701,17 +701,17 @@ document.addEventListener("DOMContentLoaded", function () {
         if (e.matches) {
           // Dark mode
           document.documentElement.classList.remove("light-mode");
-          themeIcon.textContent = "☀️";
+          themeIcon.innerHTML = '<i class="fa-solid fa-sun"></i>';
           themeTooltip.textContent = "Switch to Light Mode";
         } else {
           // Light mode
           document.documentElement.classList.add("light-mode");
-          themeIcon.textContent = "🌙";
+          themeIcon.innerHTML = '<i class="fa-solid fa-moon"></i>';
           themeTooltip.textContent = "Switch to Dark Mode";
         }
       }
-    });
-
+    })
+    
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileBackdrop = document.getElementById("mobileBackdrop");

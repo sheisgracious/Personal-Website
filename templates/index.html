@@ -14,6 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link
       rel="icon"
       type="image/png"
@@ -37,7 +38,7 @@
     <aside class="sidebar" id="sidebar" aria-label="Main navigation">
       <div class="sidebar-header">
         <div class="logo">
-          <span class="logo-icon">🅖</span>
+          <span class="logo-icon"><i class="fa-solid fa-g"></i></span>
           <span class="logo-text">Gracious</span>
         </div>
         <button
@@ -45,29 +46,29 @@
           id="collapseBtn"
           aria-label="Collapse sidebar"
         >
-          <span id="collapseIcon">◀</span>
+          <span id="collapseIcon"><i class="fa-solid fa-caret-left"></i></span>
         </button>
       </div>
 
       <nav class="nav-section" aria-label="Main navigation">
         <a href="#hero" class="nav-item active" aria-label="Home section">
-          <span class="nav-icon">🏠</span>
+          <span class="nav-icon"><i class="fa-solid fa-house"></i></span>
           <span class="nav-text">Home</span>
         </a>
         <a href="#about" class="nav-item" aria-label="About section">
-          <span class="nav-icon">👤</span>
+          <span class="nav-icon"><i class="fa-solid fa-user"></i></span>
           <span class="nav-text">About</span>
         </a>
         <a href="#experience" class="nav-item" aria-label="Experience section">
-          <span class="nav-icon">💼</span>
+          <span class="nav-icon"><i class="fa-solid fa-briefcase"></i></span>
           <span class="nav-text">Experience</span>
         </a>
         <a href="#projects" class="nav-item" aria-label="Projects section">
-          <span class="nav-icon">🔧</span>
+          <span class="nav-icon"><i class="fa-solid fa-code"></i></span>
           <span class="nav-text">Projects</span>
         </a>
         <a href="#contact" class="nav-item" aria-label="Contact section">
-          <span class="nav-icon">📞</span>
+          <span class="nav-icon"><i class="fa-solid fa-envelope"></i></span>
           <span class="nav-text">Contact</span>
         </a>
       </nav>
@@ -103,7 +104,7 @@
                 onclick="window.open('{{ url_for('static', filename='assets/Ogyiri Asare Gracious Resume.pdf') }}', '_blank')"
                 aria-label="Open Gracious's resume"
               >
-                ▶
+                <i class="fa-solid fa-play"></i>
                 <span class="tooltip">View My Resume</span>
               </button>
               <a
@@ -209,7 +210,7 @@
                   <p>Apple Inc.</p>
                 </div>
                 <div class="track-company">Swift, XCTest/XCUITests, Quick</div>
-                <div class="track-date">05.25-08.25</div>
+                <div class="track-date">05.25 - 08.25</div>
               </div>
               <div class="track" aria-label="Tech Developer Intern position">
                 <div>
@@ -570,17 +571,17 @@
             id="prevBtn"
             aria-label="Previous section"
           >
-            ⏮
+            <i class="fa-solid fa-backward"></i>
           </button>
           <button
             aria-label="Play/pause web auto scroll"
             class="control-btn play-pause"
             id="playBtn"
           >
-            ▶
+            <i class="fa-solid fa-play"></i>
           </button>
           <button class="control-btn" id="nextBtn" aria-label="Next section">
-            ⏭
+            <i class="fa-solid fa-forward"></i>
           </button>
         </div>
         <div
@@ -603,7 +604,7 @@
           aria-label="Open accessibility settings"
           aria-expanded="false"
         >
-          <span>♿</span>
+          <i class="fa-brands fa-accessible-icon"></i>
           <span class="a11y-tooltip">Accessibility Settings</span>
         </button>
 
@@ -613,7 +614,7 @@
           id="themeToggle"
           aria-label="Toggle light/dark mode"
         >
-          <span class="theme-icon">☀️</span>
+          <span class="theme-icon"><i class="fa-solid fa-sun"></i></span>
           <span class="theme-tooltip" id="themeTooltip">
             Switch to Light Mode
           </span>

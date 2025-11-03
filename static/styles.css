@@ -636,7 +636,7 @@ body {
   grid-template-columns: 50px 1fr 300px 100px;
   padding: 16px 24px;
   align-items: center;
-  cursor: pointer;
+  /* cursor: none; */
   transition: background 0.2s;
   border-radius: 4px;
   gap: 16px;
