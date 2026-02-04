@@ -101,70 +101,89 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Activities Carousel TO DO
-  // const activitiesCarousel = document.getElementById("activitiesCarousel");
-  // const activitiesPrevBtn = document.getElementById("activitiesCarouselPrev");
-  // const activitiesNextBtn = document.getElementById("activitiesCarouselNext");
+  const activitiesCarousel = document.getElementById("activitiesCarousel");
+  const activitiesPrevBtn = document.getElementById("activitiesCarouselPrev");
+  const activitiesNextBtn = document.getElementById("activitiesCarouselNext");
 
-  // if (activitiesCarousel && activitiesPrevBtn && activitiesNextBtn) {
-  //   function scrollActivitiesCarousel(direction) {
-  //     const cards = activitiesCarousel.querySelectorAll(
-  //       ".activity-card-wrapper"
-  //     );
-  //     if (cards.length === 0) return;
+  if (activitiesCarousel && activitiesPrevBtn && activitiesNextBtn) {
+    function scrollActivitiesCarousel(direction) {
+      const cards = activitiesCarousel.querySelectorAll(
+        ".activity-card-wrapper",
+      );
+      if (cards.length === 0) return;
 
-  //     const card = cards[0];
-  //     const cardStyle = window.getComputedStyle(card);
-  //     const cardWidth = card.offsetWidth;
-  //     const gap = parseInt(cardStyle.marginRight) || 24;
-  //     const scrollAmount = cardWidth + gap;
+      const card = cards[0];
+      const cardStyle = window.getComputedStyle(card);
+      const cardWidth = card.offsetWidth;
+      const gap = parseInt(cardStyle.marginRight) || 24;
+      const scrollAmount = cardWidth + gap;
 
-  //     activitiesCarousel.scrollBy({
-  //       left: direction === "next" ? scrollAmount : -scrollAmount,
-  //       behavior: "smooth",
-  //     });
-  //   }
+      activitiesCarousel.scrollBy({
+        left: direction === "next" ? scrollAmount : -scrollAmount,
+        behavior: "smooth",
+      });
+    }
 
-  //   activitiesNextBtn.addEventListener("click", () =>
-  //     scrollActivitiesCarousel("next")
-  //   );
-  //   activitiesPrevBtn.addEventListener("click", () =>
-  //     scrollActivitiesCarousel("prev")
-  //   );
+    activitiesNextBtn.addEventListener("click", () =>
+      scrollActivitiesCarousel("next"),
+    );
+    activitiesPrevBtn.addEventListener("click", () =>
+      scrollActivitiesCarousel("prev"),
+    );
 
-  //   // Update button states
-  //   function updateArrowStates() {
-  //     activitiesPrevBtn.disabled = activitiesCarousel.scrollLeft <= 10;
-  //     activitiesNextBtn.disabled =
-  //       activitiesCarousel.scrollLeft >=
-  //       activitiesCarousel.scrollWidth - activitiesCarousel.offsetWidth - 10;
-  //   }
+    // Update button states
+        activitiesCarousel.addEventListener("scroll", () => {
+          activitiesPrevBtn.disabled = activitiesCarousel.scrollLeft <= 10; // Small buffer
+          activitiesNextBtn.disabled =
+            activitiesCarousel.scrollLeft >=
+            activitiesCarousel.scrollWidth - activitiesCarousel.offsetWidth - 10;
+        });
+    // function updateArrowStates() {
+    //   activitiesPrevBtn.disabled = activitiesCarousel.scrollLeft <= 10;
+    //   activitiesNextBtn.disabled =
+    //     activitiesCarousel.scrollLeft >=
+    //     activitiesCarousel.scrollWidth - activitiesCarousel.offsetWidth - 10;
+    // }
 
-  //   activitiesCarousel.addEventListener("scroll", updateArrowStates);
-  //   updateArrowStates();
-  // }
+    // activitiesCarousel.addEventListener("scroll", updateArrowStates);
+    // updateArrowStates();
+    activitiesPrevBtn.disabled = true;
+  }
 
-  // // Swipe functionality for activities carousel
-  // const activitiesCarouselSwipe = document.getElementById("activitiesCarousel");
-  // if (activitiesCarouselSwipe) {
-  //   let startX = 0;
+  // Swipe functionality for activities carousel
+  const activitiesCarouselSwipe = document.getElementById("activitiesCarousel");
+  if (activitiesCarouselSwipe) {
+    let startX = 0;
+    let isSwiping = false;
 
-  //   activitiesCarouselSwipe.addEventListener("touchstart", (e) => {
-  //     startX = e.touches[0].clientX;
-  //   });
+    activitiesCarouselSwipe.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      isSwiping = false;
+    });
 
-  //   activitiesCarouselSwipe.addEventListener("touchend", (e) => {
-  //     const endX = e.changedTouches[0].clientX;
-  //     const diff = startX - endX;
+    activitiesCarouselSwipe.addEventListener("touchmove", (e) => {
+      const currentX = e.touches[0].clientX;
+      const diff = startX - currentX;
 
-  //     if (Math.abs(diff) > 50) {
-  //       if (diff > 0) {
-  //         document.getElementById("activitiesCarouselNext")?.click();
-  //       } else {
-  //         document.getElementById("activitiesCarouselPrev")?.click();
-  //       }
-  //     }
-  //   });
-  // }
+      if (Math.abs(diff) > 10) {
+        e.preventDefault();
+        isSwiping = true;
+      }
+    });
+
+    activitiesCarouselSwipe.addEventListener("touchend", (e) => {
+      const endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          document.getElementById("activitiesCarouselNext")?.click();
+        } else {
+          document.getElementById("activitiesCarouselPrev")?.click();
+        }
+      }
+    });
+  }
 
   // Smooth scroll progress bar
   window.addEventListener("scroll", () => {
@@ -310,7 +329,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (currentIndex < sectionIds.length - 1) {
         const nextSection = document.getElementById(
-          sectionIds[currentIndex + 1]
+          sectionIds[currentIndex + 1],
         );
         if (nextSection) {
           nextSection.scrollIntoView({ behavior: "smooth" });
@@ -327,7 +346,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (currentIndex > 0) {
         const prevSection = document.getElementById(
-          sectionIds[currentIndex - 1]
+          sectionIds[currentIndex - 1],
         );
         if (prevSection) {
           prevSection.scrollIntoView({ behavior: "smooth" });
@@ -418,7 +437,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const spotifyLoginBtn = document.getElementById("spotify-login-modal");
   if (spotifyLoginBtn) {
     spotifyLoginBtn.addEventListener("click", function () {
-      // console.log("🔑 Login button clicked, redirecting to Spotify...");
       localStorage.setItem("modalShouldReopen", "true");
       window.location.href = "/login";
     });
@@ -427,7 +445,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check URL for spotify_login=success parameter
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("spotify_login") === "success") {
-    // console.log("🎉 Returned from Spotify login successfully!");
 
     // Clean URL
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -496,7 +513,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           if (res.status === 401) {
             searchResults.innerHTML =
-              "<p>❌ Please log in to Spotify first</p>";
+              "<p>Please log in to Spotify first</p>";
             return;
           }
 
@@ -549,7 +566,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     e.target.style.backgroundColor = "";
                   }, 2000);
                 } else {
-                  e.target.textContent = "❌ Failed";
+                  e.target.textContent = "Failed";
                   e.target.disabled = false;
                   setTimeout(() => {
                     e.target.textContent = originalText;
@@ -561,7 +578,7 @@ document.addEventListener("DOMContentLoaded", function () {
             searchResults.textContent = "No results found.";
           }
         } catch (error) {
-          console.error("❌ Search error:", error);
+          console.error("Search error:", error);
           searchResults.innerHTML = "<p>Error searching. Please try again.</p>";
         }
       }, 400);
@@ -569,7 +586,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Contact Form Success Message
-  // Contact Form Success Message - AJAX Version (No page reload)
   const contactForm = document.querySelector(".contact-form form");
 
   if (contactForm) {
@@ -663,7 +679,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Check for saved theme preference or default to system preference
   const savedTheme = localStorage.getItem("theme");
   const systemPrefersDark = window.matchMedia(
-    "(prefers-color-scheme: dark)"
+    "(prefers-color-scheme: dark)",
   ).matches;
   const currentTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
 
@@ -710,8 +726,8 @@ document.addEventListener("DOMContentLoaded", function () {
           themeTooltip.textContent = "Switch to Dark Mode";
         }
       }
-    })
-    
+    });
+
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const mobileBackdrop = document.getElementById("mobileBackdrop");
@@ -793,24 +809,23 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 50);
 });
 
-// Auto-expand sidebar on for 5 seconds 
+// Auto-expand sidebar on for 5 seconds
 setTimeout(() => {
-  const sidebar = document.querySelector('.sidebar');
-  const addTrackBtn = document.querySelector('.add-track-btn');
-  
-  if (sidebar && addTrackBtn) {
-    sidebar.classList.add('force-expand');
-    // pulse to draw attention
-    addTrackBtn.classList.add('pulse');
-    
-    // 5 seconds
-    setTimeout(() => {
-      sidebar.classList.remove('force-expand');
-      addTrackBtn.classList.remove('pulse');
-    }, 5000);
-  }
-}, 1000); 
+  const sidebar = document.querySelector(".sidebar");
+  const addTrackBtn = document.querySelector(".add-track-btn");
 
+  if (sidebar && addTrackBtn) {
+    sidebar.classList.add("force-expand");
+    // pulse to draw attention
+    addTrackBtn.classList.add("pulse");
+
+    // 5 seconds (chang to 3s)
+    setTimeout(() => {
+      sidebar.classList.remove("force-expand");
+      addTrackBtn.classList.remove("pulse");
+    }, 3500);
+  }
+}, 1000);
 
 // Accessibility Panel Manager
 const A11yManager = {
@@ -928,7 +943,7 @@ const A11yManager = {
     document.body.classList.toggle("high-contrast", enabled);
     localStorage.setItem("a11y-high-contrast", enabled);
     this.announceChange(
-      `High contrast mode ${enabled ? "enabled" : "disabled"}`
+      `High contrast mode ${enabled ? "enabled" : "disabled"}`,
     );
   },
 
@@ -936,7 +951,7 @@ const A11yManager = {
     document.body.classList.toggle("dyslexia-font", enabled);
     localStorage.setItem("a11y-dyslexia-font", enabled);
     this.announceChange(
-      `Dyslexia-friendly font ${enabled ? "enabled" : "disabled"}`
+      `Dyslexia-friendly font ${enabled ? "enabled" : "disabled"}`,
     );
   },
 
@@ -1025,7 +1040,7 @@ const KeyboardNav = {
     modal.addEventListener("keydown", (e) => {
       if (e.key === "Tab") {
         const focusableElements = modal.querySelectorAll(
-          'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])'
+          'button:not([disabled]), input:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
         );
         const firstElement = focusableElements[0];
         const lastElement = focusableElements[focusableElements.length - 1];
@@ -1131,7 +1146,7 @@ const PageAnnouncer = {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     document.querySelectorAll("section[id]").forEach((section) => {

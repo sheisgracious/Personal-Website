@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -14,7 +14,10 @@
       href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <link
       rel="icon"
       type="image/png"
@@ -232,7 +235,7 @@
       </section>
 
       <!-- Projects Section -->
-        
+
       <section
         id="projects"
         class="content-section"
@@ -258,9 +261,35 @@
             id="projectCarousel"
             aria-label="Projects carousel"
           >
-          <div
+            <div
               class="project-card"
-              onclick="window.open('https://github.com/sheisgracious/mindwell', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/lc430/bttai-fall-ai-studio-project-repo',
+                  '_blank',
+                )
+              "
+              aria-label="Kickstarter Success Prediction Engine"
+            >
+              <div class="project-cover project-4">
+                <div class="play-overlay"><i class="fa-solid fa-play"></i></div>
+              </div>
+              <div class="project-info">
+                <h3>Kickstarter Success Prediction ML Engine</h3>
+                <p
+                  >Python, Scikit-learn, XGBoost, TensorFlow Pandas,
+                  Matplotlib</p
+                >
+              </div>
+            </div>
+            <div
+              class="project-card"
+              onclick="
+                window.open(
+                  'https://github.com/sheisgracious/mindwell',
+                  '_blank',
+                )
+              "
               aria-label="Mindwell- Telehealth Therapy Website"
             >
               <div class="project-cover project-5">
@@ -271,9 +300,11 @@
                 <p>Python, Django, SQLite, HTML/CSS, JavaScript</p>
               </div>
             </div>
-          <div
+            <div
               class="project-card"
-              onclick="window.open('https://github.com/ame0102/sparkbytes', '_blank')"
+              onclick="
+                window.open('https://github.com/ame0102/sparkbytes', '_blank')
+              "
               aria-label="Spark Bytes project"
             >
               <div class="project-cover project-3">
@@ -289,7 +320,12 @@
             </div>
             <div
               class="project-card"
-              onclick="window.open('https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/SEO-TECH-PROJECTS/Portfolio_Tracker',
+                  '_blank',
+                )
+              "
               aria-label="Stock Portfolio Website project"
             >
               <div class="project-cover project-1">
@@ -303,7 +339,12 @@
 
             <div
               class="project-card"
-              onclick="window.open('https://github.com/AnthonyC247/CrowdSync', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/AnthonyC247/CrowdSync',
+                  '_blank',
+                )
+              "
               aria-label="CrowdSync project"
             >
               <div class="project-cover project-2">
@@ -315,11 +356,14 @@
               </div>
             </div>
 
-            
-
             <div
               class="project-card"
-              onclick="window.open('https://github.com/sheisgracious/HeadAid', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/sheisgracious/HeadAid',
+                  '_blank',
+                )
+              "
               aria-label="HeadAid project"
             >
               <div class="project-cover project-4">
@@ -333,7 +377,12 @@
 
             <div
               class="project-card"
-              onclick="window.open('https://github.com/sheisgracious/iwep-website', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/sheisgracious/iwep-website',
+                  '_blank',
+                )
+              "
               aria-label="iWEP Landing Page project"
             >
               <div class="project-cover project-5">
@@ -349,7 +398,12 @@
 
             <div
               class="project-card"
-              onclick="window.open('https://github.com/sheisgracious/Timezone-project', '_blank')"
+              onclick="
+                window.open(
+                  'https://github.com/sheisgracious/Timezone-project',
+                  '_blank',
+                )
+              "
               aria-label="TimeZoner project"
             >
               <div class="project-cover project-1">
@@ -363,17 +417,16 @@
           </div>
         </div>
       </section>
-       
 
-      <!-- Activities Section TO DO -->
-<!-- 
+      <!-- Activities Section -->
+
       <section
         id="activities"
         class="content-section activities-section-wrapper"
         aria-label="Activities and Involvement section"
       >
         <h2 class="section-title">Activities & Involvement</h2>
-
+        
         <div class="activities-carousel-wrapper">
           <button
             class="activities-arrow activities-arrow-prev"
@@ -392,49 +445,26 @@
             <div class="activity-card-wrapper">
               <div
                 class="activity-card-large"
-                onclick="window.open('https://girlswhocode.com/', '_blank')"
+                onclick="
+                  window.open('https://girlswhocode.com/about-us', '_blank')
+                "
                 aria-label="Girls Who Code membership"
               >
                 <div
                   class="activity-card-image"
-                  style="background-image: url('{{ url_for('static', filename='assets/gracious_gwc.png') }}');"
+                  style="background-image: url('{{ url_for('static', filename='assets/gracious-ogyiri-asare-gwc.png') }}');"
                 >
                   <div class="activity-card-overlay">
                     <div class="activity-card-text">
                       <h3 class="activity-title">Girls Who Code</h3>
                       <p class="activity-description"
-                        >As the <strong>Bits Lead</strong> for Girls Who Code, I
-                        manage the weekly free coding lessons for 3rd to 5th
-                        graders to learn to code.</p
+                        >For two years, I served as the
+                        <strong>Bits Lead</strong> for BU GWC, managing the free
+                        coding sessions for 3rd to 5th graders.</p
                       >
                     </div>
                   </div>
-                  <div class="activity-play-overlay">▶</div>
-                </div>
-              </div>
-            </div>
-
-            
-            <div class="activity-card-wrapper">
-              <div
-                class="activity-card-large"
-                onclick="window.open('https://www.instagram.com/rophejewels/', '_blank')"
-                aria-label="Rophe Jewels business"
-              >
-                <div
-                  class="activity-card-image"
-                  style="background-image: url('{{ url_for('static', filename='assets/gracious_rophe.png') }}');"
-                >
-                  <div class="activity-card-overlay">
-                    <div class="activity-card-text">
-                      <h3 class="activity-title">Rophe Jewels</h3>
-                      <p class="activity-description"
-                        >Founded Rophe Jewels, a brand using jewelry to empower
-                        with intentional styles.</p
-                      >
-                    </div>
-                  </div>
-                  <div class="activity-play-overlay">▶</div>
+                  <div class="activity-play-overlay"><i class="fa-solid fa-play"></i></div>
                 </div>
               </div>
             </div>
@@ -442,31 +472,83 @@
             <div class="activity-card-wrapper">
               <div
                 class="activity-card-large"
-                onclick="window.open('https://risehubu.site/', '_blank')"
-                aria-label="RiseHubu nonprofit"
+                onclick="window.open('https://www.risehub.site/', '_blank')"
+                aria-label="RiseHub nonprofit"
               >
                 <div
                   class="activity-card-image"
-                  style="background-image: url('{{ url_for('static', filename='assets/gracious_risehub.png') }}');"
+                  style="background-image: url('{{ url_for('static', filename='assets/gracious-ogyiri-asare-risehub-logo.png') }}');"
                 >
                   <div class="activity-card-overlay">
                     <div class="activity-card-text">
                       <h3 class="activity-title">RiseHub</h3>
                       <p class="activity-description"
-                        >Founded RiseHub through my passion for bridging the
+                        >Founder of RiseHub through my passion for bridging the
                         digital divide by providing opportunities to STEM
-                        students to share their knowledge.</p
+                        students to share their tech knowledge with elderly and
+                        rural communities in Ghana.</p
                       >
                     </div>
                   </div>
-                  <div class="activity-play-overlay">▶</div>
+                  <div class="activity-play-overlay"><i class="fa-solid fa-play"></i></div>
                 </div>
               </div>
             </div>
+
+            <div class="activity-card-wrapper">
+              <div
+                class="activity-card-large"
+                onclick="window.open('https://www.rophejewels.com/', '_blank')"
+                aria-label="Rophe Jewels business"
+              >
+                <div
+                  class="activity-card-image"
+                  style="background-image: url('{{ url_for('static', filename='assets/gracious_ogyiri_asare_rophe.png') }}');"
+                >
+                  <div class="activity-card-overlay">
+                    <div class="activity-card-text">
+                      <h3 class="activity-title">Rophe Jewels</h3>
+                      <p class="activity-description"
+                        >Founder of Rophe Jewels, a jewelry brand that aims to
+                        empower mental wellness and inspire with jewelry, while
+                        bringing style.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="activity-play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="activity-card-wrapper">
+              <div
+                class="activity-card-large"
+                onclick="window.open('https://therecordco.org/about/', '_blank')"
+                aria-label="Music Production and Audio Engineering Fellow at The Record Co. Academy in Boston"
+              >
+                <div
+                  class="activity-card-image"
+                  style="background-image: url('{{ url_for('static', filename='assets/gracious-ogyiri-asare-trc-studio.png') }}');"
+                >
+                  <div class="activity-card-overlay">
+                    <div class="activity-card-text">
+                      <h3 class="activity-title"
+                        >Music Prod. and Audio Engineering Fellow</h3
+                      >
+                      <p class="activity-description"
+                        >Fellow at The Record Co. Boston Academy program, certified
+                        particpant in the music production and current fellow of
+                        the audio engineering 12-week practical sessions.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="activity-play-overlay"><i class="fa-solid fa-play"></i></div>
+                </div>
+              </div>
+            </div>
+
           </div>
-        </div>
-      </section> 
- -->
+      </section>
 
       <!-- Contact Section -->
       <section
@@ -479,7 +561,12 @@
           <div class="social-links" aria-label="Social media links">
             <div
               class="social-btn"
-              onclick="window.open('https://linkedin.com/in/graciousogyiriasare', '_blank')"
+              onclick="
+                window.open(
+                  'https://linkedin.com/in/graciousogyiriasare',
+                  '_blank',
+                )
+              "
               aria-label="Visit Gracious's LinkedIn profile"
             >
               <img
@@ -495,7 +582,9 @@
             </div>
             <div
               class="social-btn"
-              onclick="window.open('https://github.com/sheisgracious', '_blank')"
+              onclick="
+                window.open('https://github.com/sheisgracious', '_blank')
+              "
               aria-label="Visit Gracious's GitHub profile"
             >
               <img
@@ -533,7 +622,7 @@
               <div class="form-group">
                 <textarea
                   name="message"
-                  placeholder="Your Message"
+                  placeholder="Write your message, comment, suggestions, advice, etc!"
                   required
                   aria-label="Your message"
                 ></textarea>
@@ -769,7 +858,7 @@
         height="380"
         frameborder="0"
         allowfullscreen=""
-        allow="clipboard-write;"
+        allow="clipboard-write"
         loading="lazy"
         title="Spotify playlist"
       >
